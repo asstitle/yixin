@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="class_top clr"> 
+		<div class="item"><em>类别</em><i class='icon-angle-down'></i></div>
+		<div class="item"><em>品牌</em><i class='icon-angle-down'></i></div>
+		<div class="item"><em>价格</em><i class='icon-angle-down'></i></div>
+		<div class="item"><em>排序</em><i class='icon-angle-down'></i></div>
+	</div>
+	<div class="pop">
+		<div class="box">
+			<h3>类别</h3>
+			<ul class=" _list1 swiper-container1">
+				<div class="swiper-wrapper">
+        			<div class="swiper-slide">
+        				<foreach name="goods_class" item="vo" key="ko">
+						<li <if condition="$get['class_is'] eq $vo['id']"> class="now_on" </if> ><a href="{:U('Portal/prolist/index',array('class_id'=>$vo['id']))}">{$vo.name}</a></li>
+						</foreach>
+					</div>
+				</div>
+				<div class="swiper-scrollbar"></div>
+			</ul>
+		</div>
+		<div class="box">
+			<h3>品牌</h3>
+			<ul class=" _list1 swiper-container1">
+				<div class="swiper-wrapper">
+        			<div class="swiper-slide">
+		                <php>
+		                    $pp_get = $get;
+		                    $price_get = $get;    
+		                </php>
+		                <foreach name="goods_brand" item="brand">
+		                <php>
+		                    $pp_get['pp_id'] = $brand['id'];
+		                </php>
+						<li <if condition="$get['pp_id'] eq $brand['id']"> class="now_on" </if> ><a href="{:U('Portal/prolist/index',$pp_get)}">{$brand.name}</a></li>
+						</foreach>
+					</div>
+				</div>
+				<div class="swiper-scrollbar"></div>
+			</ul>
+		</div>
+		<div class="box">
+			<h3>价格</h3>
+			<ul class=" _list1 swiper-container1">
+				<div class="swiper-wrapper">
+        			<div class="swiper-slide">
+		                <foreach name="priceArray" item="vo" key="ko">
+		                <php>
+		                    $price_get['price_id'] = $ko;
+		                </php>
+						<li <if condition="$get['price_id'] eq $ko"> class="now_on" </if> ><a href="{:U('Portal/prolist/index',$price_get)}">{$vo}</a></li>
+		                </foreach>
+					</div>
+				</div>
+				<div class="swiper-scrollbar"></div>
+			</ul>
+			<!--<div class="je_btom">其他<input type="text" /><a href="javascript:;;" class="btn_eb6100">确认</a></div>-->
+		</div>
+		<div class="box">
+			<!--<h3>排序</h3> 客户要求删一个-->
+			<ul class=" _list1 swiper-container1">
+				<div class="swiper-wrapper">
+        			<div class="swiper-slide">
+		                <php>
+		                    $get['orderlist']='readno';
+		                    $px_id = 'readno';
+		                </php>
+						<li <if condition="$orderlist eq $px_id"> class="now_on" </if> ><a href="{:U('Prolist/index',$get)}" >排序</a></li>
+		                <php>
+		                    $get['orderlist']='saleno';
+		                    $px_saleno = 'saleno';
+		                </php>
+						<li <if condition="$orderlist eq $px_saleno"> class="now_on" </if> ><a href="{:U('Prolist/index',$get)}" >销 量</a></li>
+		                <php>
+		                    $get['orderlist']='pl_all';
+		                    $px_pl_all = 'pl_all';
+		                </php>
+						<li  <if condition="$orderlist eq $px_pl_all"> class="now_on" </if> ><a href="{:U('Prolist/index',$get)}" >评 价</a></li>
+		                <php>
+		                    $get['orderlist']='price';
+		                    $px_price = 'price';
+		                </php>
+						<li  <if condition="$orderlist eq $px_price"> class="now_on" </if> ><a href="{:U('Prolist/index',$get)}" >价 格</a></li>
+					</div>
+				</div>
+				<div class="swiper-scrollbar"></div>
+			</ul>
+		</div>
+	</div>
+	<div class="idx_s1"> 
+		<ul class="idx_goods clr"> 
+            <foreach name="goods_list" item="list">
+            <php>
+                $imgurl = unserialize($list['imgurl']);
+            </php>
+			<li><a href="{:U('Portal/proview/index',array('id'=>$list['id']))}"> 
+				<div class="img"><img src="{$imgurl[0]}"/></div>
+				<h3>{$list.name}</h3>
+				<h4><i>￥{$list.price}</i><em>已售{$list.saleno}件</em></h4>
+			</a></li>
+            </foreach>
+		</ul>
+	</div>
+	<div class="search">
+		<form action="{:U('Prolist/index')}" method="post">
+			<input type="text" name="keyword" value="{$ssname}"/>
+			<input type="submit" value=" " />
+		</form>
+		<i class='icon-search'></i>
+	</div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+
+</body>
+</html>

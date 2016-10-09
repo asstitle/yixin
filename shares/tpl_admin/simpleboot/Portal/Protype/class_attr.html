@@ -1,0 +1,76 @@
+<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="javascript:;">商品属性</a></li>
+            <li><a href="{:U('Protype/class_attr_add',array('class_id'=>$class_id))}">添加属性</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Protype/class_attr')}">
+			<div class="search_type cc mb10">
+				<div class="mb10">
+					<span class="mr20">&nbsp;&nbsp;
+						关键字： 
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+                        <input type="hidden" name="class_id" value="{$class_id}" />
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+				</div>
+			</div>
+		</form>
+        
+		<form class="J_ajaxForm" action="" method="post">
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						<th><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+						<th>属性名称</th>
+                        <th>商品分类名称</th>
+						<th>属性值的录入方法</th>
+                        <th>可选值</th>
+                        <th>是否用于搜索</th>
+                        <th>是否显示</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<foreach name="list" item="vo">
+				<tr>
+					<td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" title="ID:{$vo.id}"></td>
+                    <td>{$vo.name}</td>
+					<td>{$vo.class_name}</td>
+					<td>{$itypes[$vo['itype']]}</td>
+                    <td>{$vo.value}</td>
+					<td>
+                        <if condition="$vo['is_search'] eq 1">
+							<font color="red">√</font>
+			            <else /> 
+							<font color="red">╳</font>
+						</if>
+                    </td>
+                    <td>
+                        <if condition="$vo['is_show'] eq 1">
+							<font color="red">√</font>
+			            <else /> 
+							<font color="red">╳</font>
+						</if>
+                    </td>
+					<td>
+                        <a href="{:U('Protype/class_attr_delete',array('id'=>$vo['id']))}" class="J_ajax_del">删除</a>
+                        |<a href="{:U('Protype/class_attr_edit',array('id'=>$vo['id']))}">修改</a>
+                    </td>
+				</tr>
+				</foreach>
+			</table>
+			<div class="table-actions">
+                <button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Protype/class_attr_check',array('check'=>1))}" data-subcheck="true">显示</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Protype/class_attr_check',array('uncheck'=>1))}" data-subcheck="true">取消显示</button>
+                <button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Protype/class_attr_search',array('check'=>1))}" data-subcheck="true">搜索</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Protype/class_attr_search',array('uncheck'=>1))}" data-subcheck="true">取消搜索</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Protype/class_attr_delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+			</div>
+			<div class="pagination">{$Page}</div>
+		</form>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>

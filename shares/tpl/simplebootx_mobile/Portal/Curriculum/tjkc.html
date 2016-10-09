@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head lang="en">
+    <tc_include file="Public/meta2"/>
+</head>
+
+<body>
+
+<main>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <foreach name="banner_list" item="vo">
+        	
+        		<div class="swiper-slide">
+                <a href="{$vo.slide_url}" ><img src="{$vo.slide_pic}"></a>
+            	</div>
+        		
+        	</foreach>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</main>
+
+<section class="sec-detail-nav cc">
+    <ul>
+        <li><a href="#" data-id="sec-content"  class="active">课程详情</a></li>
+        <li><a href="#" data-id="sec-catlog">课程目录</a></li>
+        <li><a href="#" data-id="sec-course">相关课程</a></li>
+    </ul>
+</section>
+
+<div class="sec-detail-wrapper">
+    <section class="sec-detail sec-content cc active">
+     
+		<div>
+			<php>
+				$curriculum_content = htmlspecialchars_decode($curriculum['curriculum_content']);	
+			</php>
+            <h3>{$curriculum_content}</h3>
+            <ul>
+                <li>报名人数 <span>{$curriculum.sold_number}</span></li>
+                <li>价格：<i>{$curriculum.curriculum_money}</i>元</li>
+            </ul>
+        </div>
+		
+        <div class="sec-index sec-detail-teacher cc">
+			
+            <h2>老师介绍</h2>
+            <div class="te-wrapper">
+                <div class="pos">
+                    <img src="{$curriculum.teacher_pic}">
+                    <dl>
+                        <dd>{$curriculum.teacher_name}</dd>
+                        <dd>课程数：<i>{$curriculum.curriculum_number}</i>课</dd>
+                        <dd>学生数：<span>{$curriculum.student_number}</span>人</dd>
+                    </dl>
+                </div>
+                <p>{$curriculum.teacher_content}</p>
+            </div>
+        </div>
+       
+        	
+        
+    </section>
+    <section class="sec-index sec-detail sec-catlog cc">
+        <h2>课程目录</h2>
+        	<ul class="catlog">
+        	<php>
+    		$ks_list = json_decode($curriculum['ks_list']);
+    		</php>
+    		
+    		<php>
+        		foreach($ks_list as $keys => $values)
+        		{
+        			</php>
+        				<!-- <li><a href="{$values}">{$keys}</a></li> -->
+        				<li><a href="{$values}"><i class="iconfont">&#xe609;</i><b>{$keys}</b></a></li><br/>
+        			<php>
+        		}
+        	</php>
+        	</ul>
+        
+    </section>
+    <!--推荐课程-->
+    <section class="sec-index  sec-course sec-detail cc">
+        <h2>易信商学院</h2>
+        <ul>
+        	<foreach name="curriculum_list" item="vo">
+    		<php>
+				$curriculum_pic = json_decode($vo['curriculum_pic']);
+				$ks_list = json_decode($vo['ks_list']);
+				
+				$count = 0;
+				foreach($ks_list as $keys=>$values)
+				{
+					$count ++;
+				}
+			</php>
+			<li>
+	            <a href="{:U('Curriculum/tjkc')}&id={$vo.id}">
+	                <div class="img-wrapper">
+	                    <img  src="{$curriculum_pic[0]}">
+	                    <div class="overlay">
+	                        <p>共{$count}节</p>
+	                    </div>
+	                </div>
+	                <span>{$vo.curriculum_name}</span>
+	            </a>
+	        </li>
+    	</foreach>
+           <!--  <li>
+                <a href="#">
+                    <div class="img-wrapper">
+                        <img src="__ROOT__/statics/xyh/images/c_05.png">
+                        <div class="overlay">
+                            易信金融（共18节）
+                        </div>
+                    </div>
+                    <span>易信金融培训课程初级班易信金融培训课程初级班易信金融培训课程初级班易信金融培训课程初级班</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="img-wrapper">
+                        <img src="__ROOT__/statics/xyh/images/c_07.jpg">
+                        <div class="overlay">
+                            <p>易信金融（共18节）</p>
+                        </div>
+                    </div>
+                    <span>易信金融培训课程初级班</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="img-wrapper">
+                        <img src="__ROOT__/statics/xyh/images/c_11.jpg">
+                        <div class="overlay">
+                            <p>易信金融（共18节）</p>
+                        </div>
+                    </div>
+                    <span>易信金融培训课程初级班</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="img-wrapper">
+                        <img src="__ROOT__/statics/xyh/images/c_13.jpg">
+                        <div class="overlay">
+                            <p>易信金融（共18节）</p>
+                        </div>
+                    </div>
+                    <span>易信金融培训课程初级班</span>
+                </a>
+            </li> -->
+        </ul>
+    </section>
+</div>
+
+
+
+
+
+
+
+<div class="clear-pos"></div>
+<!--底部导航-->
+<tc_include file="Public/footer2"/>
+</body>
+</html>

@@ -1,0 +1,9 @@
+[ 2016-10-02T12:02:37+08:00 ] ::1 /shares/index.php?g=admin&m=course&a=index&menuid=288
+ERR: 无法加载控制器:Course
+
+[ 2016-10-02T12:02:43+08:00 ] ::1 /shares/index.php?g=admin&m=about&a=index&menuid=287
+ERR: 无法加载控制器:About
+
+[ 2016-10-02T16:09:41+08:00 ] ::1 /shares/index.php?g=admin&m=category&a=index&menuid=289
+ERR: 无法加载控制器:Category
+

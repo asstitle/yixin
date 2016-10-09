@@ -1,0 +1,91 @@
+@charset "UTF-8";
+/**
+ * +-------------------------------------------------------+
+ * common define begin
+ * +-------------------------------------------------------+
+ */
+*{margin:0;padding:0}
+body{margin:0 auto;padding:0;color:#4b4b4b;font-size:12px;font-family:'微软雅黑';background-color:#ffffff;}
+body div{margin-right:auto;margin-left:auto;}
+div,form,ul,ol,li,span,p,dl,dt,dd,img{margin:0;padding:0;border:0;}
+h1,h2,h3,h4,h5,h6{margin:0;padding:0;font-size:12px;font-weight:normal;}
+ul,ol,li{list-style:none;list-style-position:outside}
+table,th,td,input,textarea{font-size:12px; overflow:visible; *overflow:visible; outline: none;}
+table,th,td{text-align:left;vertical-align:top}
+a{color:#333;text-decoration:none;outline:none;}
+i{ font-style:normal;}
+a:hover{/*color:#ff3674;text-decoration:underline;*/}
+em{font-style:normal}
+.wi_1080{ width:1080px; margin:auto;font-size:12px;}
+.wi_1000{ width:1000px; padding:0 20px; margin:auto;}
+
+.clr{#zoom:1;clear:both}
+.clr:before,.clr:after{display:block;content:".";height:0!important;line-height:0!important;visibility:hidden}
+.clr:after{clear:both}
+/* IE 6/7娴忚鍣  (瑙﹀彂hasLayout) */
+.clr{*zoom:1;}
+
+
+.fl{float:left;width:auto;}
+.fr{float:right;width:auto;}
+.dspI{display:inline}
+.clear{clear:both;height:0px;width:0px;font-size:0px;line-height:0px;visibility:hidden;}
+
+.fB{font-weight:bold}
+.fI{font-style:italic}
+.tU{text-decoration:underline}
+.tL{text-align:left}
+.tR{text-align:right}
+.tC{text-align:center}
+.hC{display:none;}
+
+/* color define 
+	尴尬的问题，因为优先级问题，即使这样定义到A上，颜色也不会生效，除非 .c01, a.c01, .c01 a 真有这个必要？？ 
+	如果定义了A.c05 还需要定义A.c05:hover，问题又来了。
+*/
+.c01{color:#4b4b4b;}
+.c02{color:#707070;}
+.c03{color:#ff3674;}
+.c04{color:#c7aca1;}
+.c05, a.c05{color:#5e5e5e;}
+
+
+/* blank */
+.blankH4,.blankH5,.blankH6,.blankH8,.blankH9,.blankH10,.blankH20{width:1px;height:auto;font-size:0px;line-height:0px;overflow:hidden;clear:both;}
+.blankH4{height:4px;}
+.blankH5{height:5px;}
+.blankH6{height:6px;}
+.blankH8{height:8px;}
+.blankH9{height:8px;}
+.blankH10{height:10px;}
+.blankH20{height:20px;}
+
+.blankW5,.blankW6,.blankW8,.blankW9,.blankW10{width:auto;height:1px;font-size:0px;line-height:0px;overflow:hidden;clear:none;}
+.blankW5{width:5px;}
+.blankW6{width:6px;}
+.blankW8{width:8px;}
+.blankW9{width:9px;}
+.blankW10{width:10px;}
+
+.copyMark{font-size:14px;}
+.yuan, .yuan12, .yuan14, .yuan16{font-size:12px;font-family:'Arial','微软雅黑'}
+.yuan14{font-size:14px;}
+.yuan16{font-size:16px;}
+/**
+ * common define begin
+ * +-------------------------------------------------------+
+ */
+
+/*分页*/
+.page{ text-align:center;margin-top: 50px;}
+.page span{ display:inline-table; *display:inline; zoom:1; font-size:14px; height:40px;   margin:0 5px; background:#f2f2f2; line-height:40px; text-align:center;width: 41px;}
+.page span a{ display:block; color:#777; padding:0 16px;width: 41px; height: 40px;}
+.page span.first a,.page span.last a{ padding:0 20px;}
+.page span:hover,.page span.on{background:#00a0ea;}
+.page span:hover a,.page span.on a{ color:#fff;}
+
+
+.page .current{background:#00a0ea;color: #fff;width: 41px; height: 40px;}
+.page a{margin-left: 10px;}
+
+.text_cont{ text-align:center;overflow: hidden;position: relative;width: 1080px;}

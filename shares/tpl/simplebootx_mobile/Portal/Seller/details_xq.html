@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="padd_0_1 union_lsinfo">
+		<div class="itme_3 clr green"> 
+			<div class="fl">账户</div>
+			<div  class="fr">{$mobile}</div>
+		</div>
+		<div class="itme_3 clr"> 
+			<div class="fl">时间</div>
+			<div  class="fr">{$date|date="Y-m-d H:i:s",###}</div>
+		</div>
+		<div class="itme_3 clr"> 
+			<div class="fl">金额</div>
+			<div  class="fr red">{$integral_sj}元</div>
+		</div>
+		<div class="itme_3 clr"> 
+			<div class="">备注</div>
+			<div class="_text" >{$remark}</div>
+		</div>
+	</div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

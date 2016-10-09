@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>{$site_pcname}</title>
+  <link href="__TMPL__public/images/favicon.ico" rel="SHORTCUT ICON" />
+
+  <link rel="stylesheet" href="__TMPL__public/style/basic.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/com.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/dcom.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/zjcfb.css" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="__TMPL__public/js/html5shiv.min.js"></script>
+  <script src="__TMPL__public/js/respond.min.js"></script>
+  <script src="__TMPL__public/js/css3-mediaQueries.js"></script>
+  <![endif]-->
+  <script src="__TMPL__public/js/jquery-1.12.3.min.js"></script>
+  <script src="__TMPL__public/js/com.js"></script>
+</head>
+<body>
+<!--头部导航-->
+<tc_include file="Public:top" />
+
+<!--焦点图-->
+<div class="main">
+  <img src="__TMPL__public/images/bg_2.png">
+</div>
+
+<!--内容区域：董事长寄语-->
+<div class="section">
+  <div class="container">
+    <div class="sec_header">
+      <ul class="left">
+        <li><a href="index.php?g=&m=Index&a=introduce&tid=8&type=1">公司简介</a></li>
+        <li><a href="index.php?g=&m=Index&a=introduce&tid=9&type=2">企业理念</a></li>
+        <li><a href="index.php?g=&m=Index&a=introduce&tid=10&type=3">企业文化</a></li>
+        <li><a href="index.php?g=&m=Index&a=introduce&tid=11&type=4">平台介绍</a></li>
+        <li  class="active"><a href="index.php?g=&m=Index&a=introduce&tid=12&type=5">董事长寄语</a></li>
+      </ul>
+      <ul class="right">
+        <li>当前位置：</li>
+        <li>首页<i>></i></li>
+        <li>集团介绍<i>></i></li>
+        <li> 董事长寄语</li>
+      </ul>
+    </div>
+    <div class="sec_body msg">
+      <div class="container">
+        <h1><em>CHAIRMAN</em> MESSAGE</h1>
+        <volist name="list" id="vo">
+          <h2>{$vo.post_title}</h2>
+          <div>
+            <img src="__ROOT__/data/upload/{$vo.smeta}">
+            <p> {$vo.post_content}</p>
+          </div>
+        </volist>
+        <h3><img src="__TMPL__public/images/sign.png"><span>董事长:</span></h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--底部内容-->
+<tc_include file="Public:footer" />
+
+</body>
+</html>

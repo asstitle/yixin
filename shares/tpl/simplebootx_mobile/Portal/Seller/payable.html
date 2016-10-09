@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body>
+<div class="padd_0_1 sfk_box">
+	<form action="{:U('Seller/dopay')}" method="post">
+		<input type="hidden" id="type" name="type"><!--支付类型-->
+		<h3>商家报单</h3>
+		<div class="clr _div">
+			<p>用户编号</p>
+			<div class="clr">
+				<span class='fl'><input type="tel" name="user" id="user" placeholder="请输入用户手机" onblur="ckuser()" datatype="*" nullmsg="请输入用户手机"/></span>
+				<span class='fr' id="scanQRCode"><img src="__PUBLIC__/image/sm_zhifu.png" />扫码识别</span>
+			</div>
+		</div>
+		<div class="clr _div pad_botm_no">
+			<p>用户支付金额</p>
+			<div class="clr">
+				<span class='fl'><input type="tel" name="price" id="price" placeholder="请输入支付金额" onblur="ckprice()" datatype="*" nullmsg="请输入支付金额"/></span>
+				<span class='fr red'>元</span>
+			</div>
+			<p class="clr">
+				<i class='fl'>实际赠送金额： <em class='red' id="sjprice"></em> 元</i>
+				<i class='fl fr'>手续费： <em class='red' id="sxf"></em> 元</i>
+			</p>
+		</div>
+		<h3>支付方式</h3>
+		<div class="zf_fs clr">
+			<!--<span class='fl paytype' data-id="1"><img src="__PUBLIC__/image/rechange_1.png">微信支付</span>-->
+			<span class='fl paytype on' data-id="2"><img src="__PUBLIC__/image/rechange_2.png">积分支付</span> <!--此行fl之前为fr的-->
+		</div>
+		<h3>支付密码</h3>
+		<div class="pass_box"><input name="zfmm" type="password" datatype="*" nullmsg="请输入支付密码"/></div>
+		<div class="_btn"><input type="submit" value="确认支付" class="zt_ajax_form" /></div>
+	</form>
+</div>
+<script>
+	//验证用户
+	function ckuser(){
+		if(isNull($("#user").val())){
+			layer.msg("请输入用户手机！");
+			$("#user").val("");
+			$("#sjprice").html("");
+			$("#sxf").html("");
+			return false;
+		}
+		if(!checkMobile($("#user").val())){
+			layer.msg("输入的手机有误！");
+			$("#user").val("");
+			$("#sjprice").html("");
+			$("#sxf").html("");
+			return false;
+		}
+		$.post("{:U('Index/checkuser')}",{"user":$("#user").val()},function(data){
+			if(data==2){
+				layer.msg("未查询到此用户 或被禁用！");
+				$("#user").val("");
+				$("#sjprice").html("");
+				$("#sxf").html("");
+			}
+		})
+	}
+	//扫码回调
+	function hd(){
+		$.post("{:U('Index/checkuser')}",{"user":$("#user").val()},function(data){
+			if(data==2){
+				layer.msg("未查询到此用户 或被禁用！");
+				$("#user").val("");
+				$("#sjprice").html("");
+				$("#sxf").html("");
+			}
+		})
+	}
+	//验证支付金额
+	function ckprice(){
+		if(isNull($("#user").val())){
+			layer.msg("请输入用户手机！");
+			$("#price").val("");
+			$("#sjprice").html("");
+			$("#sxf").html("");
+			return false;
+		}
+		if(!isDecimal($("#price").val())||$("#price").val()<=0){
+			layer.msg("输入金额错误！");
+			$("#price").val("");
+			$("#sjprice").html("");
+			$("#sxf").html("");
+			return false;
+		}
+		$.post("{:U('Index/getsxf')}",{price:$("#price").val(),type:1},function(data){
+			$("#sjprice").html(data.price);
+			$("#sxf").html(data.sxf);
+		})
+	}
+	$(function(){
+		$(".paytype").each(function(){
+			$(this).click(function(){
+				if($(this).data("id")==1){
+					$("#type").val(1);
+					//判断赠送金额
+					if($("#sjprice").html()==""||!$("#sjprice").html()){
+						layer.msg("请填写支付金额！");
+						return false;
+					}
+					//生成微支付
+					$.post("{:U('Seller/js_api_call')}",$(".paytype.on").parents("form").serialize(),function(data){
+						callpay(data);
+					},"json")
+
+				}
+				$(".paytype").removeClass("on");
+				$(this).addClass("on");
+			})
+		})
+		//调用微信JS api 支付 x=>json参数
+		function jsApiCall(e){
+			WeixinJSBridge.invoke(
+					'getBrandWCPayRequest',
+					{
+						appId: e.appId,
+						timeStamp: e.timeStamp,
+						nonceStr: e.nonceStr,
+						"package": e.package,
+						signType: "MD5",
+						paySign: e.paySign
+					},
+					function(res){
+						//如果支付成功
+						if (res.err_msg == 'get_brand_wcpay_request:ok') {
+							//支付成功后跳转的地址
+							layer.msg("您已收款成功！");
+							//location.href = "{:U('Pay/notify_url')}";
+						}else if (res.err_msg == 'get_brand_wcpay_request:cancel') {
+							alert('请尽快完成支付哦！');
+						}else if (res.err_msg == 'get_brand_wcpay_request:fail') {
+							alert('支付失败');
+						}else {
+							alert('意外错误');
+						}
+						//WeixinJSBridge.log(res.err_msg);
+						//alert(res.err_code+res.err_desc+res.err_msg);
+						/*if (res.err_msg == 'get_brand_wcpay_request:ok') {
+						 alert('支付成功');
+						 }else {
+						 alert('取消支付');
+						 }*/
+					}
+			);
+		}
+		function callpay(x){
+			if (typeof WeixinJSBridge == "undefined"){
+				if( document.addEventListener ){
+					document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+				}else if (document.attachEvent){
+					document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+					document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+				}
+			}else{
+				jsApiCall(x);
+			}
+		}
+	})
+	function zt_ck(){
+		$("#type").val($(".paytype.on").data("id"));
+	}
+</script>
+<tc_include file="Public/share"/>
+<tc_include file="Public/footer"/>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+    <script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+</head>
+<body>
+	
+    <form class="form-horizontal J_ajaxForms" action="{:U('curriculum/result')}" method="post" name="order">
+    	<div class="rechange_order_top"> 
+    		<img src="__PUBLIC__/image/rechange_order.png" />
+    		<div> 
+    			<p>订单交易成功，请尽快支付！</p>
+    			<p>订单编号：{$orderno}</p>
+    			<p>支付金额：<i class='red'>{$order_money}元</i></p>
+    		</div>
+    	</div> 
+     	<div class="recheange_select"> 
+     		<h3>选择支付方式</h3>
+     		<div class="clr"><label> 
+     			<span class='fl'><i><img src="__PUBLIC__/image/rechange_1.png" /></i>微信支付</span>
+     			<span class='fr'><input type="radio" name="pay_type" value="1" class="iCheck" /></span>
+     		</label></div>
+     		<!-- <div class="clr"><label> 
+     			<span class='fl'><i><img src="__PUBLIC__/image/rechange_2.png" /></i>积分支付<em class='red'>可用积分：{$users['score']}</em></span>
+     			<span class='fr'><input type="radio" name="pay_type" value="2" class="iCheck" checked /></span>
+     		</label></div> -->
+            <!-- <input type="hidden" class="orderid" name="orderid" value="{$list['id']}" />
+            <input type="hidden" class="zffs" name="zffs" value="2" />
+            <input type="hidden" class="add_post" /> -->
+    		<a href="javascript:;;" class="btn_red_a">确认支付</a>
+     	</div>
+    </form>
+    <input type="hidden" class="buyok_url" data-url="{:U('Portal/curriculum/result',array('orderid'=>$order_id))}" />
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+    
+    var _this = '';
+    $(".fr input.iCheck").on('ifChecked',function(){
+        var v = $(this).val();
+        _this = $(this);
+        if (v == 1) {
+            callpay();
+        }
+    });
+    
+    $("body").on('click',".btn_red_a",function(){
+        $(".add_post").trigger('click');
+    });
+    
+    
+    var order_sn = "{$res['order_sn']}";
+    //调用微信JS api 支付
+    function jsApiCall(){
+    	WeixinJSBridge.invoke(
+    		'getBrandWCPayRequest',
+    		<?php echo $jsApiParameters; ?>,
+    		function(res){
+    			//如果支付成功
+    			if (res.err_msg == 'get_brand_wcpay_request:ok') {
+    				//支付成功后跳转的地址
+    				location.href = $(".buyok_url").data('url');
+    			}else if (res.err_msg == 'get_brand_wcpay_request:cancel') {
+    				alert('请尽快完成支付哦！');
+    			}else if (res.err_msg == 'get_brand_wcpay_request:fail') {
+    				alert('支付失败');
+    			}else {
+    				alert('意外错误');
+    			}
+                _this.iCheck('uncheck');
+                _this.parents(".clr").next(".clr").find("input.iCheck").iCheck('check');
+    			//WeixinJSBridge.log(res.err_msg);
+    			//alert(res.err_code+res.err_desc+res.err_msg);
+    			/*if (res.err_msg == 'get_brand_wcpay_request:ok') {
+    				alert('支付成功');
+    			}else {
+    				alert('取消支付');
+    			}*/
+    		}
+    	);
+    }
+    function callpay(){
+    	if (typeof WeixinJSBridge == "undefined"){
+    	    if( document.addEventListener ){
+    	        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+    	    }else if (document.attachEvent){
+    	        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+    	        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+    	    }
+    	}else{
+    	    jsApiCall();
+    	}
+    }
+    
+});
+</script>

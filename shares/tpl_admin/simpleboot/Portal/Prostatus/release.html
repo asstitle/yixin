@@ -1,0 +1,74 @@
+<admintpl file="header" />
+<body>
+<!--header-->
+
+<link href="__ROOT__/statics/simpleboot/css/index.css" rel="stylesheet">
+<script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+<!--end-->
+<!--content-->
+<section>
+    <div class="main shadow">
+        <div class="sidebar">
+            <div class="fl sidebar_a">
+            </div>
+            <div class="fr sidebar_b">
+                <div class="sidebar_b_c">
+                    <div class="title"><span>发布商品</span></div>
+                    <div class="classify">
+                        <input type="hidden" class="url_next" value="{:U('Portal/Prostatus/nextgoods_search')}" />
+                        <input type="hidden" class="result_url" value="{:U('Portal/Prostatus/resultgoods_search')}" />
+                        <input type="hidden" class="classid" value="" />
+                        <div class="fl">
+                            <ul>
+                                <foreach name="list" item="vo">
+                                <li data-parent_id="{$vo.parent_id}" data-id="{$vo.id}" class="list1" >{$vo.name}</li>
+                                </foreach>
+                            </ul>
+                            <script id="goods_class" type="text/html">
+                                [[each content as v i]]
+                                <li data-parent_id="[[v.parent_id]]" data-id="[[v.id]]" class="list1" >[[v.name]]</li>
+                                [[/each]]
+                            </script>
+                            <div class="c_search">
+                                <div>
+                                    <input type="text" style="border: none medium;" class="value1" />
+                                    <input type="hidden" class="url" value="{:U('Portal/Prostatus/release_search')}" />
+                                    <input type="submit" value="" class="search_seller" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fl end">
+                            <ul>
+                                
+                            </ul>
+                            <div class="c_search">
+                                <div>
+                                    <input type="text" style="border: none medium;" class="value1" />
+                                    <input type="hidden" class="url" value="{:U('Portal/Prostatus/release_search')}" />
+                                    <input type="submit" value="" class="search_seller" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="c_position">您当前的选择是：<i class="goods_jg"></i></div>
+                    <div class="tc">
+                        <a href="javascript:;;" class="dib radius_2" data-id="" style="width: 179px;height: 29px;line-height:29px;margin:17px auto;border: 1px solid #ce000f;background: url(__ROOT__/statics/images/border6.jpg) repeat-x center;color:#fff;">下一步，填写详细信息</a>
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--end-->
+
+</body>
+</html>

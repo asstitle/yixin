@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<volist name="list" id="vo">
+	<div class="addres_list clr">
+		<div class="clr _tle">
+			<em class='fl'><label><input type="radio" name="address_list" value="{$vo.id}" <if condition="$vo['default'] eq 1">checked</if> class="iCheck">当前地址</label></em>
+			<em class='fr'>
+				<a href="{:U('User/setting_address',array('id'=>$vo['id']))}"><img src="__PUBLIC__/image/update.png">修改</a>
+				<a href="javascript:void(0)" data-url="{:U('User/removeaddress',array('id'=>$vo['id']))}" data-msg="确定要删除此信息？" class="zt_click_post"><img src="__PUBLIC__/image/delete.png">删除</a>
+			</em>
+		</div>
+		<div class="_text">
+			<p>{$vo.name} {$vo.phone}</p>
+			<p>地址：{$vo.sheng}/{$vo.shi}/{$vo.qu}/{$vo.address}</p>
+		</div>
+	</div>
+	</volist>
+	<div class="btn_1">
+		<input	type='button' value='新增收货地址' onclick="ck()"/>
+	</div>
+	<form action="{:U('User/dosetting_address')}" method="post" <if condition="!empty($list) and $id eq ''">class="zt_yc"</if> id="adform">
+	<input type="hidden" name="id" value="{$id}"/>
+		<div class="padd_0_1">
+			<div class="login_form">
+				<p><span>收货人：</span><input type="text" name="name" value="{$name}" datatype="s2-6" nullmsg="请输入收货人姓名" errormsg="姓名请输入2-6个字符" placeholder="请输入收货人姓名" /></p>
+				<p><span>联系手机：</span><input type="text" name="phone" value="{$phone}" datatype="m" nullmsg="请输入联系手机" errormsg="手机格式不正确" placeholder="请输入收货人手机" /></p>
+				<p><span>省&nbsp;&nbsp;&nbsp;&nbsp;份：</span><select id="s_province" name="sheng"></select></p>
+				<p><span>城&nbsp;&nbsp;&nbsp;&nbsp;市：</span><select id="s_city" name="shi" ></select></p>
+				<p><span>区&nbsp;&nbsp;&nbsp;&nbsp;县：</span><select id="s_county" name="qu"></select></p>
+				<p><span style=" vertical-align: top;">详细地址：</span><textarea name="address" datatype="*" nullmsg="请输入详细地址">{$address}</textarea></p>
+			</div>
+		</div>
+		<div class="btn_1"> 
+			<input	type='submit' class="zt_ajax_form" value='确认' />
+		</div>
+	</form>
+	<script type="text/javascript">_init_area("{$sheng}","{$shi}","{$qu}");</script>
+	<script>
+		function ck(){
+			if($("#adform").hasClass("zt_yc")){
+				$("#adform").removeClass("zt_yc");
+			}
+		}
+		function zt_ck(){
+			if($("#s_province").val()=="请选择省份"||$("#s_city").val()=="请选择市"||$("#s_county").val()=="请选择区|县"){
+				$.Showmsg("请选择地区！");
+				return false;
+			}
+		}
+		$(function(){
+			//选中默认地址事件
+			$("[name=address_list]").each(function(){
+				$(this).click(function(){
+					$.post("{:U('User/setdfaddress')}",{"id":$(this).val()},function(){});
+				})
+			})
+		})
+	</script>
+	<tc_include file="Public/footer"/>
+	<tc_include file="Public/share"/>
+</body>
+</html>

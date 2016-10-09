@@ -1,0 +1,226 @@
+
+/*顶部次导航*/
+.sub_nav {
+  background-color: #474747;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  color: #fff;
+}
+.sub_nav span {
+  float: left;
+}
+.sub_nav ul {
+  float: right;
+  overflow: hidden;
+}
+.sub_nav ul li {
+  float: right;
+}
+.sub_nav ul a {
+  color: #fff;
+}
+.sub_nav ul i {
+  padding-left: 18px;
+  padding-right: 18px;
+  font-weight: bold;
+}
+
+/*顶部主导航*/
+.main_nav {
+  padding-top: 20px;
+  padding-bottom: 12px;
+}
+.main_nav .container > a {
+  float: left;
+}
+.main_nav .m_nav {
+  float: right;
+}
+.main_nav .m_nav > li {
+  float: left;
+  margin-top: 22px;
+  margin-left: 30px;
+  display: block;
+  width: 90px;
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+}
+.main_nav .m_nav > li > a {
+  color: #333;
+}
+.main_nav .m_nav > li .s_nav {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  display: none;
+  z-index: 10000;
+  width: 160px;
+  padding-top: 5px;
+  background: url("../images/Path.png")  no-repeat;
+}
+.main_nav .m_nav > li .s_nav.p2{
+  background: url("../images/path2.png")  no-repeat;
+}
+.main_nav .m_nav > li .s_nav > li {
+  width: 150px;
+  height: 30px;
+  margin: 5px auto;
+  line-height: 30px;
+  background-color: #49A3DF;
+  text-align: left;
+  font-size: 14px;
+  background: url("../images/Rectangle1.png") center no-repeat;
+}
+.main_nav .m_nav > li .s_nav i {
+  float: left;
+  margin-top: 12px;
+  width: 6px;
+  height: 9px;
+  background: url("../images/arrow.png") center center no-repeat;
+  margin-left: 12px;
+  margin-right: 25px;
+}
+.main_nav .m_nav > li .s_nav .other {
+  text-indent: 3.2em;
+}
+.main_nav .m_nav > li:hover {
+  background: url("../images/index_spr.png") 0 -100px no-repeat;
+}
+.main_nav .m_nav > li:hover a {
+  color: #fff;
+}
+.main_nav .m_nav > li:hover .s_nav {
+  display: block;
+}
+.main_nav .m_nav > li:hover .s_nav > li:hover {
+  background: url("../images/re_Rectangle.png") no-repeat;
+}
+.main_nav .m_nav > li.active {
+  color: #fff;
+  background: url("../images/index_spr.png") 0 -100px no-repeat;
+}
+.main_nav .m_nav > li.active a {
+  color: #fff;
+}
+
+/*底部导航*/
+.footer {
+  background-color: #474747;
+  padding-top: 44px;
+  color: #fff;
+}
+.footer .left,
+.footer .right {
+  width: 50%;
+}
+.footer .left {
+  float: left;
+}
+.footer .left h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+.footer .left h2 i {
+  padding-left: 22px;
+  background: url("../images/index_spr.png") -396px -412px no-repeat;
+}
+.footer .left span {
+  display: block;
+  width: 492px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.footer .left p,
+.footer .left dt {
+  font-size: 18px;
+  height: 32px;
+  line-height: 32px;
+  overflow: hidden;
+}
+.footer .left p i,
+.footer .left dt i {
+  float: left;
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-image: url("../images/index_spr.png");
+  background-repeat: no-repeat;
+}
+.footer .left p {
+  margin-top: 28px;
+  margin-bottom: 30px;
+}
+.footer .left .tel {
+  background-position: -248px -412px;
+}
+.footer .left .email {
+  background-position: -320px -412px;
+}
+.footer .left .address {
+  background-position: -362px -412px;
+}
+.footer .left .code {
+  background-position: -282px -412px;
+}
+
+.footer .left dl dd{
+  margin-left: 8px;
+}
+.footer .right {
+  float: right;
+}
+.footer .right form {
+  margin-top: 34px;
+}
+.footer .right form label,
+.footer .right form input,
+.footer .right form textarea {
+  width: 535px;
+  display: block;
+  margin-bottom: 22px;
+  padding: 0 15px;
+}
+.footer .right form label {
+  margin-bottom: 8px;
+}
+.footer .right form label span {
+  font-size: 18px;
+}
+.footer .right form label em {
+  font-size: 14px;
+}
+.footer .right form input[name='name'] {
+  height: 48px;
+  background: url("../images/white_cir.png") no-repeat;
+  font-size: 16px;
+}
+.footer .right form input[name='tel'] {
+  height: 48px;
+  background: url("../images/white_cir.png") no-repeat;
+  font-size: 16px;
+}
+.footer .right form textarea {
+  height: 202px;
+  background: url("../images/white_cir_big.png") no-repeat;
+  overflow: hidden;
+  font-size: 16px;
+}
+.footer .right form input[type='button'] {
+  width: 158px;
+  height: 45px;
+  margin-left: 198px;
+  background: url("../images/index_spr.png") -250px -446px no-repeat;
+}
+.footer > p {
+  margin-top: 42px;
+  font-size: 14px;
+  line-height: 54px;
+  text-align: center;
+  background-color: #fff;
+  color: #333;
+}
+

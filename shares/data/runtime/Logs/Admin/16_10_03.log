@@ -1,0 +1,12 @@
+[ 2016-10-03T16:16:25+08:00 ] ::1 /shares/index.php?g=admin&m=position&a=index&menuid=290
+ERR: 无法加载控制器:Position
+
+[ 2016-10-03T16:49:56+08:00 ] ::1 /shares/index.php?g=admin&m=settlement&a=xxx&menuid=293
+ERR: 无法加载控制器:Settlement
+
+[ 2016-10-03T16:55:47+08:00 ] ::1 /shares/index.php?g=admin&m=orderdcl&a=index
+ERR: 无法加载控制器:Orderdcl
+
+[ 2016-10-03T17:11:29+08:00 ] ::1 /shares/index.php?g=admin&m=category&a=index&menuid=289
+ERR: 无法加载控制器:Category
+

@@ -1,0 +1,118 @@
+<style>
+select {
+	width: auto !important;
+	height: auto !important;
+}
+
+input {
+	height: auto !important;
+}
+</style>
+
+<admintpl file="header" /><body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="{:U('Indexadmin/index')}">会员列表</a></li>
+	</ul>
+	<form class="well form-search" method="post" action="{:U('Indexadmin/index')}">
+		<div class="search_type cc mb10">
+			<div class="mb10">
+					<span class="mr20">&nbsp;&nbsp;
+						时间：
+						<input type="text" name="start_time" class="J_date" value="{$formget.start_time|default=''}" style="width: 80px;" autocomplete="off">-
+						<input type="text" class="J_date" name="end_time" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+						关键字：
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+						
+						<select name="state">
+							<option value="" <if condition="$formget['state'] eq '' and $formget['state'] neq 0">selected</if>>选择状态...</option>
+							<volist name="ar_usertype" id="vo">
+								<option value="{$key}" <if condition="$formget['state'] eq $key">selected</if>>{$vo}</option>
+							</volist>
+						</select>
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+			</div>
+		</div>
+	</form>
+	<form class="J_ajaxForm" action="" method="post">
+		<table class="table table-hover table-bordered table-list" id="menus-table" data-sort_field="{$formget.sort_field}" data-sort_by="{$formget.sort_by}"><!--在table-list里添加sort_field和sort_by字段，存放之前选择的值 -->
+			<thead>
+			<tr>
+				<th width="15"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+				<th class="J_table_sort" data-field="ou.id">ID</th>
+				<th class="J_table_sort" data-field="ou.mobile">用户昵称</th>
+				<th class="J_table_sort" data-field="ou.mobile">手机号码</th>
+				<th class="J_table_sort" data-field="ou.zs_name">真实姓名</th>
+				<th class="J_table_sort" data-field="ou.tjrr">推荐人员</th>
+				<th class="J_table_sort" data-field="ou.tjrs">推荐人数</th>
+				<!--<th>性别</th>-->
+				<th class="J_table_sort" data-field="ou.score">当前资金</th>
+				<!-- <th class="J_table_sort" data-field="ou.wfjf">未返积分</th>
+				<th class="J_table_sort" data-field="ou.yfjf">已返积分</th> -->
+				<!-- <th>商家积分</th>
+				<th>代理积分</th> -->
+				<th class="J_table_sort" data-field="ou.user_type">用户类型</th>
+				<th class="J_table_sort" data-field="ou.user_status">会员状态</th>
+				<th class="J_table_sort" data-field="ou.create_time">注册时间</th>
+				<th>管理操作</th>
+			</tr>
+			</thead>
+			<tbody>
+			<volist name="list" id="vo">
+				<tr>
+					<td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" title="ID:{$vo.id}"></td>
+					<td>{$vo.id}</td>
+					<td>{$vo.user_nicename}</td>
+					<td>{$vo.mobile}</td>
+					<td>{$vo.zs_name}</td>
+					<td>{$vo.tjrr}</td>
+					<td><if condition="$vo['tjrs']">{$vo.tjrs}</if></td>
+					<!--<td>{$ar_sex[$vo[sex]]}</td>-->
+					<td>{$vo.score}</td>
+					<!-- <td>{$vo.wfjf}</td>
+					<td>{$vo.yfjf}</td>
+					<td>{$vo.sjscore}</td>
+					<td>{$vo.dl_score}</td> -->
+					<td>{$ar_usertype[$vo[user_type]]}</td>
+					<td>{$ar_blur[$vo[user_status]]}</td>
+					<td>{$vo.create_time|date="Y-m-d H:i",###}</td>
+					<td>
+						<a href="{:U('Indexadmin/edit',array('id'=>$vo['id']))}">修改</a> |
+						<a href="{:U('Indexadmin/delete',array('id'=>$vo['id']))}" class="J_ajax_del" data-msg="你确定要删除吗？<BR>将删除用户消息、提现、积分明细、订单、店铺、代理">删除</a>
+						<a href="{:U('Indexadmin/enable',array('t'=>1,'id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="你确定进行此操作吗？">启用</a>
+						<a href="{:U('Indexadmin/enable',array('t'=>0,'id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="你确定进行此操作吗？">禁用</a>					</td>
+				</tr>
+			</volist>
+			</tbody>
+
+		</table>
+		<div class="table-actions">
+			<!--<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Indexadmin/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button> -->
+			<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Indexadmin/enable',array('t'=>1))}" data-subcheck="true" >全部启用</button>
+			<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Indexadmin/enable',array('t'=>0))}" data-subcheck="true" >取消启用</button>
+		</div>
+		<div class="pagination">{$Page}</div>
+	</form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+	$(document).ready(function() {
+		Wind.css('treeTable');
+		Wind.use('treeTable', function() {
+			$("#menus-table").treeTable({
+				indent : 20
+			});
+		});
+	});
+
+	setInterval(function() {
+		var refersh_time = getCookie('refersh_time_admin_menu_index');
+		if (refersh_time == 1) {
+			reloadPage(window);
+		}
+	}, 1000);
+	setCookie('refersh_time_admin_menu_index', 0);
+</script>
+</body>
+</html>

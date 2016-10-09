@@ -1,0 +1,54 @@
+.section {
+  margin-top: 58px;
+  margin-bottom: 36px;
+}
+.sec_header {
+  border-bottom: 1px solid #666;
+  overflow: hidden;
+}
+.sec_header .left {
+  float: left;
+  overflow: hidden;
+}
+.sec_header .left li {
+  float: left;
+  width: 125px;
+  height: 31px;
+  line-height: 31px;
+  text-align: center;
+  border: 1px solid #666;
+  border-bottom: none;
+  margin-right: 10px;
+}
+.sec_header .left li a {
+  color: #383838;
+  font-size: 16px;
+}
+.sec_header .left li:hover {
+  background-color: #3498DB;
+}
+.sec_header .left li:hover a {
+  color: #fff;
+}
+.sec_header .left li.active {
+  background-color: #3498DB;
+}
+.sec_header .left li.active a {
+  color: #fff;
+}
+.sec_header .right {
+  float: right;
+  overflow: hidden;
+}
+.sec_header .right li {
+  float: left;
+  font-size: 14px;
+}
+.sec_header .right li:last-child {
+  color: #C6DFF0;
+}
+.sec_body img {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+}

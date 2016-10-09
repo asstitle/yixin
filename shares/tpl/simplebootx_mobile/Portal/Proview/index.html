@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+    <script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+</head>
+<body>
+	<div class="beaner swiper-container">
+		<div class="swiper-wrapper">
+            <foreach name="imgurl" item="vo">
+            <div class="swiper-slide"><img src="{$vo}" /></div>
+            </foreach>
+        </div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="info_pad_01"> 
+		<div class="info_top"> 
+			<h3>{$goods.name}</h3>
+			<div><em class='price' >￥<i class="goods_price" data-price="{$goods.price}">{$goods.price}</i>元</em><em class='raw_price'>￥{$goods.price_yp}元</em></div>
+			<p>服务：由福优源旗舰店发货   并提供售后服务</p>
+		</div>
+		<div class="info_select">
+            <if condition="$goods['spec_color']"> 
+			<div class="item sys_spec_text" data-url="{:u('Proview/search_gg',array('id'=>$goods['id']))}" >
+				<span>选择{$goods.spec_color}：</span>
+				<div class="_box select_color" >
+                    <foreach name="goods_spec" item="spec" key="spec_ko"> 
+					<span class=" spec_color <if condition='$spec_ko eq 0'> on</if>" title="{$spec.spec_color}" >{$spec.spec_color}</span>
+					</foreach>
+				</div>
+			</div>
+            </if>
+            <if condition="$goods['spec_size']">
+			<div class="item sys_spec_text" data-url="{:u('Proview/search_goods')}" >
+				<span>选择{$goods.spec_size}：</span>
+                <input type="hidden" name="" value="" class="send_specid" data-spec_size="{$goods.spec_size}" />
+				<div class="_box select_size">
+                    <foreach name="spec_size" item="size"> 
+					<span data-id="{$size.id}" class="spec_size">{$size.spec_size}</span>
+					</foreach>
+				</div>
+			</div>
+            </if>
+            <script id="spec_size" type="text/html">
+                [[each content as v i]]
+                <span data-id="[[v.id]]" class="spec_size" title="[[v.spec_size]]">[[v.spec_size]]</span>
+                [[/each]]
+            </script>
+			<div class="item">
+				<span>购买数量：</span>
+				<div class="_box select_sum"> 
+					<div class="order_reduce order_reduces">
+						<span>
+							<em id="reduce" class="J_jian"></em> 
+							<input name="" type="text" value="1" class="num" id="input"/>
+							<em id="add" class="J_jia"></em>
+						</span>
+					</div>
+                    库存:<i class="goods_store" data-store="{$goods.store}">{$goods.store}</i>
+				</div>
+			</div>
+			<div class="info_botm"> 
+		        <input type="hidden" class="goods_id" value="{$goods['id']}" />
+				<input type="button" class="gm now_buy" value="立即购买" data-url="{:u('Probuy/index',array('id'=>$goods['id']))}" />
+				<a href="javascript:;;" data-url="{:u('Procar/add_post',array('id'=>$goods['id']))}" class="add_car"><img src="__PUBLIC__/image/goods_car_1.png" /> 加入购物车</a>
+			</div>
+		</div>
+		<div class="goodds_infotle">产品参数</div>
+		<div class="info_box">
+			<ul class='cs_ul clr'>
+				<li>主图来源：自主实拍图</li>
+				<li>品牌：</li>
+				<li>服装版型：</li>
+				<li>风格：</li>
+				<li>衣长：</li>
+				<li>袖长：</li>
+				<li>袖型：</li>
+				<li>衣门襟：</li>
+				<li>面料材质：</li>
+				<li>面料主材质含量：</li>
+				<li>里料材质：</li>
+				<li>适用年龄：</li>
+				<li>颜色分类：</li>
+				<li>尺码：</li>
+			</ul>
+		</div>
+		<div class="goodds_infotle">商品详情</div>
+		<div class="info_box">
+			{$goods.describe}
+		</div>
+	</div>
+	<div class="car_box"><a href="{:u('Procar/index')}"><span>{$car_count}</span></a></div>
+	<!--<div class="set_top"><i class='icon-angle-top'></i><p>TOP</p></div>-->
+
+    <tc_include file="Public/share"/>
+    <tc_include file="Public/footer"/>
+</body>
+</html>
+<script>
+    $(function(){
+        var add,reduce,num,num_txt;
+        add=$(".J_jia");//添加数量
+        reduce=$(".J_jian");//减少数量
+        num="";//数量初始值
+        num_txt=$(".num");//接受数量的文本框
+        //var num_val=num_txt.val();//给文本框附上初始值
+
+        /*添加数量的方法*/
+        add.click(function(){
+            num = $(".num").val();
+            num++;
+            var type = 1;
+            is_kcs(num,type,num_txt);
+            
+            //ajax代码可以放这里传递到数据库实时改变总价
+        });
+
+        /*减少数量的方法*/
+        reduce.click(function(){
+            //如果文本框的值大于0才执行减去方法
+            num = $(".num").val();
+            if(num >0){
+                //并且当文本框的值为1的时候，减去后文本框直接清空值，不显示0
+                if(num==1)
+                { num--;
+                    num_txt.val("");
+                }
+                //否则就执行减减方法
+                else
+                {
+                    num--;
+                    num_txt.val(num);
+                }
+            }
+        });
+        
+        //判断库存
+        function is_kcs (num,type,num_txt) {
+            if ($(".send_specid").size() > 0){
+                var size_id = $(".send_specid").val();
+                if (!size_id) {
+                    layer.msg("请选择"+$(".send_specid").data("spec_size"));
+                    return false;
+                }
+            }
+            var goods_id = $(".goods_id").val();
+          
+            $.post("index.php?g=&m=Proview&a=kucun&goods_id="+goods_id,{num:num,type:type,size_id:size_id},function(data){
+                if (data.error) {
+                    layer.msg(data.error);
+                }
+                //增加
+                if (type == 1 && !data.error) {
+                    num_txt.val(num);
+                }
+            });
+        }
+        
+        //隐藏信息
+        $(".h_left").live('click',function(){
+            $(this).parents(".wares-popup").hide();
+        });
+        
+        
+    })
+</script>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body>
+	<form action="{:U('User/doshenqing')}" method="post">
+		<input type="hidden" name="itype" value="{$itype}">
+		<div class="tx_head">
+			<h3><img src="{$user_img}">昵称：{$user_nicename}</h3>
+			<div class="jf">现有金额<i>{$score}</i></div>
+			<p>提款时间每天09:00— 17:00，每天限提1次，每次不低于100元，提款在1个工作日内到账。</p>
+		</div>
+		<div class="tx_box">
+			<h3>提现卡号：{$yhk}</h3>
+			<input type="tel" style="padding:20px;text-align: center; border-bottom: 1px solid #dcdcdc;" name="price" datatype="*" id="price" nullmsg="请输入提现金额" placeholder='请输入提现金额' onBlur="sxf()"/>
+			<input type="password" style="padding:20px;text-align: center;" name="zfmm" datatype="*" nullmsg="请输入支付密码" placeholder='请输入支付密码' />
+			<p>当前手续费：<span id="sxf">{$sx_price}</span>元</p>
+			<input type="submit" value="申请提现" class="zt_ajax_form" />
+		</div>
+	</form>
+	<script>
+		function sxf(){
+			if(!isDecimal($("#price").val())||$("#price").val()<=0){
+				layer.msg("输入金额错误");
+				$("#price").val("");
+				return false;
+			}
+			
+		}
+	</script>
+	<tc_include file="Public/share"/>
+</body>
+</html>

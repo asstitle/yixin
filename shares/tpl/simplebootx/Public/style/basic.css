@@ -1,0 +1,67 @@
+/*initial*/
+body,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+dl,
+dd,
+dt,
+input,
+p {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font: 12px 'Sumsun', 'Microsoft YaHei';
+  overflow-x: hidden;
+}
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+.container:before {
+  content: '';
+  clear: both;
+  display: block;
+}
+.container:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a img {
+  border: none;
+}
+i {
+  font-style: normal;
+}
+textarea,input,button{
+  border: none;
+}
+em,i{
+  font-style: normal;
+}
+input:focus{
+  -webkit-appearance: none !important;
+  outline: none !important;
+}
+textarea{
+  outline: none !important;
+  resize: none;
+}

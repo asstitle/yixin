@@ -1,0 +1,515 @@
+<admintpl file="header" />
+<body>
+
+<link href="__ROOT__/statics/simpleboot/css/index.css" rel="stylesheet" />
+<script type="text/javascript" src="__ROOT__/statics/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+
+<script type="text/javascript" src="__ROOT__/statics/js/jquery.form.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+<!--end-->
+<!--content-->
+<style>
+#edui1{width: 60%;}
+.delBox{width:568px;overflow:hidden;}
+.del{width: 73px;height: 95px;float:left;margin-right:6px;;text-align:center;overflow: hidden;}
+.del img{display: block;}
+.del p{height: 22px;line-height: 22px;cursor:pointer;overflow: hidden;}
+ul li{list-style: none;}
+</style>
+<input type="hidden" class="return_url" value="{:U('Portal/Prostatus/index')}" />
+<form name="myform" id="myform"  class="form-horizontal J_ajaxForms" action='{:U("Portal/Prostatus/edit_goods_post")}' method="post"  enctype="multipart/form-data">
+<section>
+    <div class="main shadow">
+        <div class="sidebar">
+            <div class="fr sidebar_b">
+                <div class="sidebar_b_c">
+                    <div class="title"><span>填写商品信息</span></div>
+                    <input name="post[class_id]" type="hidden" value="{$sellerid}" />
+                    <input name="post[shop_id]" value="{$goods.shop_id}" type="hidden" class="shop_id" />
+                    <input name="goods_id" type="hidden" value="{$goods_id}" />
+                    <input type="hidden" class="express_id" value="{$goods.express_id}" />
+                    <table class="goods">
+                        <tr>
+                            <th colspan="4">
+                                <p style="color: #323232;">
+                                    <label class="fl" style="width: 3px;height: 12px;background: #ce000f;margin-top:3px;"></label>
+                                    <b class="fl">&nbsp;商品基本信息</b>
+                                </p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>商品名称：</th>
+                            <td colspan="3"><input name="post[name]" value="{$goods.name}" type="text" class="inp" required /> 30字</td>
+                        </tr>
+                        <tr>
+                            <th valign="top" style="padding-top: 15px;">商品卖点：</th>
+                            <td colspan="3"><textarea name="post[selling]">{$goods.selling}</textarea> 150字</td>
+                        </tr>
+                        
+                         <tr>
+                            <th>市场价：</th>
+                            <td colspan="3"><input name="post[price_yp]" value="{$goods.price_yp}" type="text" class="inp" /> 元</td>
+                        </tr>
+                        <tr>
+                            <th>商品价格：</th>
+                            <td colspan="3"><input name="post[price]" value="{$goods.price}" type="text" class="inp" required /> 元</td>
+                        </tr>
+                        <tr>
+                            <th>商品年产量：</th>
+                            <td colspan="3"><input name="post[nums_year]" value="{$goods.nums_year}" type="text" class="inp"></td>
+                        </tr>
+                        <tr>
+                            <th>已 产 量：</th>
+                            <td colspan="3"><input name="post[nums_now]" value="{$goods.nums_now}" type="text" class="inp"></td>
+                        </tr>
+                        <tr>
+                            <th>商品品牌：</th>
+                            <td colspan="3">
+                                <select name="post[brand_id]" style="width: 379px;">
+                                    <foreach name="goods_brand" item="vo">
+                                        <option value="{$vo.id}" <if condition="$goods['brand_id'] eq $vo['id']">selected</if>>{$vo.name}</option>
+                                    </foreach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th valign="top" style="padding-top: 15px;">商品规格：</th>
+                            <td colspan="3">
+                                <div class="standard">
+                                    <table class="tc">
+                                        <tr>
+                                            <td colspan="6"><h1><b>编辑商品规格</b></h1></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6"><div>您最多可以添加两种规格（如：颜色和尺码）规格名称可以自定义如只有一项规格另一项留空</div></td>
+                                        </tr>
+                                        <tr>
+                                            <th><input name="post[spec_color]" value="{$goods.spec_color}" type="text"class="inp" /></th>
+                                            <th><input name="post[spec_size]" value="{$goods.spec_size}" type="text"class="inp" /></th>
+                                            <th>价格</th>
+                                            <th>库存</th>
+                                            <th>货号</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        <php>
+                                            $goods_spec = M("goods_spec")->where("goods_id='$goods_id'")->select();
+                                        </php>
+                                        <foreach name="goods_spec" item="vo">
+                                        <tr class="goods_gg">
+                                            <td><input type="text" class="inp" value="{$vo.spec_color}" name="spec_color[]" /></td>
+                                            <td><input type="text" class="inp" value="{$vo.spec_size}" name="spec_size[]" /></td>
+                                            <td><input type="text" class="inp" value="{$vo.price}" name="price[]" /></td>
+                                            <td><input type="text" class="inp" value="{$vo.stock}" name="stock[]" /></td>
+                                            <td><input type="text" class="inp" value="{$vo.itemno}" name="itemno[]" /></td>
+                                            <td>
+                                                <span><img src="__ROOT__/statics/simpleboot/image/b_icon6.png" class="add_prev" /></span>
+                                                <span><img src="__ROOT__/statics/simpleboot/image/b_icon7.png" class="add_next" /></span>
+                                                <span><img class="goods_gg_delete" src="__ROOT__/statics/simpleboot/image/b_icon8.png" /></span>
+                                            </td>
+                                        </tr>
+                                        </foreach>
+                                        
+                                        <tr>
+                                            <td colspan="6">
+                                                <div  class="goods_gg_add" style="width:100%;border-top: 1px solid #e2e2e2;border-bottom: 1px solid #e2e2e2;text-align: left;cursor: pointer;"><img src="__ROOT__/statics/simpleboot/image/b_icon9.png" /> 添加新规格属性</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <div class="tr" style="width:100%;border-top: 3px solid #cccccc;height: 30px;line-height: 30px;overflow: hidden;">
+                                                    <span class="dib s_close"><img src="__ROOT__/statics/simpleboot/image/b_icon10.png"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>商品库存：</th>
+                            <td colspan="3"><input name="post[store]" value="{$goods.store}" type="text" class="inp"></td>
+                        </tr>
+                        <php>
+                            $goods_pic = M("goods_pic")->where("goods_id='$goods_id'")->find();
+                            $imgurl = unserialize($goods_pic['imgurl']);
+                        </php>
+                        <tr>
+                            <th valign="top" style="padding-top: 15px;">商品图片：</th>
+                            <td colspan="3">
+                                <div class="delBox qt_change_images">
+                                    <div class="del">
+                                        <img src="{$imgurl[0]}" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="2" data-src="__ROOT__/statics/simpleboot/image/134.jpg" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="{$imgurl[0]}" class="img_url" required />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="<if condition='$imgurl[1]'>{$imgurl[1]}<else />__ROOT__/statics/simpleboot/image/135.jpg</if>" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="<if condition='$imgurl[1]'>2<else />1</if>" data-src="<if condition='$imgurl[1]'>__ROOT__/statics/simpleboot/image/135.jpg</if>" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="{$imgurl[1]}" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="<if condition='$imgurl[2]'>{$imgurl[2]}<else />__ROOT__/statics/simpleboot/image/135.jpg</if>" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="<if condition='$imgurl[2]'>2<else />1</if>" data-src="<if condition='$imgurl[2]'>__ROOT__/statics/simpleboot/image/135.jpg</if>" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="{$imgurl[2]}" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="<if condition='$imgurl[3]'>{$imgurl[3]}<else />__ROOT__/statics/simpleboot/image/135.jpg</if>" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="<if condition='$imgurl[3]'>2<else />1</if>" data-src="<if condition='$imgurl[3]'>__ROOT__/statics/simpleboot/image/135.jpg</if>" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="{$imgurl[3]}" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="<if condition='$imgurl[4]'>{$imgurl[4]}<else />__ROOT__/statics/simpleboot/image/135.jpg</if>" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="<if condition='$imgurl[4]'>2<else />1</if>" data-src="<if condition='$imgurl[4]'>__ROOT__/statics/simpleboot/image/135.jpg</if>" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="{$imgurl[4]}" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="<if condition='$imgurl[5]'>{$imgurl[5]}<else />__ROOT__/statics/simpleboot/image/135.jpg</if>" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="<if condition='$imgurl[5]'>2<else />1</if>" data-src="<if condition='$imgurl[5]'>__ROOT__/statics/simpleboot/image/135.jpg</if>" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="{$imgurl[5]}" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="fl">
+                                        <img src="__ROOT__/statics/simpleboot/image/136.jpg" />
+                                    </div>
+                                </div>
+
+                                <div class="fileImg">
+                                    <div class="fileImg_t tc"><b>本地上传图片</b></div>
+                                    <div class="c">
+                                        <input type='button' value="本地上传" onclick="javascript:flashupload('albums_images', '图片上传','photos',qt_change_images,'10,gif|jpg|jpeg|png|bmp,0','','&max_count=6','')" class='btn' />
+                                        <!--<input type='text' name='textfield' id='textfield' value="一次可选6张图片哦~" class='txt' />
+                                        <input type="file" name="fileField" class="file" id="fileField" onchange="document.getElementById('textfield').value=this.value" multiple="multiple" />-->
+                                    </div>
+                                    <p style="width: 450px;margin:10px auto;overflow: hidden;">
+                                        提示：1、图片尺寸为800*800，单张大小不超过1024K。仅支持 jpg jpeg png 格式。<br>
+                                        &nbsp;&nbsp;&nbsp;2、图片质量要清晰，不能虚化。建议主图为白色背景正面图
+                                    </p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th valign="top" style="padding-top: 15px;">商品描述：</th>
+                            <td colspan="3"><div class="editor"><script type="text/plain" id="content5" name="describe" >{$goods.describe}</script>
+                                    <script type="text/javascript">
+                                    //编辑器路径定义
+                                    var editorURL = GV.DIMAUB;
+                                    </script>
+                                    <script type="text/javascript"  src="__ROOT__/statics/js/ueditor/ueditor.config.js"></script>
+                                    <script type="text/javascript"  src="__ROOT__/statics/js/ueditor/ueditor.all.min.js"></script></div></td>
+                        </tr>
+                        <tr>
+                            <th colspan="4">
+                                <p style="color: #323232;text-align: left;margin: 10px 0;">
+                                    <b>商品属性</b>
+                                </p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <php>
+                                $goods_attr = M("goods_attr")->where("goods_id='$goods_id'")->select();
+                            </php> 
+                            <foreach name="list" item="vo" key="ko">
+                                <foreach name="goods_attr" item="vo3">
+                                    <if condition="$vo['id'] eq $vo3['attr_id']">
+                                        <input type="hidden" value="{$vo.id}" name="attr_id[]" /> 
+                                        <th>{$vo.name}：</th>
+                                        <td class="public_parents">
+                                            <if condition="$vo['itype'] eq 1">
+                                                <select name="sattr_id[]" class="select">
+                                                    <foreach name="vo['value']" item="vo2">
+                                                    <php>
+                                                        $val1 = trim($vo2['name']);
+                                                    </php>
+                                                    <option value="{$val1}" <if condition="trim($vo2['name']) eq trim($vo3['val'])">selected</if> >{$val1}</option>
+                                                    </foreach>
+                                                </select>
+                                            <elseif condition="$vo['itype'] eq 5" />
+                                                <php>
+                                                    $val = explode(',',$vo3['val']);
+                                                </php>
+                                                <input class="type public_dx_check_sum" type="hidden" name="sattr_id[]" value="{trim($vo3['val'])}" />
+                                                <foreach name="vo['value']" item="vo2" key="ko">
+                                                    <php>
+                                                        $val2 = trim($vo2['name']);
+                                                    </php>
+                                                    <input name="" style="position: relative;top: 2px;" <volist name="val" id="vals"><if condition="trim($vals) eq trim($vo2['name'])">checked</if></volist> class="public_dx_check" type="checkbox" value="{$val2}" />{$val2}&nbsp;&nbsp;
+                                                    
+                                                </foreach>
+                                            <else />
+                                                <input type="text" name="sattr_id[]" value="{$vo3['val']}" class="inp sattr_id" style="width: 178px;" />
+                                            </if>
+                                        </td>
+                                        <if condition="($ko+1)%2 eq 0">
+                                            </tr>
+                                            <tr>
+                                        </if>
+                                    </if>
+                                </foreach>
+                            </foreach>
+                        </tr>
+                        <tr>
+                            <th colspan="4">
+                                <p style="color: #323232;">
+                                    <label class="fl" style="width: 3px;height: 12px;background: #ce000f;margin-top:3px;"></label>
+                                    <b class="fl">&nbsp;商品基本信息</b>
+                                </p>
+                            </th>
+                        </tr>
+                        
+                        <tr class="tr_logisticsser">
+                            <th valign="top" style="padding-top: 15px;">运费设置：</th>
+                            <td colspan="3">
+                                <div class="ovh logisticsser">
+                                    <select name="post[express_id]" class="logistics" data-url="{:U('Portal/Prostatus/logisticsser')}" dataType="Require" msg="请选择物流模板" >
+                                        <option value="">请选择物流模板</option>
+                                        <foreach name="express_template" item="vo">
+                                        <option value="{$vo.id}">{$vo.name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                                <script id="logisticsAdd" type="text/html">
+                                    [[if valuation_type]]
+                                        <div class="kd logisticsAdd" id="book">
+                                            <ul class="tab_tG book_top">
+                                                [[each name as v i]]
+                                                <li [[if i==0]]class="current"[[/if]]><b>[[v]]</b><label></label></li>
+                                                [[/each]]
+                                            </ul>
+                                            [[if calculation1]]
+                                                <ul class="tab_cG book_foot">
+                                                    <li>[[calculation1.a]][[valuation_type]]内[[calculation1.b]]元，每增加[[calculation1.c]][[valuation_type]]，加[[calculation1.d]]元</li>
+                                                </ul>
+                                            [[/if]]
+                                            
+                                            [[if calculation2]]
+                                                <ul class="tab_cG book_foot" style="display:none;">
+                                                    <li>[[calculation2.a]][[valuation_type]]内[[calculation2.b]]元，每增加[[calculation2.c]][[valuation_type]]，加[[calculation2.d]]元</li>
+                                                </ul>
+                                            [[/if]]
+                                            
+                                            [[if calculation3]]
+                                                <ul class="tab_cG book_foot" style="display:none;">
+                                                    <li>[[calculation3.a]][[valuation_type]]内[[calculation3.b]]元，每增加[[calculation3.c]][[valuation_type]]，加[[calculation3.d]]元</li>
+                                                </ul>
+                                            [[/if]]
+                                        </div>
+                                    [[/if]]
+                                </script>
+                                <script id="logisticsAdd2" type="text/html">
+                                    [[if valuation_type]]
+                                    <div class="kd logisticsAdd">
+                                        <b style="float:left;margin-left:14px">卖家包邮</b>
+                                    </div>
+                                    [[/if]]
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>商品体积：</th>
+                            <td colspan="3"><input type="text" value="{$goods.goods_v}" name="post[goods_v]" class="inp" /> m3</td>
+                        </tr>
+                        <tr>
+                            <th>商品重量：</th>
+                            <td colspan="3"><input type="text" value="{$goods.goods_g}" name="post[goods_g]" class="inp" required /> kg</td>
+                        </tr>
+                    </table>
+                    <div class="form-actions">
+                        <button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
+                        <a class="btn" href="{:U('Portal/Prostatus/index')}">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</form>
+<!--end-->
+
+
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script id="goods_gg" type="text/html">
+    <tr class="goods_gg">
+        <td><input type="text" class="inp" name="spec_color[]" /></td>
+        <td><input type="text" class="inp" name="spec_size[]" /></td>
+        <td><input type="text" class="inp" name="price[]" /></td>
+        <td><input type="text" class="inp" name="stock[]" /></td>
+        <td><input type="text" class="inp" name="itemno[]" /></td>
+        <td>
+            <span><img src="__ROOT__/statics/simpleboot/image/b_icon6.png" class="add_prev"></span>
+            <span><img src="__ROOT__/statics/simpleboot/image/b_icon7.png" class="add_next"></span>
+            <span><img class="goods_gg_delete" src="__ROOT__/statics/simpleboot/image/b_icon8.png"></span>
+        </td>
+    </tr>
+</script>
+<script type="text/javascript"> 
+$(function () {
+    //设置运费模板选中
+    $(".logistics").find("option").each(function(){
+        if ($(this).attr("value") == $(".express_id").val()) {
+            $(".logistics").val($(this).attr("value"));
+            
+            var id = $(this).val();
+            var url = $(this).parents(".logistics").data("url");
+            logistics(url,id);
+        }
+    });
+    function logistics (url,id) {
+        $.post(url,{id:id},function(data){
+            $(".logisticsAdd").remove();
+            if (data.shipping == 1) {
+               $(".logisticsser").after(template("logisticsAdd",data)); 
+            } else {
+               $(".logisticsser").after(template("logisticsAdd2",data));  
+            }
+            
+            //table切换
+            $('#book').find(".book_top").find('li').hover(function(){
+                var index = $(this).index();
+                $('#book').find(".book_top").find('li.current').removeClass('current').end().find('li:eq('+index+')').addClass('current');
+                $('#book').find('ul.book_foot:visible').hide().end().find('ul.book_foot:eq('+index+')').show();    
+            },jQuery.noop)
+        });
+     }
+    
+	 $(".J_ajax_close_btn").on('click', function (e) {
+	    e.preventDefault();
+	    Wind.use("artDialog", function () {
+	        art.dialog({
+	            id: "question",
+	            icon: "question",
+	            fixed: true,
+	            lock: true,
+	            background: "#CCCCCC",
+	            opacity: 0,
+	            content: "您确定需要关闭当前页面嘛？",
+	            ok:function(){
+					setCookie("refersh_time",1);
+					window.close();
+					return true;
+				}
+	        });
+	    });
+	});
+	/////---------------------
+	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript
+	        //javascript
+            editorcontent = new baidu.editor.ui.Editor();
+            editorcontent.render( 'content5' );
+            try{editorcontent.sync();}catch(err){};
+            
+            var form = $('form.J_ajaxForms');
+        //ie处理placeholder提交问题
+            if ($.browser.msie) {
+                form.find('[placeholder]').each(function () {
+                    var input = $(this);
+                    if (input.val() == input.attr('placeholder')) {
+                        input.val('');
+                    }
+                });
+            }
+	            
+	        
+	        var formloading=false;
+	        //表单验证开始
+	        form.validate({
+				//是否在获取焦点时验证
+				onfocusout:false,
+				//是否在敲击键盘时验证
+				onkeyup:false,
+				//当鼠标掉级时验证
+				onclick: false,
+	            //验证错误
+	            showErrors: function (errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try{
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id:'error',
+							icon: 'error',
+							lock: true,
+							fixed: true,
+							background:"#CCCCCC",
+							opacity:0,
+							content: errorArr[0].message,
+							cancelVal: '确定',
+							cancel: function(){
+								$(errorArr[0].element).focus();
+							}
+						});
+					}catch(err){
+					}
+	            },
+	            //验证规则
+	            rules: {'post[post_title]':{required:1},'post[post_content]':{editorcontent:true}},
+	            //验证未通过提示消息
+	            messages: {'post[post_title]':{required:'请输入标题'},'post[post_content]':{editorcontent:'内容不能为空'}},
+	            //给未通过验证的元素加效果,闪烁等
+	            highlight: false,
+	            //是否在获取焦点时验证
+	            onfocusout: false,
+	            //验证通过，提交表单
+	            submitHandler: function (forms) {
+	            	if(formloading) return;
+	                $(forms).ajaxSubmit({
+	                    url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+	                    dataType: 'json',
+	                    beforeSubmit: function (arr, $form, options) {
+	                    	formloading=true;
+	                    },
+	                    success: function (data, statusText, xhr, $form) {
+	                    	formloading=false;
+	                        if(data.status){
+								setCookie("refersh_time",1);
+								//添加成功
+								Wind.use("artDialog", function () {
+								    art.dialog({
+								        id: "succeed",
+								        icon: "succeed",
+								        fixed: true,
+								        lock: true,
+								        background: "#CCCCCC",
+								        opacity: 0,
+								        content: data.info,
+										button:[
+											{
+												name: '继续添加？',
+												callback:function(){
+													reloadPage(window);
+													return true;
+												},
+												focus: true
+											},{
+												name: '返回列表页',
+												callback:function(){
+													location = return_url;
+													return true;
+												}
+											}
+										]
+								    });
+								});
+							}else{
+								isalert(data.info);
+							}
+	                    }
+	                });
+	            }
+	        });
+	    });
+	////-------------------------
+
+});
+</script>
+</body>
+</html>

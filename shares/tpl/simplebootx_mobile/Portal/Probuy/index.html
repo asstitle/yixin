@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+    <script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+</head>
+<php>
+    $get_op = I("get.op");
+    if ($get_op != 'dc') {
+        $get_op = '';
+    }
+</php>
+<body class="f0">
+    <input type="hidden" class="op_pd" value="{$get_op}" />
+    <input type="hidden" class="dc_size_id" value="{$size_id}" />
+    <form class="form-horizontal J_ajaxForms" action="{:U('Probuy/order_post')}" method="post" name="order">
+        <input type="hidden" value="2" class="buy_id" />
+        <input type="hidden" class="template_url" value="{:U('Probuy/template')}" />
+        <input type="hidden" name="address_id" value="{$user_address['id']}" class="address_id" />
+        <input type="hidden" class="fee" value="{$express[0]['price']}" />
+        <input type="hidden" name="fhfs" class="fhfs" value="{$express[0]['id']}@{$express[0]['price']}" />
+     	<div class="order_goods"> 
+     		<ul>
+                <foreach name="list" item="order" key="o_key"> 
+     			<li>
+                    <input type="hidden" name="goods_id[]" class="goods_id" value="{$order['id']}" />
+                    <input type="hidden" name="size_id[]" value="{$order['size_id']}" />
+                    <input type="hidden" name="car_id[]" value="{$order['cay_id']}" /> 
+     				<div class="_img"> 
+                        <php>
+                            //图片
+                            $imgurl = unserialize($order['imgurl']);
+                        </php>
+     					<img src="{$imgurl[0]}" />
+     				</div>
+     				<div class="r_text"> 
+     					<p class="_tle">{$order.name}</p>
+     					<div class="botm clr"> 
+    						<span class="price">¥<span class="size_prices">{$order.size_price}</span></span>
+    						<div class="sum">数量 X{$order.nums}</div>
+                            <input type="hidden" name="nums[]" class="nums_now" value="{$order['nums']}" />
+                            <input type="hidden" class="size_prices" value="{$order.size_price}" />
+     					</div>
+     				</div>
+     			</li>
+                </foreach>
+     		</ul>
+     		<div class="xj"> 
+     			<p>运费：<i class="express">{$express[0]['price']}</i></p>
+     			<h3>总计：<span class="newAll"></span></h3>
+     		</div>
+     	</div>
+     	<div class="order_select"> 
+     		<div class="item"> 
+     			<h2 <if condition="$user_address"> style="height: 4.5rem;"</if>><a href="{:U('portal/User/setting_address', $gets)}" ><i class='icon-map-marker'></i>
+                <if condition="$user_address">
+                {$user_address.name}&nbsp;{$user_address.phone}
+                <p>{$user_address.sheng}/{$user_address.shi}/{$user_address.qu}{$user_address.address}</p>
+                <else />
+                请选择或填写您的详细地址
+                </if>
+                 <span class='_r'><i class='icon-angle-right'></i></span></a></h2>
+     		</div>
+     		<div class="item"> 
+     			<h2>客户留言：<input type="text" name="remark_buy" placeholder='选填' /></h2>
+     		</div>
+     		<div class="item">
+     			<h2>配送时间:<span class='_r'>
+                    <select name="shsj">
+                        <option value="0">任意时间</option>
+                        <option value="1">周一到周五</option>
+                        <option value="2">周末及节假日</option>
+                    </select> 
+                </span>
+                </h2>
+     		</div>
+     		<div class="item"> 
+     			<h2>配送方式:</h2>
+     			<ul class="ps_fun">
+                    <foreach name="express" item="vo" key="ko">
+     				<li class="on"><label><input type="radio" name="fhfs_a" value="{$vo.id}@{$vo.price}" data-value="{$vo.price}" class="iCheck" <if condition='$ko eq 0'> checked</if> />{$vo.name}<i>运费：￥{$vo.price}</i></label></li>
+     				</foreach> 
+     			</ul>
+     		</div>
+     	</div>
+    	<footer class="order_foot">
+    		<div class="_l">
+    			<p>应付金额：<span class="nowAll"></span>元</p>
+    			<p>供<span class="num"></span>件商品</p>
+    		</div>
+    		<div class="_btn">
+    			<input type="submit" class="order_post" value="立即结算" />
+    		</div>
+    	</footer>
+    </form>
+    <tc_include file="Public/footer"/>
+    <tc_include file="Public/share"/>
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+    deal_post_price();
+    $("input[name=fhfs_a]").on('ifChecked',function(){
+        $(".fee").val($(this).data("value"));
+        $(".express").html($(this).data("value"));
+        $(".fhfs").val($(this).val());
+        deal_post_price();
+    });
+    
+    function deal_post_price () {
+        var newAll = 0;
+        var num    = 0;
+        var fee = parseFloat($(".fee").val());
+        if (!fee) {
+            fee = 0;
+        }
+        $(".nums_now").each(function(){
+            newAll += parseInt($(this).val())*parseFloat($(this).siblings(".size_prices").val());
+            num    += parseInt($(this).val());
+        });
+        nowAll = newAll + fee;
+        $(".express").html(fee.toFixed(2));
+        $(".newAll").html(newAll.toFixed(2));
+        $(".nowAll").html(nowAll.toFixed(2));
+        $(".num").html(num);
+    }
+    
+});
+</script>

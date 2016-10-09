@@ -1,0 +1,149 @@
+/*initial*/
+body,
+ul,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+dl,
+dd,
+dt,
+input,
+p {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 625%;
+}
+body {
+  font: 12px 'Sumsun', 'Microsoft YaHei', "Arial";
+  min-width: 226px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+a img {
+  border: none;
+}
+i,
+s {
+  font-style: normal;
+  text-decoration: none;
+}
+input,
+button {
+  border: none medium;
+  font-size: 1.4rem;
+  overflow: visible;
+  *overflow: visible;
+  outline: none;
+  -webkit-appearance: none;
+}
+header,
+section,
+footer {
+  max-width: 7.2rem;
+  min-width: 2.28rem;
+  margin: 0 auto;
+}
+img {
+  max-width: 100%;
+}
+section h2 {
+  text-align: center;
+  color: #304697;
+  margin-top: .25rem;
+  line-height: .35rem;
+}
+
+.ce{
+    font-family: "Arial", "微软雅黑";
+    font-weight: bold;
+}
+
+@media screen and (max-width: 350px) {
+  section h2 {
+    font-size: .18rem;
+  }
+}
+@media screen and (min-width: 350px) {
+  section h2 {
+    font-size: .22rem;
+  }
+}
+section s {
+  display: block;
+  text-align: center;
+  color: #324898;
+  margin-bottom: .15rem;
+}
+@media screen and (max-width: 350px) {
+  section s {
+    font-size: .14rem;
+  }
+}
+@media screen and (min-width: 350px) {
+  section s {
+    font-size: .16rem;
+  }
+}
+section p {
+  display: block;
+  font-size: .125rem;
+  margin: 0 auto;
+  text-align: justify;
+  line-height: .18rem;
+}
+@media screen and (max-width: 300px) {
+  section p {
+    width: 90%;
+  }
+}
+@media screen and (min-width: 301px) and (max-width: 400px) {
+  section p {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 549px) {
+  section p {
+    width: 70%;
+  }
+}
+@media screen and (min-width: 550px) {
+  section p {
+    width: 60%;
+  }
+}
+section img {
+  display: block;
+  max-width: 60%;
+  text-align: center;
+  margin: 0 auto;
+}
+section a {
+  display: block;
+  width: 100%;
+  color: #000;
+  text-align: center;
+}
+section a span {
+  font-size: .15rem;
+}
+section a img {
+  margin-bottom: .08rem;
+  max-width: 50%;
+}

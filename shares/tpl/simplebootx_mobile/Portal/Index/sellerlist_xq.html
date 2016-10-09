@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body>
+	<div class="beaner swiper-container">
+		<div class="swiper-wrapper">
+			<php>
+				$banner = explode(",",$banner);
+			</php>
+			<volist name="banner" id="vo">
+				<div class="swiper-slide"><img src="{$vo}"></div>
+			</volist>
+        </div>
+		<div class="swiper-pagination"></div>
+	</div>
+	<div class="padd_0_1 union_info">
+		<div class="union_infotop"><img src="__PUBLIC__/image/union_logmin.png">{$name}<i class='fr'>人均消费{$rjxf}</i></div>
+		<div class="itme_3 clr _i"><a href="http://api.map.baidu.com/marker?location={$lat},{$lng}&title={$name}&name={$name}&content={$sheng}{$shi}{$qu}{$address}&output=html">
+            <span class='fl'><img src="__PUBLIC__/image/union_infoaddres.png">地址：{$sheng}-{$shi}-<if condition="strstr($address,$qu)">{$address}<else />{$qu}{$address}</if></span>
+			<i class='icon-angle-right'></i>
+		</a></div>
+		<div class="itme_3 clr _i"><a href="tel:{$phone}">
+			<span class='fl'><img src="__PUBLIC__/image/union_infophone.png">电话：{$phone}</span>
+			<i class='icon-angle-right'></i>
+		</a></div>
+		<div class="goodds_infotle">商家简介</div>
+		<div class="unioninfo_box text">
+			{$about}
+		</div>
+		<div class="goodds_infotle">商家介绍</div>
+		<div class="unioninfo_box">
+			{$content}
+		</div>
+		<div>
+			<a class="btn_red_a" href="{:U('User/payment',array('phone'=>$mobile))}">我要付款</a>
+		</div>
+	</div>
+	<tc_include file="Public/footer"/>
+	<tc_include file="Public/share"/>
+</body>
+</html>

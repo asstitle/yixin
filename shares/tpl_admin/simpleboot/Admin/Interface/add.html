@@ -1,0 +1,43 @@
+<admintpl file="header" />
+<body class="J_scroll_fixed">
+	<div class="wrap jj">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('Interface/index')}">线下订单添加列表</a></li>
+			<li class="active"><a href="{:U('Interface/add')}">添加线下课程订单 </a></li>
+		</ul>
+		<div class="common-form">
+			<form method="post" class="form-horizontal J_ajaxForm" action="{:U('Interface/add_post')}">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">课程名称:</label>
+						<div class="controls">
+							<input type="text" class="input" name="curriculum_name" value="">
+							<span class="must_red">*</span>
+							<span style="margin-left: 15px;">课程名称必须完全一致，请确认好前后无空格</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">会员ID:</label>
+						<div class="controls">
+							<input type="text" class="input" name="uid" value="">
+							<span class="must_red">*</span>
+							<span style="margin-left: 15px;">会员ID为唯一标识，可在会员列表查看</span>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">备注:</label>
+						<div class="controls">
+							<textarea name="interface_bz" rows="5" cols="57"></textarea>
+						</div>
+					</div>
+				</fieldset>
+				<div class="form-actions">
+					<button class="btn btn-primary btn_submit" type="submit">添加</button>
+					<a class="btn" href="__URL__">返回</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>

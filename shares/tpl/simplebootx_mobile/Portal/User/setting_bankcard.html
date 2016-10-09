@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<form action="{:U('User/dosetting_bankcard')}" method="post">
+		<div class="itme_3 clr">
+			<span class="fl">开户银行</span>
+			<div class="fr">
+				<select name="khyh" id="khyh">
+					<volist name="yinghang" id="vo">
+						<option value="{$vo}">{$vo}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="itme_3 bor_no clr">
+			<span class="fl">开户支行</span>
+			<div class="fr"><input type="text" name="khzh" datatype="*" nullmsg="请输入开户支行"  placeholder="输入开户支行"></div>
+		</div>
+		<if condition="!$name">
+			<div class="itme_3 clr">
+				<span class="fl">真实姓名</span>
+				<div class="fr"><input type="text" name="khxm" datatype="*" nullmsg="请输入真实姓名" placeholder="输入真实姓名"></div>
+			</div>
+		</if>
+		<div class="itme_3 bor_no clr">
+			<span class="fl">银行卡号</span>
+			<div class="fr"><input type="tel" name="yhzh" ajaxurl="{:U('Index/yzyhcard')}" datatype="yhcard" nullmsg="请输入银行卡号" errormsg="请输入正确的银行卡号" placeholder="输入银行卡号"></div>
+		</div>
+		<div class="itme_3 bor_no clr">
+			<span class="fl">身份证号</span>
+			<div class="fr"><input type="text" name="idcard" ajaxurl="{:U('Index/yzidcard')}" datatype="idcard" nullmsg="请输入身份证号" errormsg="请输入正确的身份证号" placeholder="输入身份证号"></div>
+		</div>
+		<div class="btn_1">
+			<input type="submit" class="zt_ajax_form" value='确认提交'>
+		</div>
+		<div class="text_box1">
+绑定银行卡用于提取平台赠送收益，当你重新绑定新的银行卡号时，系统会自动解绑之前的关联账号，收益将提取到新绑定的银行卡上。
+		</div>
+	</form>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

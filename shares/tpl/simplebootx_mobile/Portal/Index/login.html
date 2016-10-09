@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<form action="{:U('Index/dologin')}" method="post">
+		<div class="login_box">
+			<div class="int_box">
+				<p class="name"><input type="tel" id="phone" name="phone" placeholder="请输入手机号码" datatype="m" nullmsg="请输入手机号！" errormsg="手机号不正确！"/></p>
+				<p class="pass"><input type="password" name="password" datatype="s6-18" nullmsg="请输入密码" errormsg="密码需6-18位字符！" placeholder="请输入登录密码" /></p>
+			</div>
+			<p class="od_word"><a href="{:U('Index/zhmm')}"><font color="red">忘记密码？</font></a></p>
+			<input type="submit" value="登录" class="login_btn zt_ajax_form" />
+		</div>
+	</form>
+	
+	<tc_include file="Public/share"/>
+</body>
+</html>

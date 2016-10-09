@@ -1,0 +1,9 @@
+<!--底部导航-->
+<nav>
+    <ul class="bot-nav">
+        <li><a href="{:U('Index/index')}" <if condition="$active eq 'index' ">class="active"</if> ><i class="iconfont">&#xe62d;</i><span>首页</span></a></li>
+        <!-- <li><a href="#" <if condition="$active eq 'sxy' ">class="active"</if> ><i class="iconfont">&#xe62e;</i><span>商学院</span></a></li>  -->
+        <li><a href="{:U('Index/gywm')}" <if condition="$active eq 'gywm' ">class="active"</if>><i class="iconfont">&#xe630;</i><span>关于我们</span></a></li>
+        <li><a href="{:U('User/index')}" <if condition="$active eq 'user' ">class="active"</if>><i class="iconfont">&#xe62f;</i><span>会员</span></a></li>
+    </ul>
+</nav>

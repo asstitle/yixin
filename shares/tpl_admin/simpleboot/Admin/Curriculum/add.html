@@ -1,0 +1,322 @@
+<admintpl file="header" />
+<body>
+
+<link href="__ROOT__/statics/simpleboot/css/index.css" rel="stylesheet" />
+<script type="text/javascript" src="__ROOT__/statics/js/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+
+<script type="text/javascript" src="__ROOT__/statics/js/jquery.form.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+<!--header-->
+<!--end-->
+<!--content-->
+<style>
+
+form{margin: 0 0 0 0;}
+#edui1{width: 60%;}
+.delBox{width:568px;overflow:hidden;}
+.del{width: 73px;height: 95px;float:left;margin-right:6px;;text-align:center;overflow: hidden;}
+.del img{display: block;width: 73px;height: 73px;}
+.del p{height: 22px;line-height: 22px;cursor:pointer;overflow: hidden;}
+ul li{list-style: none;}
+
+</style>
+<div class="wrap J_check_wrap" style="padding:20px 20px 0px;">
+		<ul class="nav nav-tabs" style="background-color:#ffffff; border-bottom:0px;margin-bottom:0px;">
+			<li ><a href="{:U('Curriculum/index')}">课程列表</a></li>
+            <li class="active"><a href="javascript:;">添加课程</a></li>
+		</ul>
+</div>
+<form class="form-horizontal J_ajaxForms" action='{:U("Curriculum/add_post")}' method="post" name="goods">
+<section>
+	
+    <div class="main shadow">
+    	
+        <div class="sidebar">
+            <div class="fr sidebar_b">
+                <div class="sidebar_b_c">
+                    <div class="title"><span>填写课程信息</span></div>
+                    <table class="goods">
+                        <tr>
+                            <th colspan="4">
+                                <p style="color: #323232;">
+                                    <label class="fl" style="width: 3px;height: 12px;background: #ce000f;margin-top:3px;"></label>
+                                    <b class="fl">&nbsp;课程基本信息</b>
+                                </p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>课程名称：</th>
+                            <td colspan="3"><input name="curriculum_name" type="text" class="inp" required /> 30字</td>
+                        </tr>
+                        <!-- <tr>
+                            <th valign="top" style="padding-top: 15px;">课程卖点：</th>
+                            <td colspan="3"><textarea name="post[selling]"></textarea> 150字</td>
+                        </tr> -->
+                        <tr>
+                            <th>商品价格：</th>
+                            <td colspan="3"><input name="curriculum_money"  type="text" class="inp" style="width:135px;" required /> 元</td>
+                        </tr>
+                        <tr>
+                            <th>一级分佣：</th>
+                            <td colspan="3"><input name="one_level" type="text" class="inp" style="width:135px;">元</td>
+                        </tr>
+                         <tr>
+                            <th>二级分佣：</th>
+                            <td colspan="3"><input name="two_level" type="text" class="inp" style="width:135px;">元</td>
+                        </tr>
+                         <tr>
+                            <th>三级分佣：</th>
+                            <td colspan="3"><input name="three_level" type="text" class="inp" style="width:135px;">元</td>
+                        </tr>
+                        
+                        <tr>
+                            <th>已售出：</th>
+                            <td colspan="3"><input name="sold_number" type="text" class="inp" style="width:135px;"></td>
+                        </tr>
+                        <tr>
+                            <th>是否上架：</th>
+                            <td colspan="3">
+                            	是/YES<input type="radio" name="curriculum_status" checked value="1" />&nbsp;&nbsp;
+                            	否/NO<input type="radio" name="curriculum_status" value="0" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th valign="top" style="padding-top: 15px;">课程图片：</th>
+                            <td colspan="3">
+                                <div class="delBox qt_change_images">
+                                    <div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/134.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="" class="img_url" required />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/135.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/135.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/135.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/135.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/135.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="73" height="73" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="imgurl[]" value="" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                    </div>
+                                    <div class="fl">
+                                        <img src="__ROOT__/statics/simpleboot/image/136.jpg" />
+                                    </div>
+                                </div>
+
+                               
+                                    <p style="margin:10px auto;overflow: hidden;">
+                                     	   提示：1、图片尺寸为800*800，单张大小不超过1024K。仅支持 jpg jpeg png 格式。<br/>
+                                        &nbsp;&nbsp;&nbsp;2、图片质量要清晰，不能虚化。建议主图为白色背景正面图
+                                    </p>
+                                    
+                            </td>
+                        </tr>
+                        <tr>
+                            <th valign="top" style="padding-top: 15px;">课程详情：</th>
+                            <td colspan="3"><div class="editor"><script type="text/plain" id="content5" name="curriculum_content" ></script>
+                                    <script type="text/javascript">
+                                    //编辑器路径定义
+                                    var editorURL = GV.DIMAUB;
+                                    </script>
+                                    <script type="text/javascript"  src="__ROOT__/statics/js/ueditor/ueditor.config.js"></script>
+                                    <script type="text/javascript"  src="__ROOT__/statics/js/ueditor/ueditor.all.min.js"></script></div></td>
+                        </tr>
+                        <tr>
+                        	 <th valign="top" style="padding-top: 15px;">添加课时：</th>
+                        	 <td colspan="3">
+                        	 	<div>
+                        	 		课时名称：<input type="text" class="inp" name="ksname[]" placeholder="例：第XX讲：XXXXXXXXXX">
+                        	 		课程链接：<input type="text" class="inp" name="kslink[]">
+                        	 	</div>
+                        	 	<input type="button" value="继续添加课时" id="ks_add" class="btn">
+                        	 </td>
+                        </tr>
+                        <tr>
+                        	 <th valign="top" style="padding-top: 15px;">老师介绍：</th>
+                        	 <td colspan="3">
+                        	 	
+                        	 	
+                               
+                        	 	<div>
+                        	 		老师姓名：<input type="text" class="inp" style="width:135px;" name="teacher_name" /><br/>
+                        	 		课程数量：<input type="text" class="inp" style="width:135px;" name="curriculum_number" /><br/>
+                        	 		学生数量：<input type="text" class="inp" style="width:135px;" name="student_number" /><br/>
+                        	 	</div>
+                        	 	<div>
+                        	 		老师照片：
+                        	 	</div>
+                        	 	<div class="del">
+                                        <img src="__ROOT__/statics/simpleboot/image/head.jpg" class="images_show" onclick="$(this).parents('.del').find('.file_box').trigger('click');" width="150" height="170" data-id="1" data-src="" />
+                                        <input type="file" name="fileField" class="file file_box" id="fileField" style="display: none;" />
+                                        <input type="hidden" name="teacher_pic" value="" class="img_url" />
+                                        <p class="images_delete">删除</p>
+                                </div>
+                        	 </td>
+                        </tr>
+                         <tr>
+                        	 <th valign="top" style="padding-top: 15px;">老师简介：</th>
+                        	 <td colspan="3">
+                        	 		<textarea rows="10" cols="20" name="teacher_content"></textarea>
+                        	 </td>
+                        </tr>
+                        
+                    </table>
+                    <div class="form-actions">
+                        <button class="btn btn-primary zt_ajax_form"type="submit">提交</button>
+                        <a class="btn" href="{:U('Curriculum/index')}">返回</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</form>
+
+
+<!--底部-->
+<!--底部  end-->
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/zt/js_zt.js"></script>
+
+<script type="text/javascript">
+$(function () {
+	
+	$("#ks_add").on('click',function(){
+		$("#ks_add").before("<div>课时名称：<input type='text' class='inp' name='ksname[]'> 课程链接：<input type='text' class='inp' name='kslink[]'></div>");
+		
+	});
+	
+	
+    var return_url = $(".return_url").val();
+	//setInterval(function(){public_lock_renewal();}, 10000);
+	$(".J_ajax_close_btn").on('click', function (e) {
+	    e.preventDefault();
+	    Wind.use("artDialog", function () {
+	        art.dialog({
+	            id: "question",
+	            icon: "question",
+	            fixed: true,
+	            lock: true,
+	            background: "#CCCCCC",
+	            opacity: 0,
+	            content: "您确定需要关闭当前页面嘛？",
+	            ok:function(){
+					setCookie("refersh_time",1);
+					window.close();
+					return true;
+				}
+	        });
+	    });
+	});
+	/////---------------------
+	 Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript
+	        //javascript
+            editorcontent = new baidu.editor.ui.Editor();
+            editorcontent.render( 'content5' );
+            try{editorcontent.sync();}catch(err){};
+            
+            var form = $('form.J_ajaxForms');
+        //ie处理placeholder提交问题
+            if ($.browser.msie) {
+                form.find('[placeholder]').each(function () {
+                    var input = $(this);
+                    if (input.val() == input.attr('placeholder')) {
+                        input.val('');
+                    }
+                });
+            }
+	            
+	        
+	        var formloading=false;
+	        //表单验证开始
+	        form.validate({
+				//是否在获取焦点时验证
+				onfocusout:false,
+				//是否在敲击键盘时验证
+				onkeyup:false,
+				//当鼠标掉级时验证
+				onclick: false,
+	            //验证错误
+	            showErrors: function (errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try{
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id:'error',
+							icon: 'error',
+							lock: true,
+							fixed: true,
+							background:"#CCCCCC",
+							opacity:0,
+							content: errorArr[0].message,
+							cancelVal: '确定',
+							cancel: function(){
+								$(errorArr[0].element).focus();
+							}
+						});
+					}catch(err){
+					}
+	            },
+	            //验证规则
+	            rules: {'post[post_title]':{required:1},'post[post_content]':{editorcontent:true}},
+	            //验证未通过提示消息
+	            messages: {'post[post_title]':{required:'请输入标题'},'post[post_content]':{editorcontent:'内容不能为空'}},
+	            //给未通过验证的元素加效果,闪烁等
+	            highlight: false,
+	            //是否在获取焦点时验证
+	            onfocusout: false,
+	            //验证通过，提交表单
+	            submitHandler: function (forms) {
+	            	if(formloading) return;
+	                $(forms).ajaxSubmit({
+	                    url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+	                    dataType: 'json',
+	                    beforeSubmit: function (arr, $form, options) {
+	                    	formloading=true;
+	                    },
+	                    success: function (data, statusText, xhr, $form) {
+	                    	formloading=false;
+	                        if(data.status){
+								isalert(data.info);
+							}
+	                    }
+	                });
+	            }
+	        });
+	    });
+	////-------------------------
+
+
+    
+});
+</script>
+</body>
+</html>

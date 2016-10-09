@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="mem_top">
+		<canvas id='back'></canvas>
+		<h3 class="_top"><a href="javascript:window.history.go(-1)" class="back"><i class='icon-angle-left'></i></a>{$name}</h3>
+		<div class="top_img_box">
+			<div class="bor_1"></div>
+			<div class="bor_2"></div>
+			<img src="{$img}" />
+		</div>
+		<h4>总营业额：<i>{$allsk}</i></h4>
+	</div>
+	<div class="padd_0_1">
+		<div class="view_list_box"></div>
+		<script id="showlist" type="text/html">
+			[[each list as v i]]
+			<div class="union_ls _i clr">
+				<a href="[[v.url]]">
+					<div class="fl">
+						<h3>会员：[[v.mobile]]</h3>
+						<p>[[v.date]]</p>
+					</div>
+					<div  class="fr">[[v.integral]]元</div>
+					<i class='icon-angle-right'></i>
+				</a>
+			</div>
+			[[/each]]
+		</script>
+		<div class="load_more"></div>
+	</div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

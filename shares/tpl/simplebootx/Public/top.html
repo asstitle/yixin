@@ -1,0 +1,84 @@
+<!--<div class="sub_nav">
+  <div class="container">
+    <span>您好，欢迎来到四川创富宝科技有限公司主页</span>
+    <ul>
+      <li><a href="{:U('Index/comm_quest')}">常见问题</a></li>
+      <li><i>|</i></li>
+      <li><a href="javascript:void;" >加入收藏</a></li>
+    </ul>
+  </div>
+</div>-->
+<div class="main_nav">
+  <div class="container">
+    <a href="index.php?g=&m=Index&a=index"><img src="__TMPL__public/images/logo.png"></a>
+
+    <!-- <php>
+      $effected_id="abc";    /*外部的id */
+
+        $filetpl="<a href='\$href' target='\$target'> \$label</a>";     /* waibu_a */
+
+        $foldertpl="<a href='\$href' >\$label </a>";   /*<b class='caret'></b> */
+
+        $ul_class="s_nav" ; /* 内部ul标签的class属性值 */
+
+        $li_class="" ;  /*内部li标签的class属性值*/
+
+        $style="m_nav";   /*最外层ul标签的class属性值*/
+
+        $showlevel=6;     /*显示的层级*/
+
+        $dropdown='';    /*含有子目录的li标签的class属性值*/
+
+        echo sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown);
+
+        /*{:sp_get_menu("main",$effected_id,$filetpl,$foldertpl,$ul_class,$li_class,$style,$showlevel,$dropdown)} */
+    </php> -->
+
+      <!-- <li ><a href="#">首&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
+      <li>
+        <a href="#">集团介绍</a>
+        <ul class="s_nav" >
+          <li><a href="#"><i>></i>公司简介</a></li>
+          <li><a href="#"><i>></i>企业理念</a></li>
+          <li><a href="#"><i>></i>企业文化</a></li>
+          <li><a href="#"><i>></i>平台介绍</a></li>
+          <li class="other"><a href="#">董事长寄语</a></li>
+        </ul>
+      </li>
+
+
+      <li>
+        <a href="#">联盟商家</a>
+        <ul class="s_nav">
+          <li><a href="#"><i>></i>商家联盟</a></li>
+          <li><a href="#"><i>></i>模式介绍</a></li>
+        </ul>
+      </li>
+      <li><a href="#">新闻资讯</a></li>
+      <li><a href="#">加入我们</a></li>
+      <li><a href="#">联系我们</a></li>
+          </ul> -->
+  <ul class="m_nav">
+      <foreach name="naver" item="vo">
+        <if condition="$vo['parentid'] eq 0" >
+          <li>
+          <a href="{$vo['href']}">{$vo['label']}</a>
+
+              <ul class="s_nav" >
+
+                <foreach name="naver2" item="v2">
+                <if condition="$vo['id'] eq $v2['parentid']" >
+                <li><a href="{$v2['href']}"><i></i>{$v2['label']}</a></li>
+                </if>
+                </foreach>
+
+              </ul>  
+            
+          </li>
+        </if>
+      </foreach>
+  </ul>
+
+  </div>
+</div>
+

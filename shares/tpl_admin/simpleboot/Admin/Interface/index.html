@@ -1,0 +1,87 @@
+<style>
+select {
+	width: auto !important;
+	height: auto !important;
+}
+
+input {
+	height: auto !important;
+}
+table {
+	text-align:center;
+}
+</style>
+
+</head>
+<admintpl file="header" /><body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Interface/index')}">线下订单添加列表</a></li>
+			<li><a href="{:U('Interface/add')}">添加线下课程订单 </a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Interface/index')}">
+			<div class="search_type cc mb10">
+				<div class="mb10">
+					<span class="mr20">
+                        
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="课程/会员关键字..."> &nbsp; &nbsp;
+                       <!--  价格：
+						<input type="text" name="start_money" value="{$formget.start_price}" style="width: 100px;" autocomplete="off">-
+						<input type="text" name="end_money" value="{$formget.end_price}" style="width: 100px;" autocomplete="off"> &nbsp; &nbsp; -->
+                        
+                        &nbsp;
+                       
+                      <!--   已售数量：
+						<input type="text" name="start_xl" value="{$formget.start_xl}" style="width: 100px;" autocomplete="off">-
+						<input type="text" name="end_xl" value="{$formget.end_xl}" style="width: 100px;" autocomplete="off"> &nbsp;  -->
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+				</div>
+			</div>
+		</form>
+		<form class="J_ajaxForm" action="" method="post">
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						
+                        <th>课程名程</th>
+                        <th>会员ID</th>
+                        <th>会员真实姓名</th>
+						<th>会员电话</th>
+						<th>订单ID</th>
+                        <th>添加时间</th>
+                        <th style="width:200px;">备注</th>
+						<th>操作人</th>
+					</tr>
+				</thead>
+				<foreach name="list" item="vo">
+				<tr>
+					
+                    
+					<td>{$vo.curriculum_name}</td>
+                    <td>{$vo.uid}</td>
+                    <td>{$vo.zs_name}</td>
+                    <td>{$vo.mobile}</td>
+                    <td>{$vo.order_id}</td>
+                    <td>{$vo.add_date|date='Y-m-d H:i:s',###}</td>
+                    <td>{$vo.interface_bz}</td>
+                    <td>{$vo.user_nicename}</td>
+                    <!-- <td>
+						<a href="{:U('Interface/edit',array('id'=>$vo['id']))}">详情</a> | 
+						<a href="{:U('Interface/delete',array('id'=>$vo['id']))}" class="J_ajax_del">编辑</a>
+                    </td> -->
+				</tr>
+				</foreach>
+				
+			</table>
+			
+			<div class="pagination">{$Page}</div>
+		</form>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+	<script src="__ROOT__/statics/js/jquery-1.8.2.min.js"></script>
+	<script src="__ROOT__/statics/js/layer/layer.js"></script>
+	<script src="__ROOT__/statics/js/zt/js_zt.js"></script>
+	
+</body>
+</html>

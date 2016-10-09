@@ -1,0 +1,393 @@
+<admintpl file="header"/>
+<script src="__PUBLIC__/js/area.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=UMgq9spiSDjOTeUPSl1sVTB3vI711G7w"></script>
+<style type="text/css">
+	.col-auto { overflow: auto; _zoom: 1;_float: left;}
+	.col-right { float: right; width: 210px; overflow: hidden; margin-left: 6px; }
+	.table th, .table td {vertical-align: middle;}
+	.picList li{margin-bottom: 5px;}
+	.BMap_Marker > div{width:39px !important;}
+</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+	<ul class="nav nav-tabs">
+		<li><a href="{:U('Store/index')}">商家列表</a></li>
+		<li class="active"><a href="#" ><if condition="$isedit eq 1">编辑<else/>添加</if>商家</a></li>
+	</ul>
+	<form name="myform" id="myform" action="{:U('Store/edit_post')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+		<input type="hidden" name="user[id]" value="{$userid}">
+		<input type="hidden" name="store[id]" value="{$id}">
+		<input type="hidden" name="store[uid]" value="{$userid}">
+		<div class="col-right">
+			<div class="table_full">
+				<table class="table table-bordered">
+					<tr>
+						<td><b>logo</b></td>
+					</tr>
+					<tr>
+						<td>
+							<div  style="text-align: center;"><input type='hidden' name='store[logo]' id='thumb' value='{$logo}'>
+								<a href='javascript:void(0);' onClick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
+									<if condition="empty($logo)">
+										<img src="__ROOT__/statics/images/icon/upload-pic.png" id='thumb_preview' width='135' height='113' style='cursor:hand' />
+										<else/>
+										<img src="{$logo}" id='thumb_preview' width='135' height='113' style='cursor:hand' />
+									</if>
+								</a>
+								<!-- <input type="button" class="btn" onclick="crop_cut_thumb($('#thumb').val());return false;" value="裁减图片">  -->
+								<input type="button"  class="btn" onClick="$('#thumb_preview').attr('src','__ROOT__/statics/images/icon/upload-pic.png');$('#thumb').val('');return false;" value="取消图片">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><b>注册时间</b></td>
+					</tr>
+					<tr>
+						<td><input type="text" value="{$create_time|date='Y-m-d',###}" size="21" class="input length_3 J_datetime" style="width: 160px;" readonly></td>
+					</tr>
+					<!--<tr>-->
+						<!--<td><b>状态</b></td>-->
+					<!--</tr>-->
+					<!--<tr>-->
+						<!--<td>-->
+							<!--<span class="switch_list cc">-->
+								<!--<volist name="ar_storesh" id="vo">-->
+									<!--<label class="radio"><input type="radio" name="store[status]" value="{$key}" <if condition="$status eq $key or $key eq 2 and !$status">checked</if>> <span>{$vo}</span></label>-->
+								<!--</volist>-->
+							<!--</span>-->
+						<!--</td>-->
+					<!--</tr>-->
+					<input type="hidden" name="store[status]" value="1">
+					<tr>
+						<td><b>启用</b></td>
+					</tr>
+					<tr>
+						<td>
+							<span class="switch_list cc">
+								<label class="radio"><input type="radio" name="store[isenable]" value="0" <if condition="($isenable eq 0 and $isenable neq '') or empty($isenable)">checked</if>> <span>禁用</span></label>
+								<label class="radio"><input type="radio" name="store[isenable]" value="1" <if condition="$isenable eq 1">checked</if>> <span>启用</span></label>
+							</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="col-auto">
+			<div class="table_full">
+				<table class="table table-bordered">
+					<tr>
+						<th width="80">用户手机</th>
+						<td><input type='text' value='{$mobile}' style='width:400px'   class='input' placeholder='请输入用户手机号' readonly><span class="must_red">*</span></td>
+					</tr>
+					<tr>
+						<th width="80">用户昵称</th>
+						<td><input type='text' name='user[user_nicename]' value='{$user_nicename}' style='width:400px'   class='input' placeholder='请输入用户昵称'></td>
+					</tr>
+					<tr>
+						<th width="80">店铺名称</th>
+						<td><input type='text' name='store[name]' value='{$name}' style='width:400px'  class='input' placeholder='请输入店铺名称'></td>
+					</tr>
+					<tr>
+					  <th>显示顺序</th>
+					  <td><input name='store[displayorder]' type='text' class='input' id="store[displayorder]"  style='width:400px' value='{$displayorder}' placeholder="显示顺序">
+					    值越大，越在前面</td>
+				  </tr>
+					<tr>
+						<th width="80">联系电话</th>
+						<td><input type='text' name='store[phone]' value='{$phone}'  style='width:400px' placeholder="店内联系电话" class='input'></td>
+					</tr>
+					<tr>
+						<th width="80">店铺分类</th>
+						<td>
+							<select name="store[cid]">
+								<option value="">请选择分类</option>
+								<volist name="level" id="vo">
+								<option value="{$vo.id}" <if condition="$cid eq $vo[id]">selected</if>>{$vo.name}</option>
+								</volist>
+							</select>						</td>
+					</tr>
+					<tr>
+						<th width="80">商家积分</th>
+						<td><input type='text' value='{$score}' style='width:100px'   class='input' placeholder='商家积分' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">赠送比例</th>
+						<td><input type='text' name='store[fybl]' value='{$fybl}' style='width:50px; text-align: right'   class='input'><span>%（不填默认100%！ 在系统提成的基础上额外计算）</span></td>
+					</tr>
+					<tr>
+						<th width="80">所在地区</th>
+						<td>
+							<select id="s_province" name="store[sheng]"></select>&nbsp;&nbsp;
+							<select id="s_city" name="store[shi]" ></select>&nbsp;&nbsp;
+							<select id="s_county" name="store[qu]"></select>						</td>
+					</tr>
+					<tr>
+						<th width="80">详细地址</th>
+						<td><input type='text' id="address" name='store[address]' value='{$address}' style='width:400px' placeholder="详细地址" class='input'></td>
+					</tr>
+					<tr>
+						<th width="80">人均消费</th>
+						<td><input type='text' name='store[rjxf]' value='{$rjxf}' style='width:400px' placeholder="人均消费"  class='input'></td>
+					</tr>
+					<tr>
+						<th width="80">简介</th>
+						<td>
+							<textarea name="store[about]" style="width: 98%;" cols="30" rows="3">{$about}</textarea>						</td>
+					</tr>
+					<tr>
+						<th width="80">内容</th>
+						<td>
+							<div id='content_tip'></div>
+							<script type="text/plain" id="content" name="store[content]">{$content}</script>
+							<script type="text/javascript">
+								//编辑器路径定义
+								var editorURL = GV.DIMAUB;
+							</script>
+							<script type="text/javascript"  src="__ROOT__/statics/js/ueditor/ueditor.config.js"></script>
+							<script type="text/javascript"  src="__ROOT__/statics/js/ueditor/ueditor.all.min.js"></script>						</td>
+					</tr>
+					<tr>
+						<th width="80">是否返现</th>
+						<td>
+							<input type="radio" name="store[isreturn]" value="0" <if condition="$isreturn eq 0 or !$isreturn">checked</if>/>否
+							<input type="radio" name="store[isreturn]" value="1" <if condition="$isreturn eq 1">checked</if>>是						</td>
+					</tr>
+					<tr>
+						<th width="80">备注</th>
+						<td>
+							<textarea name="store[remark]" style="width: 98%;" cols="30" rows="3">{$remark}</textarea>						</td>
+					</tr>
+
+					<tr>
+						<th width="80">banner </th>
+						<td>
+							<fieldset class="blue pad-10">
+								<legend>图片</legend>
+								<php>
+									if($banner)
+									$banner = explode(",",$banner);								</php>
+								<ul id="imgs" class="picList unstyled">
+									<foreach name="banner" item="vo">
+										<li id="savedimage{$key}">
+											<input type="text" name="imgs[]" value="{:sp_get_asset_upload_path($vo)}" title='双击查看' style="width:310px;" onDblClick="image_priview(this.value);" class="input">
+											<a href="javascript:remove_div('savedimage{$key}')">移除</a>										</li>
+									</foreach>
+								</ul>
+							</fieldset>
+							<a href="javascript:;" style="margin: 5px 0;" onClick="javascript:flashupload('albums_images', '图片上传','imgs',change_images2,'10,gif|jpg|jpeg|png|bmp,0','','&max_count=8','')" class="btn">选择图片 </a>						</td>
+					</tr>
+					<tr>
+						<th width="80">坐标</th>
+						<td>
+							<input type="hidden" name="store[lng]" value="{$lng}" id="lng"/>
+							<input type="hidden" name="store[lat]" value="{$lat}" id="lat"/>
+							<br>
+							<input type="button" value="获取地图标注" id="bz">
+							<br><br>
+							<div id="allmap" style="height: 500px;"></div>						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
+			<a class="btn" href="javascript:history.go(-1)">返回</a>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script type="text/javascript">_init_area("{$sheng}","{$shi}","{$qu}");</script>
+<script type="text/javascript">
+	$(function () {
+		//setInterval(function(){public_lock_renewal();}, 10000);
+		$(".J_ajax_close_btn").on('click', function (e) {
+			e.preventDefault();
+			Wind.use("artDialog", function () {
+				art.dialog({
+					id: "question",
+					icon: "question",
+					fixed: true,
+					lock: true,
+					background: "#CCCCCC",
+					opacity: 0,
+					content: "您确定需要关闭当前页面嘛？",
+					ok:function(){
+						setCookie("refersh_time",1);
+						window.close();
+						return true;
+					}
+				});
+			});
+		});
+		/////---------------------
+		Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript
+
+			//编辑器
+			editorcontent = new baidu.editor.ui.Editor();
+			editorcontent.render( 'content' );
+			try{editorcontent.sync();}catch(err){};
+			//增加编辑器验证规则
+			jQuery.validator.addMethod('editorcontent',function(){
+				try{editorcontent.sync();}catch(err){};
+				return editorcontent.hasContents();
+			});
+			var form = $('form.J_ajaxForms');
+			//ie处理placeholder提交问题
+			if ($.browser.msie) {
+				form.find('[placeholder]').each(function () {
+					var input = $(this);
+					if (input.val() == input.attr('placeholder')) {
+						input.val('');
+					}
+				});
+			}
+			//表单验证开始
+			form.validate({
+				//是否在获取焦点时验证
+				onfocusout:false,
+				//是否在敲击键盘时验证
+				onkeyup:false,
+				//当鼠标掉级时验证
+				onclick: false,
+				//验证错误
+				showErrors: function (errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try{
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id:'error',
+							icon: 'error',
+							lock: true,
+							fixed: true,
+							background:"#CCCCCC",
+							opacity:0,
+							content: errorArr[0].message,
+							cancelVal: '确定',
+							cancel: function(){
+								$(errorArr[0].element).focus();
+							}
+						});
+					}catch(err){
+					}
+				},
+				//验证规则
+				rules: {'post[post_title]':{required:1},'post[post_content]':{editorcontent:true}},
+				//验证未通过提示消息
+				messages: {'post[post_title]':{required:'请输入标题'},'post[post_content]':{editorcontent:'内容不能为空'}},
+				//给未通过验证的元素加效果,闪烁等
+				highlight: false,
+				//是否在获取焦点时验证
+				onfocusout: false,
+				//验证通过，提交表单
+				submitHandler: function (forms) {
+					$(forms).ajaxSubmit({
+						url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+						dataType: 'json',
+						beforeSubmit: function (arr, $form, options) {
+
+						},
+						success: function (data, statusText, xhr, $form) {
+							if(data.status){
+								setCookie("refersh_time",1);
+								//添加成功
+								Wind.use("artDialog", function () {
+									art.dialog({
+										id: "succeed",
+										icon: "succeed",
+										fixed: true,
+										lock: true,
+										background: "#CCCCCC",
+										opacity: 0,
+										content: data.info,
+										button:[
+											{
+												name: '继续添加？',
+												callback:function(){
+													reloadPage(window);
+													return true;
+												},
+												focus: true
+											},{
+												name: '返回列表页',
+												callback:function(){
+													location='{:U('AdminPost/index')}';
+													return true;
+												}
+											}
+										]
+									});
+								});
+							}else{
+								isalert(data.info);
+							}
+						}
+					});
+				}
+			});
+		});
+		////-------------------------
+	});
+</script>
+
+</body>
+</html>
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("allmap");
+	<php>
+	if($lng !='' && $lat !='') {
+	</php>
+		map.centerAndZoom(new BMap.Point({$lng},{$lat}),11);
+		map.enableScrollWheelZoom(true);
+		theLocation("{$lng}","{$lat}");
+	<php>
+	}else{
+	</php>
+		map.centerAndZoom(new BMap.Point(104.076965,30.659321),11);
+		map.enableScrollWheelZoom(true);
+		theLocation("{$lng}","{$lat}");
+	<php>
+	}
+	</php>
+	//单击获取点击的经纬度
+	map.addEventListener("click",function(e){
+		$("#lng").val(e.point.lng);
+		$("#lat").val(e.point.lat);
+		theLocation(e.point.lng,e.point.lat);
+	});
+	//地图标注点
+	function theLocation(lng,lat){
+		if(lng != "" && lat != ""){
+			map.clearOverlays();
+			var new_point = new BMap.Point(lng,lat);
+			var marker = new BMap.Marker(new_point);  // 创建标注
+			map.addOverlay(marker);              // 将标注添加到地图中
+			map.panTo(new_point);
+		}
+	}
+	//点击根据地质标注大概位置
+	$("#bz").click(function(){
+		if($("#s_province").val()=="请选择省份" | $("#s_city").val()=="请选择市" | $("#s_county").val()=="请选择区|县" | $("#address").val()==""){
+			alert("请填写完整的地址！");
+			return false;
+		}
+		// 创建地址解析器实例
+		var myGeo = new BMap.Geocoder();
+		myGeo.getPoint($("#s_province").val()+$("#s_city").val()+$("#s_county").val()+$("#address").val(), function(point){
+			if (point) {
+				map.clearOverlays();
+				map.centerAndZoom(point, 16);
+				map.addOverlay(new BMap.Marker(point));
+				$("#lng").val(point.lng);
+				$("#lat").val(point.lat);
+			}else{
+				alert("您选择地址没有解析到结果!");
+			}
+		}, "北京市");
+	})
+</script>

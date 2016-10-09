@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>{$site_pcname}</title>
+  <link href="__TMPL__public/images/favicon.ico" rel="SHORTCUT ICON" />
+
+  <link rel="stylesheet" href="__TMPL__public/style/basic.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/com.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/dcom.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/contact.css" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="__TMPL__public/js/html5shiv.min.js"></script>
+  <script src="__TMPL__public/respond.min.js"></script>
+  <script src="__TMPL__public/js/css3-mediaQueries.js"></script>
+  <![endif]-->
+  <script src="__TMPL__public/js/jquery-1.12.3.min.js"></script>
+  <script src="__TMPL__public/js/com.js"></script>
+</head>
+<body>
+<!--头部导航-->
+<tc_include file="Public:top" />
+
+<!--焦点图-->
+<div class="main">
+  <img src="__TMPL__public/images/bg_5.png">
+</div>
+
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--1、百度地图密钥：头部引用-->
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.5&ak=173efa7b4d9760ef6a81f27efa9aa63e"></script>
+</head>
+
+<!--内容区域：商家联盟-->
+<div class="section">
+  <div class="sec_header">
+    <div class="container">
+      <ul class="left">
+        <li class="active"><a href="index.php?g=&m=Index&a=contact">联系我们</a></li>
+      </ul>
+      <ul class="right">
+        <li>当前位置：</li>
+        <li>首页<i>></i></li>
+   
+        <li>联系我们</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sec_body">
+    <div class="container">
+      <h1><em>JOIN</em> US</h1>
+      <h2>联系我们</h2>
+      <div id="allmap" style="float:left; width:660px; height:400px;"></div>
+      <p>四川创富宝科技有限公司
+        </p>
+      <p><i>地</i>址：成都市金牛区万达甲级写字楼A座1206号</p>
+      <p>业务咨询：40-0866-383</p>
+      <p><i>邮</i>件：ABC19960508@GMIL.COM</p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    var map = new BMap.Map("allmap");    
+  //修改经度纬度
+    var point = new BMap.Point(104.0801283,30.695835);  // 需要标注的位置的经纬度  
+    map.centerAndZoom(point, 20);  // 中心位置和缩放倍数
+    map.enableScrollWheelZoom();   // 添加滚动轴
+    map.addControl(new BMap.NavigationControl());   // 添加左上角的标尺工具
+    map.addControl(new BMap.NavigationControl());    
+    map.addControl(new BMap.ScaleControl());    
+    map.addControl(new BMap.OverviewMapControl());    
+    map.addControl(new BMap.MapTypeControl());    
+  //修改城市，不影响展示
+    map.setCurrentCity("成都"); 
+    
+  //修改信息窗口大小
+    var opts = {    
+         width : 370,     // 信息窗口宽度    
+         height: 20,     // 信息窗口高度    
+    //修改信息窗口标题
+         title : "四川创富宝科技有限公司"  // 信息窗口标题   
+    }
+  
+  //修改公司名
+    var infoWindow = new BMap.InfoWindow("地址：成都市金牛区万达甲级写字楼A座1206号", opts);  // 创建信息窗口对象 
+    
+    map.openInfoWindow(infoWindow, map.getCenter());      // 打开信息窗口 
+    var marker = new BMap.Marker(point);        // 创建标注,即地图上的小红点    
+    map.addOverlay(marker);                             
+</script>
+
+
+<!--底部内容-->
+<tc_include file="Public:footer" />
+
+</body>
+</html>

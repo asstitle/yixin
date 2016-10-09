@@ -1,0 +1,11 @@
+.sec_body img {
+  float: left;
+  width: 660px;
+}
+.sec_body p {
+  margin-top: 20px;
+  color: #959595;
+}
+.sec_body p i {
+  letter-spacing: 2em;
+}

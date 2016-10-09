@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <link href="__ROOT__/statics/simpleboot/css/simplebootadmin.css" rel="stylesheet">
+    <link href="__ROOT__/statics/js/artDialog/skins/default.css" rel="stylesheet" />
+    <link href="__ROOT__/statics/simpleboot/font-awesome/4.2.0/css/font-awesome.min.css"  rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+    //全局变量
+    var GV = {
+        DIMAUB: "__ROOT__/",
+        JS_ROOT: "statics/js/",
+        TOKEN: ""
+    };
+    </script>
+    <tc_include file="Public/meta"/>
+    <script type="text/javascript" src="__ROOT__/statics/js/wind.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/layer/layer.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/validator.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/template.js"></script>
+    <script type="text/javascript" src="__ROOT__/statics/js/js_li.js"></script>
+</head>
+<body class="f0">
+	<div class="car_top"> 
+		<!--<div class="car_back icon-angle-left"></div>-->
+		<div class="cont_text">购物车</div>
+		<div class="car_menu icon-reorder"></div>
+		<div class="car_nav"> 
+			<footer class="footer-menu" style='position:inherit;'>
+				<ul>
+					<li class="">
+						<a href="__ROOT__/index.php" class="home"><p>首页</p></a>
+					</li>
+					<li class="">
+						<a href="{:U('portal/prolist/index')}" class="type"><p>分类</p></a>
+					</li>
+					<li class="cur">
+						<a href="{:U('portal/procar/index')}" class="cart"><p>购物车</p></a>
+					</li>
+					<li class="">
+						<a href="{:U('User/index')}" class="my"><p>会员</p></a>
+					</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
+ 	<div class="car_item"> 
+ 		<ul> 
+            <foreach name="list" item="car" key="o_key">
+ 			<li class="parents_car"> 
+ 				<div class="l_check"><input type="checkbox" class="iCheck" value="{$car.id}" /></div>
+                <php>
+                    //图片
+                    $imgurl = unserialize($car['imgurl']);
+                </php>
+ 				<div class="_img"> 
+ 					<img src="{$imgurl[0]}" />
+ 				</div>
+ 				<div class="r_text"> 
+ 					<p class="_tle">{$car.goods_name}</p>
+                    <p class="price" style="line-height: 20px;"><span style="color: #9A9494;font-size: 1.2rem;">{$car.spec_color2}:{$car.spec_color}&nbsp;&nbsp;{$car.spec_size2}:{$car.spec_size}</span></p>
+ 					<p class="price">¥<span class="size_prices">{$car.size_price}</span></p>
+ 					<div class="botm"> 
+						<div class="order_reduce order_reduces"  data-number="10">
+							<span>
+								<em id="reduce" class="less" data-url="{:u('Procar/less_num',array('id'=>$car['id'],'goods_id'=>$car['goods_id'],'size_id'=>$car['size_id']))}" ></em> 
+								<input name="" class="num" type="text" value="{$car.nums}" id="input" dataType="Range" msg="数量必须大于或等于1且小于库存的整数" min="0.9" />
+								<em id="add" class="add" data-url="{:u('Procar/add_num',array('id'=>$car['id']))}"></em>
+							</span>
+						</div>
+						<div class="remove"><a href="{:u('Procar/delete',array('id'=>$car['id']))}" class="J_ajax_del" style="color: red;"><i class='icon-trash'></i>删除</a></div>
+ 					</div>
+ 				</div>
+ 			</li>
+ 			</foreach>
+ 		</ul>
+ 	</div>
+	<footer class="footer-car">
+		<div class="all_check"><div class="l_check"><input type="checkbox" class="iCheck"></div>全选</div>
+		<div class="zj">总额：￥<i class="all_price">0.00</i></div>
+		<div class="car_btn">
+			<input type="submit" value="去结算" data-url="{:u('Probuy/index',array('op'=>'car'))}" data-fref="{:u('Probuy/check_logins')}"  class="send_car" />
+            <input value="" type="hidden" class="public_dx_check_sum" />
+		</div>
+	</footer>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>
+<script type="text/javascript">
+$(function(){
+    var car_length = $(".parents_car").length;
+    //单选
+	$('.parents_car input.iCheck').on('ifChecked',function(){
+	    js_price(car_length);
+	})
+    
+    $('.parents_car input.iCheck').on('ifUnchecked',function(){ 
+        js_price(car_length);
+	})
+    
+    //全选
+    $('.all_check input.iCheck').on('ifChecked',function(){ 
+        $('.parents_car input.iCheck').iCheck('check');
+        js_price();
+	})
+    
+    $('.all_check input.iCheck').on('ifUnchecked',function(){ 
+        $('.parents_car input.iCheck').iCheck('uncheck');
+        js_price();
+	})
+    
+    function js_price (car_length) {
+        var n = 0;
+        var all_price = 0;
+        var public_dx_check_sum = '';   
+        $(".parents_car").each(function(){
+            if ($(this).find("input.iCheck").prop("checked")) {
+                ++n;
+                all_price += parseFloat($(this).find(".size_prices").html());
+                public_dx_check_sum += $(this).find("input.iCheck").val()+',';
+            }
+        });
+        public_dx_check_sum = public_dx_check_sum.substring(0,public_dx_check_sum.length-1);
+        $(".public_dx_check_sum").val(public_dx_check_sum);
+        $(".all_price").html(all_price.toFixed(2));
+        
+        if (car_length && car_length == n) {
+            $('.all_check input.iCheck').iCheck('check');
+        } 
+        if (car_length && car_length > n) {
+            $('.all_check input.iCheck').iCheck('uncheck');
+        }
+    }
+   
+   
+});
+</script>

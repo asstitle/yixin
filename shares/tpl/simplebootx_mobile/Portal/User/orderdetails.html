@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body>
+ 	<div class="order_info"> 
+ 		<h3 class="_tle clr"> 
+ 			<i class='fl'>订单号：{$orderno}</i>
+ 			<i class='fr'>创建时间：{$order_date|date="Y-m-d",###}</i>
+ 		</h3>
+ 		<ul>
+            
+            <foreach name="view" item="vo" key="ko"> 
+ 			<li> 
+ 				<div class="_img"> 
+ 					<img src="{$vo.imgs}">
+ 				</div>
+ 				<div class="r_text"> 
+ 					<p class="_tle">{$vo.goods_name}</p>
+ 					<p class="clr"><i class='red fl'>价格：{$vo.price}</i><i class='_8d fr'>数量：X{$vo.nums}</i></p>
+ 					<p class="clr"></p>
+ 					<p class="clr _8d">{$vo.spec_color_name}：{$vo.spec_color}　　{$vo.spec_size_name}：{$vo.spec_size}</p>
+ 				</div>
+ 			</li>
+ 			</foreach>
+ 		</ul>
+ 	</div>
+ 	<div class="order_select_info"> 
+ 		<div class="itme_3 clr"> 
+ 			<i class='fl'>当前状态：</i>
+ 			<i class='fr'>{$order_type[$order_state]}</i>
+ 		</div>
+ 		<div class="itme_3 clr"> 
+ 			<i class='fl'>运送方式：</i>
+ 			<i class='fr'>{$fhfs[$fhfs2]}</i>
+ 		</div>
+        <if condition="$send_date">
+ 		<div class="itme_3 clr"> 
+ 			<i class='fl'>发货时间：</i>
+ 			<i class='fr'>{$send_date|date="Y-m-d",###}</i>
+ 		</div>
+        </if>
+ 	</div>
+ 	<div class="order_info_addres"> 
+ 		<h3 class="red">收货地址</h3>
+ 		<p>{$address['sheng']}{$address['shi']}{$address['qu']}{$address['address']}</p>
+ 		<p>{$address['name']}   {$address['phone']}</p>
+ 	</div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

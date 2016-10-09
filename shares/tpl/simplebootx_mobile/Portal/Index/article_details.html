@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <tc_include file="Public/meta"/>
+</head>
+<body>
+	<div style="text-align:center">
+		<h1 style="font-size:24px;">{$article.post_title}</h1>
+		<br/>
+			<p> {$article.post_modified} </p>
+		
+	</div>
+	<div class="about">
+		{$article.post_content}
+	</div>
+    <tc_include file="Public/footer"/>
+	<tc_include file="Public/share"/>
+</body>
+</html>
+

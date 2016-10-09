@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body>
+	
+	<div class="f0 rechange_top"> 
+		<img src="__PUBLIC__/image/recheange.png" />
+	</div> 
+ 	<div class="recheange_box"> 
+ 		<h3>订单编号：{$order.orderno}</h3>
+ 		<p>发货方式：{$fhfs[$order['fhfs']]}</p>
+		<p>支付金额：{$order.pay}元</p>
+		<p>交易时间：{$order.pay_date|date="Y-m-d H:i",###}</p>
+		<a href="__ROOT__/index.php" class="btn_red_a">返回首页</a>
+ 	</div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

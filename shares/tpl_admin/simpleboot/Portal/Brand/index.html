@@ -1,0 +1,69 @@
+<admintpl file="header" />
+</head>
+<body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="javascript:;">所有商品品牌</a></li>
+			<li><a href="{:U('Brand/add')}" target="_self">添加商品品牌</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Brand/index')}">
+			<div class="search_type cc mb10">
+				<div class="mb10">
+					<span class="mr20">
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+				</div>
+			</div>
+		</form>
+		<form class="J_ajaxForm" action="" method="post">
+			<table class="table table-hover table-bordered table-list">
+				<thead>
+					<tr>
+						<th><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+						<th>品牌名称</th>
+						<th>品牌分类</th>
+                        <th>首页推荐</th>
+                        <th>是否显示</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<foreach name="list" item="vo">
+				<tr>
+					<td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" title="ID:{$vo.id}"></td>
+					<td>{$vo.name}</td>
+                    <td>{$vo.parent_name}</td>
+                    <td>
+                        <if condition="$vo['is_index'] eq 1">
+							<font color="red">√</font>
+			            <else /> 
+							<font color="red">╳</font>
+						</if>
+                    </td>
+                    <td>
+                        <if condition="$vo['is_show'] eq 1">
+							<font color="red">√</font>
+			            <else /> 
+							<font color="red">╳</font>
+						</if>
+					<td>
+						<a href="{:U('Brand/edit',array('id'=>$vo['id']))}">修改</a> | 
+						<a href="{:U('Brand/delete',array('id'=>$vo['id']))}" class="J_ajax_del">删除</a></td>
+				</tr>
+				</foreach>
+				
+			</table>
+			<div class="table-actions">
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Brand/check',array('check'=>1))}" data-subcheck="true">显示</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Brand/check',array('uncheck'=>1))}" data-subcheck="true">取消显示</button>
+                <button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Brand/is_index',array('check'=>1))}" data-subcheck="true">推荐</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Brand/is_index',array('uncheck'=>1))}" data-subcheck="true">取消推荐</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Brand/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+			</div>
+			<div class="pagination">{$Page}</div>
+		</form>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+	
+</body>
+</html>

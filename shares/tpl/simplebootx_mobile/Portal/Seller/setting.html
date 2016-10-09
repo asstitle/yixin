@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body>
+<form action="{:U('Seller/dosetting')}" method="post" enctype="multipart/form-data">
+	<div class="business_manage">
+		<span class='_tle'><i>基本资料</i></span>
+		<div class="login_form">
+			<input type="hidden" name="logo" value="{$logo}" id="logo"/>
+			<p class="clr"><span>LOGO：</span><img src="<if condition='$logo'>{$logo}<else/>../image/business_logodefault.png</if>" id="img1"><input type="file" value=" " style="display:none;" name="file" id="filebtn" class="zt_ajax_sub" data-img="img1" data-url="{:U('Index/uploadlogo')}" data-hid="logo"/><em class='sc_btn' onclick="$('#filebtn').click()">点击上传</em></p>
+			<p><span>店铺名称：</span><input type="text" name="name" value="{$name}" datatype="*" nullmsg="请输入店铺名称！" /></p>
+			<p><span>人均消费：</span><input type="text" name="rjxf"  value="{$rjxf}" /></p>
+			<p><span style=" vertical-align: top;">店铺简介：</span><textarea name="about" datatype="*" nullmsg="请输入店铺简介！">{$about}</textarea></p>
+		</div>
+	</div>
+	<div class="business_manage">
+		<span class='_tle'><i>联系方式</i></span>
+		<div class="login_form">
+			<p><span>省&nbsp;&nbsp;&nbsp;&nbsp;份：</span><select id="s_province" name="sheng"></select></p>
+			<p><span>城&nbsp;&nbsp;&nbsp;&nbsp;市：</span><select id="s_city" name="shi" ></select></p>
+			<p><span>区&nbsp;&nbsp;&nbsp;&nbsp;县：</span><select id="s_county" name="qu"></select></p>
+			<p><span>地　　址：</span><input type="text" name="address" value="{$address}" datatype="*" nullmsg="请输入详细地址！"/></p>
+			<p><span>电　　话：</span><input type="text" name="phone" value="{$phone}"  datatype="*" nullmsg="请输入电话！"/></p>
+		</div>
+	</div>
+	<div class="btn_1" style="background:#1dd1c6;"> 
+	<input type="submit" value="提交" class="zt_ajax_form"/>
+	</div>
+	<p class="business_manage_result"><a href="javascript:window.history.go(-1)">取消</a></p>
+</form>
+	<script type="text/javascript">_init_area("{$sheng}","{$shi}","{$qu}");</script>
+<tc_include file="Public/share"/>
+<tc_include file="Public/footer"/>
+</body>
+</html>

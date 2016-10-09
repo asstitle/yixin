@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<form action="{:U('User/dozs_name')}" method="post">
+		<div class="itme_3 bor_no clr">
+			<span class="fl">真实姓名</span>
+			<div class="fr"><input type="text" name="name" placeholder="输入真实姓名" value="{$zs_name}" datatype="*"  nullmsg="请输入姓名！"></div>
+		</div>
+		<div class="btn_1">
+			<input type="submit" class="zt_ajax_form" value='确认提交'>
+		</div>
+		<div class="text_box1">
+			说明*:请输入您的真实姓名，以便于我们核对您的订单信息！
+		</div>
+	</form>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

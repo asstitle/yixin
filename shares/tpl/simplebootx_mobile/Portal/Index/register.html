@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0 reg">
+	<form action="{:U('Index/doregister')}" method="post">
+		<input type="hidden" name="tjrr" value="{$tjrr}">
+		<div class="itme_3 clr">
+			<span class="fl">手机号码</span>
+			<div class="fr"><input placeholder='请输入手机号' id="phone" name="phone" ajaxurl="{:U('Index/yzphone')}" type="tel" datatype="m" nullmsg="请输入手机号！" errormsg="手机号不正确！"></div>
+		</div>
+		<div class="itme_3 clr">
+			<span class="fl">登录密码</span>
+			<div class="fr"><input type="password" name="password" placeholder="请输入登录密码" datatype="s6-18" null="请输入密码！" errormsg="密码请输入6-18位字符"></div>
+		</div>
+		<div class="itme_3 clr">
+			<span class="fl">确认密码</span>
+			<div class="fr"><input type="password" datatype="*" recheck="password" placeholder="再次输入密码" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！"></div>
+		</div>
+		<div class="itme_3 clr">
+			<span class="fl">验证码</span>
+			<div class="fr"><input type="tel" name="code" datatype="*" placeholder="填写验证码" nullmsg="请输入验证码！" id="ipt"  data-width="100"><span class="get_code phone_validate">获取验证码</span></div>
+		</div>
+		<p class="reg_checked"><label><input type="checkbox" class="iCheck" name="isagree" value="1" />我已阅读用户并</label><a href="{:U("Index/article", array("id"=>14))}" style="color:#0000ff">接受协议</a></p>
+		<div class="btn1">
+			<input type="submit" class="zt_ajax_form" value="立即注册">
+		</div>
+	</form>
+	<script>
+		//获取验证码
+		$(".phone_validate").on('click', function(){
+			if($(".phone_validate").attr("issend")==1){
+				return false;
+			}
+			var telephone = $("input[name=phone]").val();
+			//alert(telephone);
+			var regexp = /^1[3,4,5,7,8]\d{9}$|0039[0-9]{10}$/;
+			if (!regexp.test(telephone)) {
+				layer.msg("请输入手机号码！"); //, {time:0}
+				return false;
+			}
+			$.post("{:U('Index/sms_send')}", {phone: telephone},function(data){
+				if (data == "1") {
+					layer.msg("发送成功!");
+					nulls = setInterval(re_send, 1000);
+				}
+				
+			},"json");
+		});
+		$(function(){
+			//验证码倒计时
+			$(".phone_validate").attr("issend", 2);
+		})
+		var rnd_n = 300;
+		function re_send() {
+			rnd_n--;
+			if(rnd_n == 0) {
+				$(".phone_validate").attr("issend", 2);
+				$(".phone_validate").html("获取验证码");
+				rnd_n = 300;
+				clearInterval(nulls);
+				return false;
+			}
+			$(".phone_validate").attr("issend", 1);
+			$(".phone_validate").html(rnd_n+"S");
+			//setTimeout(re_send(),1000);
+		}
+	</script>
+	
+	<tc_include file="Public/share"/>
+</body>
+</html>

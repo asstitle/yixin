@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0 reg">
+	<form action="{:U('User/dozhzfmm')}" method="post">
+		<div class="itme_3 clr">
+			<span class="fl">手机号码</span>
+			<div class="fr"><input name="phone" type="tel"  id="phone" value="{$user.mobile}" readonly="readonly">
+			</div>
+		</div>
+		<div class="itme_3 clr">
+			<span class="fl">验证码</span>
+			<div class="fr"><input type="tel" name="code" datatype="*" nullmsg="请填写验证码" placeholder="填写验证码" data-width="100"><span class="get_code phone_validate">获取验证码</span></div>
+		</div>
+		<div class="itme_3 clr">
+			<span class="fl">输入新密码</span>
+			<div class="fr"><input type="password" placeholder="请输入新密码" name="password" datatype="s6-16" nullmsg="请输入新密码" errormsg="密码长度6-16位"></div>
+		</div>
+		<div class="itme_3 clr">
+			<span class="fl">确认新密码</span>
+			<div class="fr"><input type="password" placeholder="再次输入新密码"  datatype="*" recheck="password" nullmsg="请确认密码" errormsg="您两次输入的账号密码不一致"></div>
+		</div>
+		<div class="btn1">
+			<input type="submit" class="zt_ajax_form" value="重设支付密码">
+		</div>
+	</form>
+	<script>
+		//获取验证码
+		$(".phone_validate").on('click', function(){
+			if($(".phone_validate").attr("issend")==1){
+				return false;
+			}
+			var telephone = $("input[name=phone]").val();
+			//alert(telephone);
+			var regexp = /^1[3,5,7,8]\d{9}$/;
+			if (!regexp.test(telephone)) {
+				layer.msg("请输入手机号码！"); //, {time:0}
+				return false;
+			}
+			$.post("{:U('Index/sms_send')}", {phone: telephone},function(data){
+				if (data == "1") {
+					layer.msg("发送成功!");
+					nulls = setInterval(re_send, 1000);
+				}
+			},"json");
+		});
+		$(function(){
+			//验证码倒计时
+			$(".phone_validate").attr("issend", 2);
+		})
+		var rnd_n = 120;
+		function re_send() {
+			rnd_n--;
+			if(rnd_n == 0) {
+				$(".phone_validate").attr("issend", 2);
+				$(".phone_validate").html("获取验证码");
+				rnd_n = 120;
+				clearInterval(nulls);
+				return false;
+			}
+			$(".phone_validate").attr("issend", 1);
+			$(".phone_validate").html(rnd_n+"S");
+			//setTimeout(re_send(),1000);
+		}
+	</script>
+	<tc_include file="Public/footer"/>
+	<tc_include file="Public/share"/>
+</body>
+</html>

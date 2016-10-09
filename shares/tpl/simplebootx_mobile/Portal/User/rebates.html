@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="tx_sunm itme_3 clr"> 
+		<div class="fl" style="text-align:center;"><h3><b>返佣奖励</b></h3></div>
+		<!-- <div class="fr red">￥{$sjjf}</div>  -->
+	</div>
+	<div class="padd_0_1">
+		<div class="view_list_box"></div>
+		<script id="showlist" type="text/html">
+			[[each list as v i]]
+			<div class="itme clr ">
+				<h3>作为[[v.user_nicename]][[v.mobile]]的[[v.rank]]级代理，获得<span style=" color:red;">￥[[v.rebate_money]]元</span>返佣奖励</h3>
+			</div>
+			[[/each]]
+		</script>
+		<div class="load_more"></div>
+ 	</div>
+	<tc_include file="Public/share"/>
+	
+</body>
+</html>

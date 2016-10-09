@@ -1,0 +1,169 @@
+<admintpl file="header"/>
+<style type="text/css">
+	.col-auto { overflow: auto; _zoom: 1;_float: left;}
+	.col-right { float: right; width: 210px; overflow: hidden; margin-left: 6px; }
+	.table th, .table td {vertical-align: middle;}
+	.picList li{margin-bottom: 5px;}
+</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="{:U('Member/add')}">财务统计</a></li>
+	</ul>
+	<form action="{:U('Cwgl/dctx')}" method="post" name="export" target="_blank" id="export">
+		<input type="hidden" name="start_time" value="{$formget.start_time}">
+		<input type="hidden"  name="end_time" value="{$formget.end_time}">
+		<span><input type="submit" value="导出明细" class="btn btn-primary"></span>
+  </form>
+	<div class="common-form">
+		<form action="{:U('Cwgl/index')}" method="post" name="search" class="form-horizontal J_ajaxForms" id="search">
+			<label class="control-label">选择时间段:</label>
+			<div class="controls">
+				<input type="text" name="start_time" class="J_date" value="{$formget.start_time|default=''}" style="width: 80px;" autocomplete="off">-
+				<input type="text" class="J_date" name="end_time" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+				<input type="submit" class="btn btn-primary">
+			</div>
+			<div style="height:20px;"></div>
+			<div class="control-group">
+				<label class="control-label">总营业额:</label>
+				<div class="controls">
+					<input type="text" readonly value="{$allyy}">&nbsp;积分营业额+现金营业额+微支付营业额
+				</div>
+				<label class="control-label">积分总营业额:</label>
+				<div class="controls">
+					<input type="text" readonly value="{$jfyy}">&nbsp;用户在商家那里消费的积分总数，实际
+				</div>
+				<label class="control-label">现金总营业额:</label>
+				<div class="controls">
+					<input type="text" readonly value="{$xjyy}">&nbsp;用户在商家那里消费的现金总数，赠送
+				</div>
+				<label class="control-label">微支付总营业额:</label>
+				<div class="controls">
+					<input type="text" readonly value="{$wxyy}">&nbsp;用户用微支付在商家那里消费的总数，赠送
+				</div>
+				<label class="control-label">平台总收入:</label>
+				<div class="controls">
+					<input type="text" readonly value="{$wxcz+$adminjf+$wxbd}">&nbsp;平台总收入=会员实际微支付+商家微支付报单+商家积分充值
+				</div>
+			</div>
+			平台手续费收入
+			<table style="width: 100%;text-align: center; line-height: 30px;" class="table table-hover table-bordered table-list">
+				<tr>
+					<th>积分</th>
+					<th>微信</th>
+					<th>现金</th>
+					<th>提现</th>
+					<th>总计</th>
+				</tr>
+				<tr>
+					<td>{$jfsxf}</td>
+					<td>{$wxsxf}</td>
+					<td>{$xjsxf}</td>
+					<td>
+						<div>
+							会员：{$tx[1]}
+						</div>
+						<div>
+							商家：{$tx[2]}
+						</div>
+						<div>
+							代理商：{$tx[3]}
+						</div>
+					</td>
+					<td>
+						{$jfsxf+$wxsxf+$xjsxf+$tx[1]+$tx[2]+$tx[3]}
+					</td>
+				</tr>
+			</table>
+			<br>
+			<br>
+			支出
+			<table style="width: 100%;text-align: center; line-height: 30px;" class="table table-hover table-bordered table-list">
+				<tr>
+					<th>角色</th>
+					<th>已返现</th>
+					<th>待返现</th>
+					<th>总返现</th>
+					<th>推荐返佣（<php>echo sprintf("%.2f",$fy[1]+$fy[2]+$fy[3])</php>）</th>
+					<th>已提现（<php>echo sprintf("%.2f",$ytx[1]+$ytx[2]+$ytx[3])</php>）</th>
+					<th>待提现（<php>echo sprintf("%.2f",$dtx[1]+$dtx[2]+$dtx[3])</php>）</th>
+					<th>手续费返佣</th>
+					<th>账户余额（<php>echo sprintf("%.2f",$fx['score']+$sjye+$dlye)</php>）</th>
+				</tr>
+				<tr>
+					<td>会员</td>
+					<td>{$fx['yfjf']}</td>
+					<td>{$fx['wfjf']}</td>
+					<td>{$fx['alljf']}</td>
+					<td>{$fy[1]}</td>
+					<td>{$ytx[1]}</td>
+					<td>{$dtx[1]}</td>
+					<td>{$sxffy}</td>
+					<td>{$fx['score']}</td>
+				</tr>
+                <tr>
+					<td>商家</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{$fy[2]}</td>
+					<td>{$ytx[2]}</td>
+					<td>{$dtx[2]}</td>
+					<td></td>
+					<td>{$sjye}</td>
+				</tr>
+                <tr>
+					<td>代理商</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{$fy[3]}</td>
+					<td>{$ytx[3]}</td>
+					<td>{$dtx[3]}</td>
+					<td></td>
+					<td>{$dlye}</td>
+				</tr>
+			</table>
+			明细表&nbsp;&nbsp;&nbsp;&nbsp;
+			<table style="width: 100%;text-align: center; line-height: 30px;" class="table table-hover table-bordered table-list">
+				<tr>
+					<th>操作</th>
+					<th>会员</th>
+					<th>消费（<php>echo sprintf("%.2f",$allxf);</php>）</th>
+					<th>赠送（<php>echo sprintf("%.2f",$allzs);</php>）</th>
+					<th>商家</th>
+					<th>手续费（<php>echo sprintf("%.2f",$allsx);</php>）</th>
+					<th>赠送比例</th>
+					<th>推荐会员（<php>echo sprintf("%.2f",$allyhfy);</php>）</th>
+					<th>推荐商家（<php>echo sprintf("%.2f",$allsjfy);</php>）</th>
+					<th>区域代理商（<php>echo sprintf("%.2f",$allqysj);</php>）</th>
+					<th>利润（<php>echo sprintf("%.2f",$allsx-$allyhfy-$allsjfy-$allqysj);</php>）</th>
+					<th>时间</th>
+				</tr>
+				<volist name="mx" id="vo">
+					<tr>
+						<td title="ID：{$vo.id}">{$vo.option}</td>
+						<td>{$vo.user_nicename}（{$vo.mobile}）</td>
+						<td>{$vo.xf}</td>
+						<td>{$vo.zs}</td>
+						<td>{$vo.name}（{$vo.storemobile}）</td>
+						<td>{$vo.sxf}</td>
+						<td>{$vo.fybl}</td>
+						<td>{$vo.yhfy}<if condition="$vo[topname]">（{$vo.topname}）</if></td>
+						<td>{$vo.sjfy}<if condition="$vo[topseller]">（{$vo.topseller}）</if></td>
+						<td>{$vo.qysj}</td>
+						<td>{$vo[sxf]-$vo[yhfy]-$vo[sjfy]-$vo[qysj]}</td>
+						<td>{$vo.date|date="Y-m-d H:i",###}</td>
+					</tr>
+				</volist>
+			</table>
+			<div class="pagination">{$Page}</div>
+	  </form>
+	</div>
+</div>
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+
+</body>
+</html>

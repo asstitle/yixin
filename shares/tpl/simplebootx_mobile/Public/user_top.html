@@ -1,0 +1,19 @@
+<span <if condition="$menu eq 'user'">class='on'</if> ><a href="{:U('User/index')}"><em><img src="__PUBLIC__/image/mem_pers.png" /></em>会员</a></span>
+<php>
+    if($itype==2){
+</php>
+    <span <if condition="$menu eq 'seller'">class='on'</if> ><a href="{:U('Seller/index')}"><em><img src="__PUBLIC__/image/mem_union.png" /></em>商家</a></span>
+<php>
+    }
+</php>
+<php>
+    if($itype==3){
+</php>
+    <span <if condition="$menu eq 'agernt'">class='on'</if> ><a href="{:U('Agent/index')}"><em><img src="__PUBLIC__/image/mem_agent.png" /></em>代理商</a></span>
+<php>
+    }
+</php>
+<span class='sys'><a href="javascript:;;"><em><img src="__PUBLIC__/image/sys.png" /></em>二维码</a></span>
+<div class="sys_img" >
+	<img src='__ROOT__/phpqrcode.php?showtext=<php>echo $_SESSION["user"]["mobile"]</php>'/>
+</div>

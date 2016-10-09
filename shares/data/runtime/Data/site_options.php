@@ -1,0 +1,14 @@
+a:22:{s:9:"site_name";s:24:"玛雅易信会员之家";s:11:"site_pcname";s:0:"";s:9:"site_host";s:22:"http://yixin.woyii.com";s:9:"site_txhy";s:1:"2";s:11:"site_yhcard";s:155:"建设银行
+工商银行
+农业银行
+招商银行
+中国银行
+成都银行
+邮政银行
+华夏银行
+交通银行
+民生银行
+平安银行
+广发银行";s:8:"site_tpl";s:18:"simplebootx_mobile";s:15:"site_adminstyle";s:4:"flat";s:8:"site_icp";s:0:"";s:16:"site_admin_email";s:0:"";s:11:"site_tongji";s:84:"程志的：
+AppSecret：5565edd37736c8e3daa089ae9f1711ea
+AppId：wxb0549ab6e493c07f";s:14:"site_copyright";s:0:"";s:14:"site_AppSecret";s:32:"6c63227dbed3f62cfe52846cf0817207";s:10:"site_AppId";s:18:"wx9a68aff48ed92184";s:14:"site_smsuserid";s:4:"1454";s:12:"site_smsuser";s:4:"GGHW";s:12:"site_smspass";s:6:"123456";s:14:"site_seo_title";s:9:"创富宝";s:17:"site_seo_keywords";s:0:"";s:20:"site_seo_description";s:24:"玛雅易信会员之家";s:7:"urlmode";s:1:"0";s:11:"html_suffix";s:0:"";s:21:"comment_time_interval";i:60;}

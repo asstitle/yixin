@@ -1,0 +1,92 @@
+<style>
+    select {
+        width: auto !important;
+        height: auto !important;
+    }
+
+    input {
+        height: auto !important;
+    }
+</style>
+
+</head>
+<admintpl file="header" /><body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:;">持仓列表</a></li>
+    </ul>
+    <form class="well form-search" method="post" action="{:U('Position/index')}">
+        <div class="search_type cc mb10">
+            <div class="mb10">
+					<span class="mr20">
+						昵称：
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> &nbsp; &nbsp;
+                        手机号码：
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> &nbsp; &nbsp;
+                        商品名称：
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> &nbsp; &nbsp;
+						建仓时间：
+						<input type="text" name="start_time" class="J_date" value="{$formget.start_time}" style="width: 80px;" autocomplete="off">-
+						<input type="text" name="end_time" class="J_date" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+                        
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+            </div>
+        </div>
+    </form>
+    <form class="J_ajaxForm" action="" method="post">
+        <table class="table table-hover table-bordered table-list" id="menus-table" data-sort_field="{$formget.sort_field}" data-sort_by="{$formget.sort_by}">
+            <thead>
+            <tr>
+                <th>订单号</th>
+                <th>昵称</th>
+                <th>手机号码</th>
+                <th>商品名称</th>
+                <th>商品规格</th>
+                <th>建仓方向</th>
+                <th>手数</th>
+                <th>建仓价格</th>
+                <th>定金</th>
+                <th>点数</th>
+                <th>建仓时间</th>
+            </tr>
+            </thead>
+                <tr>
+                <td>订单号</td>
+                <td>昵称</td>
+                <td>手机号码</td>
+                <td>商品名称</td>
+                <td>商品规格</td>
+                <td>建仓方向</td>
+                <td>手数</td>
+                <td>建仓价格</td>
+                <td>定金</td>
+                <td>点数</td>
+                <td>建仓时间</td>
+                </tr>
+
+        </table>
+        <div class="pagination">{$Page}</div>
+    </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+    $(document).ready(function() {
+        Wind.css('treeTable');
+        Wind.use('treeTable', function() {
+            $("#menus-table").treeTable({
+                indent : 20
+            });
+        });
+    });
+
+    setInterval(function() {
+        var refersh_time = getCookie('refersh_time_admin_menu_index');
+        if (refersh_time == 1) {
+            reloadPage(window);
+        }
+    }, 1000);
+    setCookie('refersh_time_admin_menu_index', 0);
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+	<script src="../../Public/js/area.js"></script>
+</head>
+<body>
+<div class="beaner swiper-container">
+	<div class="swiper-wrapper">
+		<volist name="banner" id="vo">
+			<div class="swiper-slide"><a href="{$vo.slide_url}"><img src="{$vo.slide_pic}" /></a></div>
+		</volist>
+	</div>
+	<div class="swiper-pagination"></div>
+</div>
+<div class="class_top clr union_eee union_top">
+	<div class="item"><em><if condition="$address">{$address}<else/>全国</if></em><i class='icon-angle-down'></i></div>
+	<div class="item"><em><if condition="$class_now">{$class_now.name}<else/>分类</if></em><i class='icon-angle-down'></i></div>
+	<div class="item"><em><if condition="$pxname">{$pxname}<else/>默认</if></em><i class='icon-angle-down'></i></div>
+</div>
+<input type="hidden" id="zuobiao"/><!--坐标位置-->
+<input type="hidden" value="{$formart}" class="list_parameter"><!--传递到JS查询列表的参数-->
+<input type="hidden" name="cid" value="{$class_now.id}" id="cid"><!--分类隐藏控件-->
+<div class="pop">
+	<div class="box">
+		<php>
+			$url = explode("&",$_SERVER['QUERY_STRING']);
+			foreach($url as $key => $val){
+			$str = "address";
+			if(substr($val,0,strlen($str))==$str){
+			unset($url[$key]);
+			}
+			}
+			$url = implode("&",$url);
+		</php>
+		<input type="hidden" value="<php>echo '__ROOT__/index.php?'.$url.'&'.$str.'=';</php>" id="address">
+		<div class="addres clr ">
+			<div>
+				<ul class="_list1 add1 swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="addres_pre">
+							</div>
+						</div>
+					</div>
+					<div class="swiper-scrollbar swiper-scrollbar1"></div>
+				</ul>
+			</div>
+			<div>
+				<ul class="_list1 add2 swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="addres_child">
+							</div>
+						</div>
+					</div>
+					<div class="swiper-scrollbar swiper-scrollbar2"></div>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="box">
+		<ul class="_list1 swiper-container1 swiper-container-vertical swiper-container-free-mode swiper-container-android">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide swiper-slide-active">
+					<php>
+						$url = explode("&",$_SERVER['QUERY_STRING']);
+						foreach($url as $key => $val){
+						$str = "cid";
+						if(substr($val,0,strlen($str))==$str){
+						unset($url[$key]);
+						}
+						}
+						$url = implode("&",$url);
+					</php>
+					<li data-val="0" class="hidfl" style="text-align: center;"><a href="<php>echo '__ROOT__/index.php?'.$url.'&'.$str.'=0';</php>">所有分类</a></li>
+					<volist name="class" id="vo">
+						<li class="hidfl" style="text-align: center;"><a href="<php>echo '__ROOT__/index.php?'.$url.'&'.$str.'='.$vo['id'];</php>">{$vo['name']}</a></li>
+					</volist>
+				</div>
+			</div>
+			<div class="swiper-scrollbar"></div>
+		</ul>
+	</div>
+	<div class="box">
+		<h3 style="text-align: center;">排序</h3>
+		<ul class=" _list1 swiper-container1">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<php>
+						$url = explode("&",$_SERVER['QUERY_STRING']);
+						foreach($url as $key => $val){
+						$str = "ord";
+						if(substr($val,0,strlen($str))==$str){
+						unset($url[$key]);
+						}
+						}
+						$url = implode("&",$url);
+					</php>
+					<li style="text-align: center;"><a href="<php>echo '__ROOT__/index.php?'.$url.'&'.$str.'=1';</php>">赠送比例</a></li>
+					<li style="text-align: center;"><a href="<php>echo '__ROOT__/index.php?'.$url.'&'.$str.'=2';</php>">人均消费</a></li>
+					<li style="text-align: center;"><a href="<php>echo '__ROOT__/index.php?'.$url.'&'.$str.'=3';</php>">距 离</a></li>
+				</div>
+			</div>
+			<div class="swiper-scrollbar"></div>
+		</ul>
+	</div>
+</div>
+<ul class="union clr">
+	<div class="view_list_box_selller on"></div>
+	<script id="showlist" type="text/html">
+		[[each list as v i]]
+		<li><a href="[[v.url]]">
+			<div class="_img"><img src="[[v.logo]]"></div>
+			<div class="r_text">
+				<h3>[[v.name]] <span>赠送 <font color="red">[[v.fybl]]%</font></span></h3>
+				<p>[[v.about]]</p>
+				<h4 class="addres red">[[v.address]] [[if v.juli]]<i class='fr'>距离：[[v.juli]] </i>[[/if]]</h4>
+			</div>
+		</a></li>
+		[[/each]]
+	</script>
+	<div class="load_more"></div>
+</ul>
+<tc_include file="Public/footer"/>
+<tc_include file="Public/share"/>
+<div class="search">
+	<form action="{:U('Index/sellerlist')}" method="post">
+		<input type="text" name="keyword1"/>
+		<input type="submit" value=" " />
+	</form>
+	<!---->
+	<i class='icon-search'></i>
+</div>
+<script>
+	/*
+	 * 注意：
+	 * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+	 * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+	 * 3. 常见问题及完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+	 *
+	 * 开发中遇到问题详见文档“附录5-常见错误及解决办法”解决，如仍未能解决可通过以下渠道反馈：
+	 * 邮箱地址：weixin-open@qq.com
+	 * 邮件主题：【微信JS-SDK反馈】具体问题
+	 * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
+	 */
+	wx.config({
+		debug: false,
+		appId: '{$site_AppId}',
+		timestamp: '{$timestamp}',
+		nonceStr: '{$nonceStr}',
+		signature: '{$signature}',
+		jsApiList: [
+			// 所有要调用的 API 都要加到这个列表中
+			'getLocation'
+		]
+	});
+
+
+	var IsNext = true;
+
+	wx.ready(function () {
+		// 在这里调用 API
+
+		wx.getLocation({
+			success: function (res) {
+				var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+				var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+				var speed = res.speed; // 速度，以米/每秒计
+				var accuracy = res.accuracy; // 位置精度
+//                    //返回坐标
+
+				$("#zuobiao").val(latitude+","+longitude);
+				if ($(".view_list_box_selller").size() > 0) {
+					if($(".view_list_box_selller").hasClass('on')) {
+						var page = 1;
+						$(document).ready(function () {
+							$(window).scroll(function () {
+								//var tops = parseFloat($(window).height()) + parseFloat($(window).scrollTop()) + 380; //380
+								//var h = $(document).height();
+								//h = $(document.body).height()*page;
+								//var w = tops - h;
+								//if (IsNext && w >= 0) {
+								var scrollTop = $(this).scrollTop(); //滚动条在Y轴上的滚动距离
+								var scrollHeight = $(document).height(); //内容可视区域的高度
+								var windowHeight = $(this).height(); //内容可视区域的高度加上溢出（滚动）的距离
+								if (scrollTop + windowHeight == scrollHeight) { //从这个三个属性的介绍就可以看出来，滚动条到底部的条件即为scrollTop + clientHeight == scrollHeight。（兼容不同的浏览器）。
+
+									if (IsNext) {
+										page++;
+										foodlist_selller(page);
+									}
+								}
+							});
+							foodlist_selller(1);//第二个参数是坐标地址 其他项目可删掉
+						});
+					}
+				}
+			},
+			cancel: function (res) {
+				alert('用户拒绝授权获取地理位置');
+			}
+		});
+
+	});
+
+
+	//滑动翻页 函数
+	//zb 从微信底部传入 做距离排序用
+	function foodlist_selller(Page) {
+
+		//把分页存放在变量里，这样防止android手机重复显示内容
+		var obj = $(".view_list_box_selller");
+		if (obj.data('page') == Page) {
+			return true;
+		}
+		obj.data('page', Page);
+//alert(Page);
+//alert(Page);
+		var str = "";
+		var zb = $("#zuobiao").val();
+		if(zb != "" && zb != 'undefined'){
+			str = "&zb="+zb;//坐标
+		}
+		IsNext = false;
+		$(".load_more").html("正在加载更多...").show(); //<span><img src=\"image/load.gif\"></span>
+		var url = $(".view_list_box_selller").data('url');
+		url = url != undefined ? url : window.location.href;
+		var url = url + "&ajax=1&p=" + Page + str + $(".list_parameter").val();
+		$.ajax(
+			{ type: "post",
+				dataType: "json",
+				url: url ,
+				data: {},
+				async: true,
+				timeout: 10000,
+				success: function (msg) {
+					var list = eval(msg);
+					var foodtemp = "";
+					if (list['list'].length != 0) {
+						var html = template('showlist',msg);
+						$(".view_list_box_selller").append(html);
+						IsNext = true;
+						$(".load_more").hide();
+					} else {
+						$(".load_more").html("无更多信息").show();
+						IsNext = false;
+					}
+				}, error: function(XMLHttpRequest, textStatus, errorThrown) {
+				$(".load_more").html("读取数据超时，请刷新本页面").show();
+			}
+			});
+	}
+	var swiper3 = new Swiper('.pop .box:eq(2) .swiper-container', {
+		scrollbar: '.swiper-scrollbar1',
+		direction: 'vertical',
+		slidesPerView: 'auto',
+		mousewheelControl: true,
+		freeMode: true
+	});
+
+</script>
+</body>
+</html>

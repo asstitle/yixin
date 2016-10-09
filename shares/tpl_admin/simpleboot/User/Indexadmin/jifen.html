@@ -1,0 +1,71 @@
+<admintpl file="header" />
+<body class="J_scroll_fixed">
+	<div class="wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a>积分明细</a></li>
+			<li><a href="{:U('indexadmin/edit_post')}">查看详情</a></li>
+		</ul>
+		<form method="post" class="J_ajaxForm" action="#">
+			<div class="table_list">
+				<table class="table table-hover table-bordered">
+					<thead>
+						<tr>
+							<th align='center'>ID</th>
+							<th>用户名</th>
+							<th>操作</th>
+							<th>积分变化</th>
+							<th>操作时间</th>
+							<th>状态</th>
+							<th align='center'>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<php>$user_statuses=array("0"=>"已拉黑","1"=>"正常","2"=>"未验证");</php>
+						<foreach name="lists" item="vo">
+						<tr>
+							<td align='center'>{$vo.id}</td>
+							<td>{$vo.user_login|default='第三方用户'}</td>
+							<td>{$vo.user_nicename|default='未填写'}</td>
+							<td><img width="25" height="25" src="{:U('user/public/avatar',array('id'=>$vo['id']))}" /></td>
+							<td>{$vo.user_email}</td>
+							<td>{$vo.create_time}</td>
+							<td>{$vo.last_login_time}</td>
+							<td>{$vo.last_login_ip}</td>
+							<td>{$user_statuses[$vo['user_status']]}</td>
+							<td align='center'>
+								<a href="{:U('indexadmin/ban',array('id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="您确定要拉黑此用户吗？">拉黑</a>|
+								<a href="{:U('indexadmin/cancelban',array('id'=>$vo['id']))}" class="J_ajax_dialog_btn" data-msg="您确定要启用此用户吗？">启用</a>
+							</td>
+						</tr>
+						</foreach>
+						<tr>
+							<td align='center'>1</td>
+							<td>小强</td>
+							<td>提现</td>
+							<td>-940</td>
+							<td>2016-3-23</td>
+							<td>成功</td>
+							<td align='center'>
+								<a href="{:U('indexadmin/jifen',array('id'=>$vo['id']))}">删除</a>
+							</td>
+						</tr>
+						<tr>
+							<td align='center'>1</td>
+							<td>小强</td>
+							<td>提现</td>
+							<td>-940</td>
+							<td>2016-3-23</td>
+							<td>成功</td>
+							<td align='center'>
+								<a href="{:U('indexadmin/jifen',array('id'=>$vo['id']))}">删除</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pagination">{$page}</div>
+			</div>
+		</form>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>

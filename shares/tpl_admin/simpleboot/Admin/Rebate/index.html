@@ -1,0 +1,80 @@
+
+<admintpl file="header" /><body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="{:U('Rebate/index')}">返佣明细列表</a></li>
+	</ul>
+	<form class="well form-search" method="post" action="{:U('Rebate/index')}">
+			<div class="search_type cc mb10">
+				<div class="mb10">
+					<span class="mr20">
+                       课程名： 
+						<input type="text" name="keyword" style="width: 200px;"  placeholder="请输入关键字..."> &nbsp; &nbsp;
+                       金额区间：
+						<input type="text" name="start_price"  style="width: 80px;" autocomplete="off">-
+						<input type="text" name="end_price"  style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+                        
+	         返现时间：
+						<input type="text" name="start_time" class="J_date"  style="width: 80px;" autocomplete="off">-
+						<input type="text" name="end_time" class="J_date"  style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+                        &nbsp;
+                        级别查找:
+                       		<select name="rank">
+                       		<option value="0">按级别查找</option>
+                            <option value="1">1级返佣</option>
+                            <option value="2">2级返佣</option>
+                            <option value="3">3级返佣</option>
+                            
+                           
+                        </select> &nbsp; &nbsp;
+                        
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+				</div>
+			</div>
+		</form>
+	<form class="J_ajaxForm" action="" method="post">
+		<table class="table table-hover table-bordered table-list" id="menus-table">
+			<thead>
+			<tr>
+				<th width="30">ID</th>
+				<th>购买用户</th>
+				<th>获得用户</th>
+				<th>课程名称</th>
+				<th>对应等级</th>
+				<th>获得金额</th>
+				<th>返佣时间</th>
+			</tr>
+			</thead>
+			<tbody>
+			<volist name="list" id="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.buy_name} &nbsp;&nbsp;{$vo.buy_mobile}</td>
+					<td><span style="color:green;">{$vo.get_name}&nbsp;&nbsp;{$vo.get_mobile}</span></td>
+					<td>{$vo.curriculum_name}</td>
+					<td>{$vo.rank}</td>
+					<td>￥{$vo.rebate_money}</td>
+					<td>{$vo.rebate_date|date='Y-m-d H:i:s',###}</td>
+				</tr>
+			</volist>
+			</tbody>
+			<tfoot>
+			<tr>
+				<th width="30">ID</th>
+				<th>购买人</th>
+				<th>获得人</th>
+				<th>课程名</th>
+				<th>对应等级</th>
+				<th>获得金额</th>
+				<th>返佣时间</th>
+			</tr>
+			</tfoot>
+		</table>
+		<div class="pagination">{$Page}</div>
+	</form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+
+</body>
+</html>

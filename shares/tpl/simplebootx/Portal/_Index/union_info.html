@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>{$site_pcname}</title>
+  <link href="__TMPL__public/images/favicon.ico" rel="SHORTCUT ICON" />
+  <link rel="stylesheet" href="__TMPL__public/style/basic.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/com.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/dcom.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/sjlm.css" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="__TMPL__public/js/html5shiv.min.js"></script>
+  <script src="__TMPL__public/js/respond.min.js"></script>
+  <script src="__TMPL__public/js/css3-mediaQueries.js"></script>
+  <![endif]-->
+  <script src="__TMPL__public/js/jquery-1.12.3.min.js"></script>
+  <script src="__TMPL__public/js/com.js"></script>
+</head>
+<body>
+<!--头部导航-->
+<tc_include file="Public:top" />
+
+<!--焦点图-->
+<div class="main">
+  <img src="__TMPL__public/images/bg_sj_03.png">
+</div>
+
+<!--内容区域：商家联盟-->
+<div class="section">
+  <div class="sec_header">
+    <div class="container">
+      <ul class="left">
+        <li class="active"><a href="index.php?g=&m=Index&a=union&tid=14&type=1">商家联盟</a></li>
+        <li><a href="index.php?g=&m=Index&a=union&tid=15&type=2">模式介绍</a></li>
+      </ul>
+      <ul class="right">
+        <li>当前位置：</li>
+        <li>首页<i>></i></li>
+        <li>商家联盟<i>></i></li>
+        <li>商家联盟</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sec_body">
+    <div class="container">
+      <h1><em>MERCHANT</em> ALLIANCE</h1>
+      <h2>商家联盟</h2>
+      <volist name="list" id="vo">
+      <!-- <h3>你准备好了吗？全民创富，创造奇迹！</h3>
+      <span> 不论做什么都需要付出努力，在这里只要你愿意，百分之一百可以成功，你想赚到多少钱取决于你自己！！！</span>
+      <img src="images/img_3_01_03.png">
+      <img src="images/dream.png">
+      <p>
+      创富宝【正在邀请您】加入“梦想合伙人”，赚本来只有大企业可以赚到的钱，让不同的企业商家成为你的“打工仔”，这是可持续的，就算你不工作还有源源不断的收入自动流入到你
+      的账户！可兼职可全职。收入超出你的预期。 不论做什么都需要付出努力，在这里只要你愿意，百分之一百可以成功，你想赚到多少钱取决于你自己！！！
+      无需缴纳任何费用
+      无需任何行业经验
+      你将得到：1、公司提供的一流办公环境与设备
+                2、公司专业化培训
+                3、大型招商活动会议支持。
+                你还将得到：平台消费有效金额5‰
+                商家平台有效营业额8‰
+                年薪百万不是梦
+      </p>
+      <img src="images/example.png">
+      <p>
+        推荐一个汽车商家，一天销售一辆汽车，单价10万元，那么一个月下来你将得到：
+        10万 * 8‰ =800元 / 天*30天=24000元/月
+        这只是一个商家，当你有10个商家、100个商家的时候呢……
+      </p> -->
+      {$vo.post_content}
+	  </volist>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--底部内容-->
+<tc_include file="Public:footer" />
+
+</body>
+</html>

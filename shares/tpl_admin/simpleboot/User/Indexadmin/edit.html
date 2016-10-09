@@ -1,0 +1,271 @@
+<admintpl file="header"/>
+<style type="text/css">
+	.col-auto { overflow: auto; _zoom: 1;_float: left;}
+	.col-right { float: right; width: 210px; overflow: hidden; margin-left: 6px; }
+	.table th, .table td {vertical-align: middle;}
+	.picList li{margin-bottom: 5px;}
+</style>
+</head>
+<body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+	<ul class="nav nav-tabs">
+		<li><a href="{:U('Indexadmin/index')}">会员列表</a></li>
+		<li class="active"><a href="#" ><if condition="$isedit eq 1">编辑<else/>添加</if>会员</a></li>
+	</ul>
+	<form name="myform" id="myform" action="{:u('Indexadmin/edit_post')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="{$id}">
+		<div class="col-right">
+			<div class="table_full">
+				<table class="table table-bordered">
+					<tr>
+						<td><b>缩略图</b></td>
+					</tr>
+					<tr>
+						<td>
+							<div  style="text-align: center;"><input type='hidden' name='user_img' id='thumb' value='{$user_img}'>
+								<a href='javascript:void(0);' onClick="flashupload('thumb_images', '附件上传','thumb',thumb_images,'1,jpg|jpeg|gif|png|bmp,1,,,1','','','');return false;">
+									<if condition="empty($user_img)">
+										<img src="__ROOT__/statics/images/icon/upload-pic.png" id='thumb_preview' width='135' height='113' style='cursor:hand' />
+										<else/>
+										<img src="{$user_img}" id='thumb_preview' width='135' height='113' style='cursor:hand' />
+									</if>
+								</a>
+								<!-- <input type="button" class="btn" onclick="crop_cut_thumb($('#thumb').val());return false;" value="裁减图片">  -->
+								<input type="button"  class="btn" onClick="$('#thumb_preview').attr('src','__ROOT__/statics/images/icon/upload-pic.png');$('#thumb').val('');return false;" value="取消图片">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><b>注册时间</b></td>
+					</tr>
+					<tr>
+						<td><input type="text" value="{$create_time|date='Y-m-d',###}" size="21" class="input length_3 J_datetime" style="width: 160px;" readonly></td>
+					</tr>
+					<tr>
+						<td><b>状态</b></td>
+					</tr>
+					<tr>
+						<td>
+							<span class="switch_list cc">
+							<label class="radio"><input type="radio" name="user_status" value="1" <if condition="$user_status eq 1 or $isedit eq 0">checked</if>> <span>启用</span></label>
+							<label class="radio"><input type="radio" name="user_status" value="0" <if condition="$user_status eq 0 and $user_status neq ''">checked</if>><span>禁用</span></label>
+							</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="col-auto">
+			<div class="table_full">
+				<table class="table table-bordered">
+					<tr>
+						<th width="80">用户手机</th>
+						<td><input type='text' value='{$mobile}' style='width:400px'   class='input' placeholder='请输入用户手机号' readonly><span class="must_red">*</span></td>
+					</tr>
+					<tr>
+						<th width="80">用户昵称</th>
+						<td><input type='text' name='user_nicename' id='source' value='{$user_nicename}' style='width:400px'   class='input' placeholder='请输入用户昵称'></td>
+					</tr>
+					<!--<tr>-->
+						<!--<th width="80">用户性别 </th>-->
+						<!--<td>-->
+							<!--<volist name="ar_sex" id="vo">-->
+								<!--<input type="radio" name="sex" value="{$key}" id="f{$key}" style="float:left" <if condition="$sex eq $key">checked</if> ><label for="f{$key}" style="float:left">{$vo}</label>-->
+							<!--</volist>-->
+						<!--</td>-->
+					<!--</tr>-->
+					<tr style="display: none;">
+						<th width="80">返佣比例</th>
+						<td><input type='text' name='fybl' value='{$fybl}' style='width:50px; text-align: right'   class='input'><span>%</span></td>
+					</tr>
+					<tr>
+						<th width="80">所属推荐人</th>
+						<php>
+							$ar = M("oauth_user")->find($tjrr);
+							$name = $ar['mobile'].' '.$ar['user_nicename'];
+						</php>
+						<td>{$name}</td>
+					</tr>
+					<tr>
+						<th width="80">用户积分</th>
+						<td><input type='text' name='score' value='{$score}' style='width:400px'   class='input' placeholder='默认为0' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">推荐人数</th>
+						<td><input type='text' name='tjrs' value='{$tjrs}' style='width:400px'   class='input' placeholder='用户已推荐的人数' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">开户银行</th>
+						<td><input type='text' name='khyh' value='{$khyh}' style='width:400px'   class='input' placeholder='开户银行' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">开户姓名</th>
+						<td><input type='text' name='khxm' value='{$khxm}' style='width:400px'   class='input' placeholder='开户姓名' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">银行账号</th>
+						<td><input type='text' name='yhzh' value='{$yhzh}' style='width:400px'   class='input' placeholder='银行账号' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">登录密码</th>
+						<td><input type='password' name='password' value='' style='width:400px'   class='input' placeholder='不修改留空' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">支付密码</th>
+						<td><input type='password' name='zfmm' value='' style='width:400px'   class='input' placeholder='不修改留空' readonly></td>
+					</tr>
+					<tr>
+						<th width="80">会员类型 </th>
+						<td>
+							<volist name="ar_usertype" id="vo">
+								<input type="radio" name="user_type" value="{$key}" id="t{$key}" style="float:left" <if condition="$user_type eq $key">checked</if> ><label for="t{$key}" style="float:left">{$vo}</label>
+							</volist>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button class="btn btn-primary btn_submit J_ajax_submit_btn"type="submit">提交</button>
+			<a class="btn" href="javascript:history.go(-1)">返回</a>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<script type="text/javascript">
+	$(function () {
+		//setInterval(function(){public_lock_renewal();}, 10000);
+		$(".J_ajax_close_btn").on('click', function (e) {
+			e.preventDefault();
+			Wind.use("artDialog", function () {
+				art.dialog({
+					id: "question",
+					icon: "question",
+					fixed: true,
+					lock: true,
+					background: "#CCCCCC",
+					opacity: 0,
+					content: "您确定需要关闭当前页面嘛？",
+					ok:function(){
+						setCookie("refersh_time",1);
+						window.close();
+						return true;
+					}
+				});
+			});
+		});
+		/////---------------------
+		Wind.use('validate', 'ajaxForm', 'artDialog', function () {
+			//javascript
+
+			//编辑器
+			editorcontent = new baidu.editor.ui.Editor();
+			editorcontent.render( 'content' );
+			try{editorcontent.sync();}catch(err){};
+			//增加编辑器验证规则
+			jQuery.validator.addMethod('editorcontent',function(){
+				try{editorcontent.sync();}catch(err){};
+				return editorcontent.hasContents();
+			});
+			var form = $('form.J_ajaxForms');
+			//ie处理placeholder提交问题
+			if ($.browser.msie) {
+				form.find('[placeholder]').each(function () {
+					var input = $(this);
+					if (input.val() == input.attr('placeholder')) {
+						input.val('');
+					}
+				});
+			}
+			//表单验证开始
+			form.validate({
+				//是否在获取焦点时验证
+				onfocusout:false,
+				//是否在敲击键盘时验证
+				onkeyup:false,
+				//当鼠标掉级时验证
+				onclick: false,
+				//验证错误
+				showErrors: function (errorMap, errorArr) {
+					//errorMap {'name':'错误信息'}
+					//errorArr [{'message':'错误信息',element:({})}]
+					try{
+						$(errorArr[0].element).focus();
+						art.dialog({
+							id:'error',
+							icon: 'error',
+							lock: true,
+							fixed: true,
+							background:"#CCCCCC",
+							opacity:0,
+							content: errorArr[0].message,
+							cancelVal: '确定',
+							cancel: function(){
+								$(errorArr[0].element).focus();
+							}
+						});
+					}catch(err){
+					}
+				},
+				//验证规则
+				rules: {'post[post_title]':{required:1},'post[post_content]':{editorcontent:true}},
+				//验证未通过提示消息
+				messages: {'post[post_title]':{required:'请输入标题'},'post[post_content]':{editorcontent:'内容不能为空'}},
+				//给未通过验证的元素加效果,闪烁等
+				highlight: false,
+				//是否在获取焦点时验证
+				onfocusout: false,
+				//验证通过，提交表单
+				submitHandler: function (forms) {
+					$(forms).ajaxSubmit({
+						url: form.attr('action'), //按钮上是否自定义提交地址(多按钮情况)
+						dataType: 'json',
+						beforeSubmit: function (arr, $form, options) {
+
+						},
+						success: function (data, statusText, xhr, $form) {
+							if(data.status){
+								setCookie("refersh_time",1);
+								//添加成功
+								Wind.use("artDialog", function () {
+									art.dialog({
+										id: "succeed",
+										icon: "succeed",
+										fixed: true,
+										lock: true,
+										background: "#CCCCCC",
+										opacity: 0,
+										content: data.info,
+										button:[
+											{
+												name: '继续添加？',
+												callback:function(){
+													reloadPage(window);
+													return true;
+												},
+												focus: true
+											},{
+												name: '返回列表页',
+												callback:function(){
+													location='{:U('AdminPost/index')}';
+													return true;
+												}
+											}
+										]
+									});
+								});
+							}else{
+								isalert(data.info);
+							}
+						}
+					});
+				}
+			});
+		});
+		////-------------------------
+	});
+</script>
+</body>
+</html>

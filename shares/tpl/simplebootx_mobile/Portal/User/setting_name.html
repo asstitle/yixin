@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<form action="{:U('User/dosetting_name')}" method="post">
+		<div class="itme_3 bor_no clr">
+			<span class="fl">账户昵称</span>
+			<div class="fr"><input type="text" name="name" placeholder="输入账户昵称" value="{$username}" datatype="*"  nullmsg="请输入昵称！"></div>
+		</div>
+		<div class="btn_1">
+			<input type="submit" class="zt_ajax_form" value='确认提交'>
+		</div>
+		<div class="text_box1">
+			说明*:账户昵称可以是英文、中文、或者中英结合，
+			也可以是数字。
+		</div>
+	</form>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

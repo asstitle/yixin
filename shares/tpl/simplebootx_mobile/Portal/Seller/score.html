@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="mem_top"> 
+		<canvas id='back'></canvas>
+		<h3 class="_top"><a href="javascript:window.history.go(-1)" class="back"><i class='icon-angle-left'></i></a>{$user_nicename}</h3>
+		<div class="top_img_box"> 
+			<div class="bor_1"></div>
+			<div class="bor_2"></div>
+			<img src="{$user_img}" />
+		</div>
+		<h4>当前可用积分：<i>{$score}</i></h4>
+	</div>
+	<div class="padd_0_1">
+		<div class="view_list_box"></div>
+		<script id="showlist" type="text/html">
+			[[each list as v i]]
+			<div class="itme clr ">
+				<div class="fl">
+
+					<h3>[[v.op]]</h3>
+					<p>[[v.date]] </p>
+				</div>
+				<div class="fr">
+					<h3 class="red">[[v.integral_sj]]</h3>
+				</div>
+			</div>
+			[[/each]]
+		</script>
+		<div class="load_more"></div>
+ 	</div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

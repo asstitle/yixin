@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<!--
+	<div class="car_top"> 
+		<div class="car_back icon-angle-left"></div>
+		<div class="cont_text">会员中心</div>
+		<div class="car_menu icon-reorder"></div>
+		<div class="car_nav"> 
+			<footer class="footer-menu" style='position:inherit;'>
+				<ul>
+					<li class="">
+						<a href="index.html" class="home"><p>首页</p></a>
+					</li>
+					<li class="">
+						<a href="class.html" class="type"><p>分类</p></a>
+					</li>
+					<li class="cur">
+						<a href="good_car.html" class="cart"><p>购物车</p></a>
+					</li>
+					<li class="">
+						<a href="member.html" class="my"><p>会员</p></a>
+					</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
+	-->
+	<div class="mem_head">
+		<img class="mem_head_img" src="__PUBLIC__/image/mem_head_img.jpg"/>
+		<!--<div class='mem_head_back'></div>-->
+		<div class="clr head_top"> 
+			<div class="head_img">
+				<form action="" enctype="multipart/form-data">
+					<img src="{$logo}" id="img1" style="display: inline-block;height: 9rem;width: 9rem;border-radius: 5rem;background-size: 100% 100%;overflow: hidden;">
+					<input type="file" id="img_tx" style="display: none;"  name="img" class="zt_ajax_sub" data-url="{:U('Index/uploadfilelogo2')}" data-img="img1">
+				</form>
+				<p>{$name}</p> <!--female-->
+				<div style="color: white; margin-top: 5px;">
+					账户积分：<span style="color:red">{$score}</span>
+				</div>
+			</div>
+			<div class="head_class">
+				<tc_include file="Public/user_top"/>
+			</div>
+		</div>
+
+	</div>
+	<ul class="idx_list clr mem_list"> 
+		<li><a href="{:U('Seller/score')}">
+			<img src="__PUBLIC__/image/mem_jf.png">
+			<p>我的积分</p>
+		</a></li>
+		<li><a href="{:U('Seller/setting')}">
+			<img src="__PUBLIC__/image/union_gl.png">
+			<p>商家管理</p>
+		</a></li>
+		<li><a href="{:U('Seller/record_tx')}">
+			<img src="__PUBLIC__/image/mem_tx.png">
+			<p>提现记录</p>
+		</a></li>
+		<li><a href="{:U('User/message')}">
+			<if condition="$messagenum gt 0"><i>{$messagenum}</i></if>
+			<img src="__PUBLIC__/image/mem_mess.png">
+			<p>消息中心</p>
+		</a></li>
+		<li><a href="{:U('Seller/payable')}">
+			<img src="__PUBLIC__/image/union_sk.png">
+			<p>商家报单</p>
+		</a></li>
+		<li><a href="{:U('Seller/details')}">
+			<img src="__PUBLIC__/image/union_ls.png">
+			<p>商家流水</p>
+		</a></li>
+		<li><a href="{:U('User/invite')}">
+			<img src="__PUBLIC__/image/union_yq.png">
+			<p>我的邀请</p>
+		</a></li>
+		<li><a href="{:U('User/share')}">
+			<img src="__PUBLIC__/image/mem_tgewm.png">
+			<p>推广二维码</p>
+		</a></li>
+	</ul>
+	<ul class="mem_list2"> 
+		<!--<li><a href="{:U('User/rebates')}"><em><img src="__PUBLIC__/image/union2_zhfx.png"></em>账户返现</a><i class='icon-angle-right'></i></li>-->
+		<li><a href="{:U('Seller/shenqing_tx')}"><em><img src="__PUBLIC__/image/mem2_txsq.png"></em>提现申请</a><i class='icon-angle-right'></i></li>
+		<!--<li><a href="{:U('User/setting')}"><em><img src="__PUBLIC__/image/mem2_grsz.png"></em>个人设置</a><i class='icon-angle-right'></i></li>-->
+		<li><a href="javascript:void(0)" class="zt_click_post" data-msg="确定退出？" data-url="{:U('User/loginout')}"><em><img src="__PUBLIC__/image/mem2_tcxt.png"></em>退出系统</a><i class='icon-angle-right'></i></li>
+	</ul>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

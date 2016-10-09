@@ -1,0 +1,46 @@
+.sec_body img{
+  float: left;
+  margin-right: 25px;
+}
+.sec_body p{
+  font-size: 14px;
+  margin-right: 14px;
+}
+
+.info img{
+  width: 308px;
+  height: 440px;
+}
+.culture img{
+  width: 350px;
+  height: 445px;
+}
+.idea img{
+  width: 519px;
+  height: 345px;
+}
+.plat img{
+  width: 518px;
+  height: 366px;
+}
+
+
+.msg img {
+  width: 310px;
+  height: 436px;
+}
+.msg h3{
+  margin-top: 30px;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 70px;
+}
+.msg h3 span,.msg h3 img{
+  float: right;
+}
+.msg h3 img{
+  width: 100px;
+  height: 35px;
+  margin-top: 15px;
+  margin-left: 15px;
+}

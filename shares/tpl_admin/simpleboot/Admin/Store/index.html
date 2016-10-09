@@ -1,0 +1,162 @@
+<style>
+select {
+	width: auto !important;
+	height: auto !important;
+}
+
+input {
+	height: auto !important;
+}
+</style>
+
+<script src="__PUBLIC__/js/area.js"></script>
+<admintpl file="header" /><body class="J_scroll_fixed">
+	<div class="wrap J_check_wrap">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="{:U('Store/index')}">商家列表</a></li>
+		</ul>
+		<form class="well form-search" method="post" action="{:U('Store/index')}">
+			<div class="search_type cc mb10">
+				<div class="mb10">
+					<span class="mr20">
+						时间：
+						<input type="text" name="start_time" class="J_date" value="{$formget.start_time|default=''}" style="width: 80px;" autocomplete="off">-
+						<input type="text" class="J_date" name="end_time" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+						关键字：
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字...">
+						<!--状态：-->
+						<!--<select name="state">-->
+							<!--<option value="" <if condition="$formget['state'] eq '' and $formget['state'] neq 0">selected</if>>请选择状态</option>-->
+							<!--<volist name="ar_storesh" id="vo">-->
+								<!--<option value="{$key}" <if condition="$formget['state'] eq $key">selected</if>>{$vo}</option>-->
+							<!--</volist>-->
+						<!--</select>-->
+						
+						 <select name="class">
+							 <option value="">选择分类...</option>
+							 <volist name="class" id="vo">
+								 <option value="{$vo.id}" <if condition="$formget['class'] eq $key"></if> >{$vo.name}</option>
+							 </volist>
+						 </select>&nbsp;&nbsp;
+						
+                        <select id="s_province" name="sheng"></select>&nbsp;&nbsp;
+                      
+						<select id="s_city" name="shi" ></select>&nbsp;&nbsp;
+                     
+						<select id="s_county" name="qu"></select>&nbsp;&nbsp;
+
+						<select name="isfh">
+							<option value="" >是否返还</option>
+							<option value="1" <if condition="$formget['isfh'] eq 1">selected</if> >是</option>
+							<option value="0" <if condition="$formget['isfh'] eq 0 and $formget['isfh'] neq ''">selected</if> >否</option>
+						</select>&nbsp;&nbsp;
+
+						<select name="isjy">
+							<option value="" >是否启用</option>
+							<option value="1" <if condition="$formget['isjy'] eq 1">selected</if> >是</option>
+							<option value="0" <if condition="$formget['isjy'] eq 0 and $formget['isjy'] neq ''">selected</if> >否</option>
+						</select>
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+				</div>
+			</div>
+		</form>
+		<form class="J_ajaxForm" action="" method="post">
+			<table class="table table-hover table-bordered table-list" id="menus-table" data-sort_field="{$formget.sort_field}" data-sort_by="{$formget.sort_by}"><!--在table-list里添加sort_field和sort_by字段，存放之前选择的值 -->
+				<thead>
+					<tr>
+						<th width="15"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+						<th width="30" class="J_table_sort" data-field="ou.id">ID</th>
+						<th class="J_table_sort" data-field="ou.user_nicename">会员昵称</th>
+						<th class="J_table_sort" data-field="s.name">店铺名称</th>
+						<th class="J_table_sort" data-field="s.displayorder">显示顺序</th>
+						<th class="J_table_sort" data-field="s.name">店铺分类</th>
+						<th class="J_table_sort" data-field="s.score">商家积分（{$allprice}）</th>
+						<th class="J_table_sort" data-field="s.fybl">赠送比例</th>
+						<th class="J_table_sort" data-field="ou2.mobile">推荐人</th>
+						<th class="J_table_sort" data-field="ou.tjrs">推荐人数</th>
+						<th class="J_table_sort" data-field="yye">营业额</th>
+						<!--<th>商家状态</th>-->
+						<th class="J_table_sort" data-field="s.isreturn">是否返还</th>
+						<th class="J_table_sort" data-field="s.isenable">是否启用</th>
+						<th width="150">管理操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="list" id="vo">
+					<tr>
+						<td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.userid}" title="ID:{$vo.userid}"></td>
+						<td width="30">{$vo.userid}</td>
+						<td>{$vo.user_nicename}</td>
+						<td>{$vo.name}</td>
+						<td><if condition="$vo[displayorder]">{$vo.displayorder}</if></td>
+						<td>{$vo.typename}</td>
+						<td>{$vo.score}</td>
+						<td>{$vo.fybl}%</td>
+						<td>{$vo.tjrr}</td>
+						<td>{$vo.tjrs}</td>
+						<td>{$vo.yye}</td>
+						<!--<td>{$ar_storesh[$vo[status]]}</td>-->
+						<td><if condition="$vo[isreturn]">{$ar_blur[$vo[isreturn]]}<else/>{$ar_blur[0]}</if></td>
+						<td><if condition="$vo[isenable]">{$ar_blur[$vo[isenable]]}<else/>{$ar_blur[0]}</if></td>
+						<td width="250">
+							<a href="{:U('Store/edit',array('id'=>$vo['userid']))}">修改</a> |
+							<a href="{:U('Store/qiyong',array('id'=>$vo['userid'],'t'=>1))}" class="J_ajax_dialog_btn" data-msg="你确定进行此操作吗？">启用</a> |
+							<a href="{:U('Store/qiyong',array('id'=>$vo['userid'],'t'=>0))}" class="J_ajax_dialog_btn" data-msg="你确定进行此操作吗？">禁用</a> |
+							<a href="{:U('Store/fanxian',array('id'=>$vo['userid'],'t'=>1))}" class="J_ajax_dialog_btn" data-msg="你确定进行此操作吗？">返现</a> |
+							<a href="{:U('Store/fanxian',array('id'=>$vo['userid'],'t'=>0))}" class="J_ajax_dialog_btn" data-msg="你确定进行此操作吗？">取消返现</a> |
+							<a href="{:U('Store/addscore',array('id'=>$vo['userid']))}">操作积分</a>						</td>
+					</tr>
+					</volist>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th width="15"><label><input type="checkbox" class="J_check_all" data-direction="x" data-checklist="J_check_x"></label></th>
+						<th width="30">ID</th>
+						<th>会员昵称</th>
+						<th>店铺名称</th>
+						<th>显示顺序</th>
+						<th>店铺分类</th>
+						<th>商家积分（{$allprice}）</th>
+						<th>赠送比例</th>
+						<th>推荐人</th>
+						<th>推荐人数</th>
+						<th>营业额</th>
+						<!--<th>商家状态</th>-->
+						<th>是否返还</th>
+						<th>是否启用</th>
+						<th width="150">管理操作</th>
+					</tr>
+				</tfoot>
+			</table>
+			<div class="table-actions">
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Store/qiyong',array('t'=>1))}" data-subcheck="true" data-msg="你确定进行此操作吗？">批量启用</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Store/qiyong',array('t'=>0))}" data-subcheck="true" data-msg="你确定进行此操作吗？">取消启用</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Store/fanxian',array('t'=>1))}" data-subcheck="true" data-msg="你确定进行此操作吗？">批量返现</button>
+				<button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Store/fanxian',array('t'=>0))}" data-subcheck="true" data-msg="你确定进行此操作吗？">取消返现</button>
+			</div>
+			<div class="pagination">{$Page}</div>
+		</form>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+	<script>
+		$(document).ready(function() {
+			Wind.css('treeTable');
+			Wind.use('treeTable', function() {
+				$("#menus-table").treeTable({
+					indent : 20
+				});
+			});
+		});
+
+		setInterval(function() {
+			var refersh_time = getCookie('refersh_time_admin_menu_index');
+			if (refersh_time == 1) {
+				reloadPage(window);
+			}
+		}, 1000);
+		setCookie('refersh_time_admin_menu_index', 0);
+	</script>
+	<script type="text/javascript">_init_area();</script>
+</body>
+</html>

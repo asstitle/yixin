@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>易信金融</title>
+</head>
+
+
+<body>
+	<foreach name="curriculum_list" item="vo">
+		<php>
+			$curriculum_pic = json_decode($vo['curriculum_pic']);
+			$curriculum_content = htmlspecialchars_decode($curriculum_active['curriculum_content']);
+		</php>
+		<div>
+			<img src="{$curriculum_pic[0]}" /><br/>
+			{$vo.curriculum_name}<br/>
+			{$vo.curriculum_money}<br/>
+			{$curriculum_content}<br/>
+			<a href="{:U('Curriculum/index')}&id={$vo.id}"><button>查看详情</button></a>
+		</div>
+		
+	</foreach>
+
+</body>
+</html>

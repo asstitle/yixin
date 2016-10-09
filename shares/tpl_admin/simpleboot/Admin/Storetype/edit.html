@@ -1,0 +1,94 @@
+<admintpl file="header" />
+<script type="text/javascript" src="__ROOT__/statics/js/common.js"></script>
+<script type="text/javascript" src="__ROOT__/statics/js/content_addtop.js"></script>
+<body class="J_scroll_fixed">
+	<div class="wrap jj">
+		<ul class="nav nav-tabs">
+			<li><a href="{:U('Storetype/index')}">分类列表</a></li>
+			<li class="active"><a href="{:U('Storetype/add')}"><if condition="$isedit eq 1">编辑<else/>添加</if>分类</a></li>
+		</ul>
+		<div class="common-form">
+			<form method="post" class="form-horizontal J_ajaxForms" action="{:U('Storetype/edit_post')}">
+				<input type="hidden" name="id" value="{$id}">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">名称:</label>
+						<div class="controls">
+							<input type="text" class="input" name="name" value="{$name}" required placeholder="请输入级别名称">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">排序:</label>
+						<div class="controls">
+							<input type="text" class="input" name="orderid" value="{$orderid}" placeholder="排序从大到小默认为0">
+						</div>
+					</div>
+
+					<!--<div class="control-group">-->
+						<!--<label class="control-label">图片:</label>-->
+						<!--<div class="controls">-->
+							<!--<if condition="$isedit eq 1"><img src="{$img}"><else/></if>-->
+							<!--<fieldset class="blue pad-10">-->
+								<!--<ul id="img" class="picList unstyled"></ul>-->
+							<!--</fieldset>-->
+							<!--<a href="javascript:;" style="margin: 5px 0;" onclick="javascript:flashupload('albums_images', '图片上传','img',change_imagesg,'1,gif|jpg|jpeg|png|bmp,0','','&max_count=5','')" class="btn">选择图片 </a>-->
+						<!--</div>-->
+					<!--</div>-->
+				</fieldset>
+				<div class="form-actions">
+					<button type="submit"
+						class="btn btn-primary btn_submit J_ajax_submit_btn"><if condition="$isedit eq 1">确定<else/>添加</if></button>
+					<a class="btn" href="__URL__">返回</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="__ROOT__/statics/js/common.js"></script>
+	<script>
+		$(function() {
+
+			
+			$("#navcid_select").change(function() {
+				if(location.search.indexOf("?")>=0){
+					location.href = location.href + "&cid=" + $(this).val();
+				}else{
+					location.href = location.href + "?cid=" + $(this).val();
+				}
+				
+				
+			});
+
+			$("#selecthref").click(function() {
+				$('#outlink_input').removeAttr('name');
+				$('#selecturl').attr({
+					'checked' : 'checked',
+					'name' : 'href'
+				});
+			});
+			$("input[name='href']").click(function() {
+				$('#selecthref').removeAttr('name');
+				$('#outlink').attr({
+					'checked' : 'checked',
+					'name' : 'href'
+				});
+			});
+			/*
+			Wind.use('ajaxForm','artDialog','iframeTools', function () {
+			 	$("#href_input").click(function(){
+			 		art.dialog.open("{:u('nav/select')}", {
+			            title: "选择链接地址",
+			            close: function () {
+			    			var checked_v = art.dialog.data('checked_v');
+			    			if (checked_v !== undefined) $('#href_input').val(checked_v);
+			    			var checked_u = art.dialog.data('checked_u');
+			    			if (checked_u !== undefined) $('#u_input').val(checked_u);
+			    		}
+			        },false);
+				});
+			});
+			 */
+		});
+	</script>
+
+</body>
+</html>

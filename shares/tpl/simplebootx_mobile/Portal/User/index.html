@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head lang="en">
+	
+    <tc_include file="Public/meta2"/>
+   
+</head>
+
+<body>
+
+<!--会员信息-->
+<section class="sec-vip sec-vip-info">
+    <div class="vip-info-wrapper">
+        <img src="__ROOT__/statics/xyh/images/vip_bg_02.jpg">
+        <ul class="vip-info">
+            <li>
+                <a href="#"> <img src="{$user_img}"></a>
+            </li>
+            <li>
+                <dl>
+                    <dt><img src="__ROOT__/statics/xyh/images/vip_01.png">会员</dt>
+                    <dd><a href="#">{$user_nicename}
+                    	<if condition="$sex eq 1">
+                    		<i class="iconfont male">&#xe62b;</i>
+                    	<elseif condition="$sex eq 2" />
+                    		<i class="iconfont female" >&#xe62a;</i>
+                    	</if>
+                    <!-- <i class="iconfont male">&#xe62b;</i> --><!-- <i class="iconfont female" >&#xe62a;</i> --></a></dd>
+                </dl>
+                <dl>
+                    <dt><img src="__ROOT__/statics/xyh/images/vip_02.png">账户佣金</dt>
+                    <dd><a href="#"><span>{$score}</span>元</a> </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!--会员导航-->
+<section class="sec-vip sec-vip-nav">
+    <ul>
+        <li><a href="{:U('User/score')}"><img src="__ROOT__/statics/xyh/images/vip_03.png"><span>我的资金</span></a></li>
+        <li><a href="{:U('User/order')}"><img src="__ROOT__/statics/xyh/images/vip_05.png"><span>我的订单</span></a></li>
+        <li><a href="{:U('User/record_tx')}"><img src="__ROOT__/statics/xyh/images/vip_07.png"><span>提现记录</span></a></li>
+        <li><a href="{:U('User/message')}"><img src="__ROOT__/statics/xyh/images/vip_09.png"><span>消息中心</span></a></li>
+        <li><a href="{:U('User/rebates')}"><img src="__ROOT__/statics/xyh/images/vip_15.png"><span>账户返佣</span></a></li>
+        <li><a href="{:U('User/invite')}"><img src="__ROOT__/statics/xyh/images/vip_16.png"><span>我的邀请</span></a></li>
+        <li><a href="{:U('User/share')}"><img src="__ROOT__/statics/xyh/images/vip_17.png"><span>推广二维码</span></a></li>
+        <li><a href="{:U('User/shenqing_tx')}"><img src="__ROOT__/statics/xyh/images/vip_18.png"><span>提现申请</span></a></li>
+    </ul>
+</section>
+
+<!--会员设置-->
+<section class="sec-vip-setting cc">
+    <ul>
+        <li><a href="{:U('User/setting')}"><img src="__ROOT__/statics/xyh/images/vip_24.png"><span>个人设置</span><i class="iconfont">&#xe605;</i></a></li>
+        <li><a href="javascript:void(0)" class="zt_click_post" data-msg="确定退出？" data-url="{:U('User/loginout')}"><img src="__ROOT__/statics/xyh/images/vip_27.png"><span>安全退出</span><i class="iconfont">&#xe605;</i></a></li>
+    </ul>
+</section>
+
+
+<div class="clear-pos"></div>
+<tc_include file="Public/footer2"/>
+</body>
+</html>

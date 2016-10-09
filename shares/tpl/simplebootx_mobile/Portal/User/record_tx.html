@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="tx_sunm itme_3 clr">
+		<div class="fl">累计提现</div>
+		<div class="fr red">￥{$alltx}</div>
+	</div>
+	<div class="padd_0_1">
+		<div class="view_list_box"></div>
+		<script id="showlist" type="text/html">
+			[[each list as v i]]
+			<div class="itme clr ">
+				<div class="fl">
+					<h3>提现到银行卡</h3>
+					<p>[[v.date]]</p>
+				</div>
+				<div class="fr">
+					<h3 class="red">￥[[v.price]]</h3>
+					<p>[[v.state]]</p>
+				</div>
+			</div>
+			[[/each]]
+		</script>
+		<div class="load_more"></div>
+ 	</div>
+	<tc_include file="Public/share"/>
+	
+</body>
+</html>

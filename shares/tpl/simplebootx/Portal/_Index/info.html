@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>{$site_pcname}</title>
+  <link href="__TMPL__public/images/favicon.ico" rel="SHORTCUT ICON" />
+
+  <link rel="stylesheet" href="__TMPL__public/style/basic.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/com.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/dcom.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/xwzx.css" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="__TMPL__public/js/html5shiv.min.js"></script>
+  <script src="__TMPL__public/js/respond.min.js"></script>
+  <script src="__TMPL__public/js/css3-mediaQueries.js"></script>
+  <![endif]-->
+  <script src="__TMPL__public/js/jquery-1.12.3.min.js"></script>
+  <script src="__TMPL__public/js/com.js"></script>
+</head>
+<body>
+<!--头部导航-->
+
+<tc_include file="Public:top" />
+
+<!--焦点图-->
+<div class="main">
+  <img src="__TMPL__public/images/bg_4.png">
+</div>
+
+<!--内容区域：新闻资讯-->
+<div class="section">
+  <div class="sec_header">
+    <div class="container">
+      <ul class="left">
+        <li class="active"><a href="#">新闻资讯</a></li>
+      </ul>
+      <ul class="right">
+        <li>当前位置：</li>
+        <li>首页<i>></i></li>
+        <li>新闻资讯</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sec_body">
+    <div class="container">
+      <div class="left">
+	  <volist name="list" id="vo">
+        <div class="item">
+          <img src="__ROOT__/data/upload/{$vo.smeta}">
+            <h4>{$vo.post_title}</h4>
+            <span>{$vo.post_modified}</span>
+            <p>{$vo.post_excerpt|msubstr=0,180,'utf-8',true}</p>
+            <a href="{:U('Index/info_news', array('id' => $vo['id'] ))}">查看详情>></a>
+        </div>
+      </volist>
+
+        <div class="page">
+          {$Page}
+        </div>
+
+      </div>
+      <div class="right">
+        <h3>往期回顾</h3>
+		<volist name="list_old" id="vo">
+	        <div class="item">
+	          <img src="__ROOT__/data/upload/{$vo.smeta}">
+	          <p>{$vo.post_title}</p>
+	        </div>
+		</volist>
+        <!-- <div class="item">
+          <img src="images/news_01_03.png">
+          <p>创富宝服装秀盛大举行</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--底部内容-->
+<tc_include file="Public:footer" />
+</body>
+</html>

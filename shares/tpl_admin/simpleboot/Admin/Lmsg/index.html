@@ -1,0 +1,52 @@
+<admintpl file="header" />
+</head>
+<body>
+<php>
+    $status = array('1'=>'已查看','0'=>'未查看');
+</php>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a>所有留言</a></li>
+    </ul>
+    <form method="post" class="J_ajaxForm" action="">
+        <table class="table table-hover table-bordered">
+            <thead>
+            <tr>
+                <th></th>
+                <th align="center">姓名</th>
+                
+                <th>电话</th>
+                <th>时间</th>
+                <th>留言</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr>
+                    <td><input type="checkbox" class="J_check" data-yid="J_check_y" data-xid="J_check_x" name="ids[]" value="{$vo.id}" title="ID:{$vo.id}"></td>
+                    <td align="center">{$vo.name}</td>
+                    <td>{$vo.tel}</td>
+                    <td>{$vo.time}</td>
+                    <td>{$vo.info}</td>
+                    <td>{$status[$vo['status']]}</td>
+                    <td><a href="{:U('Lmsg/delete',array('id'=>$vo['id']))}" class="J_ajax_del">删除</a></td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <div class="table-actions">
+                <button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Lmsg/check',array('check'=>1))}" data-subcheck="true">查看</button>
+                <button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Lmsg/check',array('uncheck'=>1))}" data-subcheck="true">取消查看</button>
+                
+                <button class="btn btn-primary btn-small J_ajax_submit_btn" type="submit" data-action="{:U('Lmsg/delete')}" data-subcheck="true" data-msg="你确定删除吗？">删除</button>
+            </div>
+        <div class="pagination">
+            {$Page}
+        </div>
+    </form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+</body>
+</html>

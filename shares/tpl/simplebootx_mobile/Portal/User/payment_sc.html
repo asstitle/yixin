@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body>
+	<!--
+	<div class="car_top"> 
+		<div class="car_back icon-angle-left"></div>
+		<div class="cont_text">购物车</div>
+		<div class="car_menu icon-reorder"></div>
+		<div class="car_nav"> 
+			<footer class="footer-menu" style='position:inherit;'>
+				<ul>
+					<li class="">
+						<a href="index.html" class="home"><p>首页</p></a>
+					</li>
+					<li class="">
+						<a href="class.html" class="type"><p>分类</p></a>
+					</li>
+					<li class="cur">
+						<a href="good_car.html" class="cart"><p>购物车</p></a>
+					</li>
+					<li class="">
+						<a href="member.html" class="my"><p>会员</p></a>
+					</li>
+				</ul>
+			</footer>
+		</div>
+	</div>
+	-->
+	<div class="f0 rechange_top"> 
+		<img src="__PUBLIC__/image/recheange.png">
+	</div> 
+ 	<div class="recheange_box">
+		<p>支付金额：{$price}元</p>
+		<p>交易时间：{$date|date="Y-m-d",###}</p>
+		<a href="{:U('User/index')}" class="btn_red_a">返回首页</a>
+ 	</div>
+	<tc_include file="Public/share"/>
+	<!-- <tc_include file="Public/footer"/> -->
+</body>
+</html>

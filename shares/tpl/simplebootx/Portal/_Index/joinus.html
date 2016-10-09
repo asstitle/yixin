@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+  <title>{$site_pcname}</title>
+  <link href="__TMPL__public/images/favicon.ico" rel="SHORTCUT ICON" />
+
+  <link rel="stylesheet" href="__TMPL__public/style/basic.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/com.css" type="text/css">
+  <link rel="stylesheet" href="__TMPL__public/style/dcom.css" type="text/css">
+  <!--[if lt IE 9]>
+  <script src="__TMPL__public/js/html5shiv.min.js"></script>
+  <script src="__TMPL__public/js/respond.min.js"></script>
+  <script src="__TMPL__public/js/css3-mediaQueries.js"></script>
+  <![endif]-->
+  <script src="__TMPL__public/js/jquery-1.12.3.min.js"></script>
+  <script src="__TMPL__public/js/com.js"></script>
+</head>
+<body>
+<!--头部导航-->
+<tc_include file="Public:top" />
+
+<!--焦点图-->
+<div class="main">
+  <img src="__TMPL__public/images/join.png">
+</div>
+
+<!--内容区域：商家联盟-->
+<div class="section">
+  <div class="sec_header">
+    <div class="container">
+      <ul class="left">
+        <li class="active"><a href="index.php?g=&m=Index&a=joinus">加入我们</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="sec_body">
+    <div class="container">
+      <h1><em>JOIN</em> US</h1>
+	  <volist name="list" id="vo">
+	      <h2>{$vo.post_title}</h2>
+	      {$vo.post_content}
+      </volist>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--底部内容-->
+<tc_include file="Public:footer" />
+
+</body>
+</html>

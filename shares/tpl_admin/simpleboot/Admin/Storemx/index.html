@@ -1,0 +1,106 @@
+<style>
+select {
+	width: auto !important;
+	height: auto !important;
+}
+
+input {
+	height: auto !important;
+}
+</style>
+
+<admintpl file="header" /><body class="J_scroll_fixed">
+<div class="wrap J_check_wrap">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="{:U('Storemx/index')}">商家明细</a></li>
+	</ul>
+	<form class="well form-search" method="post" action="{:U('Storemx/index')}">
+		<div class="search_type cc mb10">
+			<div class="mb10">
+					<span class="mr20">&nbsp;&nbsp;
+						时间：
+						<input type="text" name="start_time" class="J_date" value="{$formget.start_time|default=''}" style="width: 80px;" autocomplete="off">-
+						<input type="text" class="J_date" name="end_time" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
+						关键字：
+						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入商家店铺名称">
+					
+						 <select name="op">
+							 <option value="">选择类型...</option>
+							 <option value="jifen_sk" <if condition="$formget['op'] eq 'jifen_sk'">selected</if>>积分收款</option>
+							 <option value="weixin_sk" <if condition="$formget['op'] eq 'weixin_sk'">selected</if>>微信收款</option>
+							 <option value="declaration" <if condition="$formget['op'] eq 'declaration'">selected</if>>现金收款</option>
+							 <option value="admin"> <if condition="$formget['op'] eq 'admin'">selected</if>管理员操作</option>
+						 </select>&nbsp;&nbsp;
+						<input type="submit" class="btn btn-primary" value="搜索" />
+					</span>
+					<span>
+						&nbsp;合计：{$allhj}
+					</span>
+			</div>
+		</div>
+	</form>
+	<form class="J_ajaxForm" action="" method="post">
+		<table class="table table-hover table-bordered table-list" id="menus-table" data-sort_field="{$formget.sort_field}" data-sort_by="{$formget.sort_by}"><!--在table-list里添加sort_field和sort_by字段，存放之前选择的值 -->
+			<thead>
+			<tr>
+				<th class="J_table_sort" data-field="ui.id">ID</th>
+				<th class="J_table_sort" data-field="s.name">商家名称</th>
+				<th class="J_table_sort" data-field="ui.integral">操作积分</th>
+				<th class="J_table_sort" data-field="ui.integral_sj">实际积分</th>
+				<th class="J_table_sort" data-field="ui.cur_integral">余额</th>
+				<th class="J_table_sort" data-field="ui.op">操作</th>
+				<th class="J_table_sort" data-field="ui.remark">备注</th>
+				<th class="J_table_sort" data-field="ui.date">时间</th>
+			</tr>
+			</thead>
+			<tbody>
+			<volist name="list" id="vo">
+				<tr>
+					<td>{$vo.id}</td>
+					<td>{$vo.name}</td>
+					<td>{$vo.integral}</td>
+					<td>{$vo.integral_sj}</td>
+					<td>{$vo.cur_integral}</td>
+					<td>{$ar_op[$vo[op]]}</td>
+					<td>{$vo.remark}</td>
+					<td>{$vo.date|date="Y-m-d H:i",###}</td>
+				</tr>
+			</volist>
+			</tbody>
+			<tfoot>
+			<tr>
+				<th>ID</th>
+				<th>商家名称</th>
+				<th>操作积分</th>
+				<th>实际积分</th>
+				<th>余额</th>
+				<th>操作</th>
+				<th>备注</th>
+				<th>时间</th>
+			</tr>
+			</tfoot>
+		</table>
+		<div class="pagination">{$Page}</div>
+	</form>
+</div>
+<script src="__ROOT__/statics/js/common.js"></script>
+<script>
+	$(document).ready(function() {
+		Wind.css('treeTable');
+		Wind.use('treeTable', function() {
+			$("#menus-table").treeTable({
+				indent : 20
+			});
+		});
+	});
+
+	setInterval(function() {
+		var refersh_time = getCookie('refersh_time_admin_menu_index');
+		if (refersh_time == 1) {
+			reloadPage(window);
+		}
+	}, 1000);
+	setCookie('refersh_time_admin_menu_index', 0);
+</script>
+</body>
+</html>

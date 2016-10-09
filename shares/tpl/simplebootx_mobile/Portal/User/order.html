@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<div class="order_list_tle clr"> 
+		<span <if condition="!$type"> class='on'</if> ><a href="{:U('portal/user/order')}">全部</a></span>
+		<span <if condition="$type eq 1"> class='on'</if> ><a href="{:U('portal/user/order',array('type'=>1))}">待付款</a></span>
+	</div>
+    <div class="view_list_box">
+        <script id="showlist" type="text/html">
+            [[each list as v i]]
+             	<div class="order_info order_list_box">
+             		<h3 class="_tle clr bor_no">
+             			<i class='fl'>订单号：[[v.orderno]]</i>
+             			<i class='fr'>创建时间：[[v.order_date]]</i>
+             		</h3>
+             		<ul>
+                        [[each v.view as v2 i2]]
+                 			<li>
+                 				<div class="_img">
+                 					<img src="[[v2.imgs]]">
+                 				</div>
+                 				<div class="r_text">
+                 					<p class="_tle"><a href="{:U('User/orderdetails')}&id=[[v2.id]]">[[v2.goods_name]]</a></p>
+                 					<p class="clr _8d">[[v2.spec_color_name]]：[[v2.spec_color]]</p>
+                 					<p class="clr _8d">[[v2.spec_size_name]]：[[v2.spec_size]]</p>
+                 					<p class="clr _8d">价格：[[v2.nums*v2.price]]</p>
+                 				</div>
+                 			</li>
+             			[[/each]]
+             		</ul>
+             	</div>
+            [[/each]]
+        </script>
+		<div class="load_more"></div>
+ 	</div>
+	<tc_include file="Public/share"/>
+	
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <tc_include file="Public/meta"/>
+</head>
+<body class="f0">
+	<!-- <div class="itme_2 _i bor_botm_no"><a href="{:U('User/setting_address')}">
+		<div class="text"> 
+			<h3>收货地址<if condition="!empty($address)"><sup class="back_lv">已完成</sup><else/><sup class="back_red">请设置</sup></if></h3>
+			<p><if condition="!empty($address)">已设置（{$address.name}&nbsp;&nbsp;{$address.phone}&nbsp;&nbsp;{$address.sheng}-{$address.shi}-{$address.qu}-{$address.address}）<else/><sup class="back_red">未设置</sup></if></p>
+		</div>
+		<i class="icon-angle-right"></i>
+	</a></div> -->
+	<h3 class="mem_data">账户设置</h3>
+	<div class="itme_2 _i"><a href="{:U('User/setting_password')}">
+		<div class="text">
+			<h3>修改密码</h3>
+			<p></p>
+		</div>
+		<i class="icon-angle-right"></i>
+	</a></div>
+	<div class="itme_2 _i"><a href="{:U('User/setting_name')}">
+		<div class="text"> 
+			<h3>账户昵称<if condition="$user_nicename neq ''"><sup class="back_lv">已完成</sup><else/><sup class="back_red">请设置</sup></if></h3>
+			<p><if condition="$user_nicename neq ''">已设置（{$user_nicename}）<else/>未设置</if></p>
+		</div>
+		<i class="icon-angle-right"></i>
+	</a></div>
+	<div class="itme_2 _i"><a href="{:U('User/zs_name')}">
+		<div class="text"> 
+			<h3>真实姓名<if condition="$zs_name neq ''"><sup class="back_lv">已完成</sup><else/><sup class="back_red">请设置</sup></if></h3>
+			<p><if condition="$zs_name neq ''">已设置（{$zs_name}）<else/>未设置（输入真实姓名方便我们更好的找到你哦）</if></p>
+		</div>
+		<i class="icon-angle-right"></i>
+	</a></div>
+	<div class="itme_2 _i"><a href="{:U('User/setting_bankcard')}">
+		<div class="text"> 
+			<h3>银行卡设置<if condition="$khyh neq ''"><sup class="back_lv">已完成</sup><else/><sup class="back_red">请设置</sup></if></h3>
+			<p><if condition="$khyh neq ''">已设置（{$khyh}&nbsp;&nbsp;{$khxm|msubstr=0,1,'utf-8',false}*&nbsp;&nbsp;{$yhzh}）<else/>未设置</if></p>
+		</div>
+		<i class="icon-angle-right"></i>
+	</a></div>
+	<div class="itme_2 _i"><a href="{:U('User/setting_pass')}">
+		<div class="text"> 
+			<h3>支付密码<if condition="$zfmm neq ''"><sup class="back_lv">已完成</sup><else/><sup class="back_red">请设置</sup></if></h3>
+			<p><if condition="$zfmm neq ''">已设置<else/>未设置</if></p>
+		</div>
+		<i class="icon-angle-right"></i>
+	</a></div>
+	
+	<div class="itme_2 _i bor_botm_no"><a href="#">
+		<div class="text"> 
+			<h3>手机号码<!--<sup class="back_lv">已完成</sup>--></h3>
+			<p>已绑定({$mobile})</p>
+		</div>
+		<!--<i class="icon-angle-right"></i>-->
+	</a></div>
+	<tc_include file="Public/share"/>
+	<tc_include file="Public/footer"/>
+</body>
+</html>

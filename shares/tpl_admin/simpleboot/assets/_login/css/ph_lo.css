@@ -1,0 +1,171 @@
+/*ÊÖ»úµÇÂ¼*/
+.header{ height: 42px; background: #00a1e7; color: #fff; text-align: center; line-height:42px; font-size: 16px; }
+.btn{ height: 40px; color: #fff; border-radius: 5px; width: 100%; background:#00a1e7;  font-size: 16px; border: none;}
+
+.input{ height: 19px;  line-height: 19px; padding: 8px 4px; border: 1px solid #59afec; border-radius: 4px; background: #0087e8; box-shadow: 1px 1px 5px 1px #0562a5 inset;}
+
+.login{ padding:0 15px; margin: 20px 0;}
+.login form div{ border: 1px solid #dcdcdc; border-radius: 5px; min-width: 290px; margin-bottom: 20px;}
+.login form p{ position: relative; height: 43px; border-bottom: 1px solid #dcdcdc;}
+.login form p:last-child{ border: 0;}
+.login form  span{ position: absolute; left: 0; top: 0; line-height: 43px; font-size: 12px; color: #444;}
+.login form  img{ vertical-align: middle;}
+.login form  span i{ vertical-align: middle; margin:0 10px; color: #d7d7d7; font-size: 16px; position: relative;; top: -1px; width: 15px; text-align: center; display: inline-block;}
+.login form  input[type="text"],.login form  input[type="password"]{ margin-left: 78px; height: 20px; line-height: 20px; padding: 11px 0; border: none;}
+.login form div .validate_btn{ position: absolute; right: 10px; top: 0; padding-right: 27px; height:27px; margin: 7px 0; background: url(../images/validate_btn.jpg) no-repeat right -3px; background-size: 27px auto;}
+.validate_btn img{ height:27px; width: auto;}
+.login form  input[type="submit"]
+
+
+
+/***³é½±****/
+.slide{}
+.slide a{ width: 50%; float: left; margin-bottom: 1px; height: 33px; line-height: 33px; font-size: 12px; color: #666; text-align: center;}
+.slide a.on{ border-bottom: 1px solid #0390de; color: #0390de;}
+
+.integral{ background: #0087E8 url(../images/phone_back.png) no-repeat center top;width: 100%;background-size: 100% auto;}
+
+.integral .itme{ position: relative; height: 135px; padding:10px 0;}
+.integral .itme .img{ position: absolute; height: 70px; width: 70px; background: url(../images/goods_back.png) no-repeat; background-size: 140px auto; padding: 35px;   left: 0; top: 10px;}
+.integral .itme .img img{  height: 70px; width: 70px;border-radius: 10px; display: block;}
+.integral .itme .text{ height: 90px; padding: 20px 0; background:url(../images/text_back.png) no-repeat 90% 10px; background-size:15px auto; padding-left: 140px; color: #fff; font-size: 14px; line-height: 16px;}
+.integral .itme .text p{ padding:10px 0;}
+.integral .itme.confirm .text p{ padding:5px 0;}
+.integral .itme .text p i{ font-family: "Arial"; font-size: 18px; color: #ffec14; padding-left: 3px; font-style: normal;}
+.integral .itme .text a{ height: 31px; width: 90px; background: url(../images/btn.png) no-repeat; background-size: 90px auto; display: inline-block; color: #fff; line-height: 30px; text-align: center; box-shadow: 0 2px 4px #043d5d;}
+
+.integral .itme .text p input{ width: 50px; margin-left: 10px; color: #fff;}
+
+.surplus{ text-align: center; font-size: 13px; color: #fff; padding: 20px 0;}
+.surplus i{font-family: "Arial"; font-size: 18px; color: #ffec14; padding-left: 3px; font-style: normal;}
+
+.rule{ padding:20px; padding-top: 0;}
+.rule h3{ height: 24px; line-height: 24px; text-align: center; color: #fff; font-weight: bold; margin-bottom: 10px; background: url(../images/rule.png) no-repeat center center; background-size:auto 24px;}
+.rule p{ font:normal 12px/22px "Î¢ÈíÑÅºÚ"; color: #ffe5aa;}
+
+.form{ padding-top:10px; text-align: center; }
+.form input[type="text"]{ width: 90%; color: #fff; margin-top: 20px;}
+.form input[type="text"]:-ms-input-placeholder{ color: #fff;}
+.form input[type="text"]::-webkit-input-placeholder { color: #fff;}
+.form input[type="text"]:-moz-placeholder { color: #fff;}
+.form input[type="text"]::-moz-placeholder { color: #fff;}
+
+.form input[type="submit"]{ width: 90px; height: 30px; color: #fff; background: #ffb535; border-radius: 4px; border: none; margin:20px 0;}
+
+.pop_box{ background:rgba(0,0,0,0.5); height:100%; width:100%; position:fixed; left:0; top:0;display: none;}
+.pop_box .cont{ width:200px; background:#fff; border-radius: 5px; position:absolute; top:50%; left:50%; margin-left:-110px; padding:0 10px;  padding-top: 10px;display: none;}
+.pop_box .cont .text{ position:relative; padding:10px 0;  }
+.pop_box .cont .text img{ position:absolute; left:0; top:10px; height:40px; width:40px; display:block;}
+.pop_box .cont .text p{ line-height:17px; font-size:12px;padding:2px 0; padding-left: 55px; color:#555;}
+.pop_box .cont .submit{  padding:10px 0;}
+.pop_box .cont .btn{ height: 30px;}
+.pop_box._cj .cont .text { height: 42px;}
+.pop_box._cj .cont .text p{ line-height: 40px;}
+
+
+.integral .cj{ text-align: center;margin: 0 auto;width: 75.3%;background: url(../images/duihuan.png) no-repeat center top;height: 482px; background-size:100% auto;}
+.integral .cj img{ max-width: 100%;}
+.form p{ line-height: 20px; color: #ffe5aa; text-align: left; padding: 0 5%;}
+.phone_zp { position: relative;}
+.phone_zp .text{ color: #ae6112; padding-bottom: 60%; line-height: 15px; font-size: 12px; width: 15px; position: absolute; left: 50%; margin-left: -7px;}
+.phone_zp .btn{ position: absolute; left: 0; top: 0; background: url(../images/start.png) no-repeat center 42.5%; background-size: 21% auto; height: 100%; width: 100%;}
+
+@media (max-width: 330px ) {
+ 	.phone_zp .text{ bottom: 8%;}
+}
+@media (min-width: 331px ) and (max-width:470px) {
+ 	.phone_zp .text{ bottom: 10%;}
+ 	.phone_zp .btn { background-size: 25%}
+ 	.phone_zp .btn { background-position: center  39.8%}
+
+}
+@media (min-width: 471px ) and (max-width:640px) {
+ 	.phone_zp .text{ bottom: 15%;}
+ 	.phone_zp .btn { background-position: center  42%}
+}
+.phone_zp .text1{ 
+	transform:rotate(15deg);
+	-ms-transform:rotate(15deg); /* Internet Explorer */
+	-moz-transform:rotate(15deg); /* Firefox */
+	-webkit-transform:rotate(15deg); /* Safari 和 Chrome */
+	-o-transform:rotate(15deg); /* Opera */
+}
+
+.phone_zp .text2{ 
+	transform:rotate(45deg);
+	-ms-transform:rotate(45deg); /* Internet Explorer */
+	-moz-transform:rotate(45deg); /* Firefox */
+	-webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+	-o-transform:rotate(45deg); /* Opera */
+}
+
+.phone_zp .text3{ 
+	transform:rotate(75deg);
+	-ms-transform:rotate(75deg); /* Internet Explorer */
+	-moz-transform:rotate(75deg); /* Firefox */
+	-webkit-transform:rotate(75deg); /* Safari 和 Chrome */
+	-o-transform:rotate(75deg); /* Opera */
+}
+.phone_zp .text4{ 
+	transform:rotate(105deg);
+	-ms-transform:rotate(105deg); /* Internet Explorer */
+	-moz-transform:rotate(105deg); /* Firefox */
+	-webkit-transform:rotate(105deg); /* Safari 和 Chrome */
+	-o-transform:rotate(105deg); /* Opera */
+}
+.phone_zp .text5{ 
+	transform:rotate(135deg);
+	-ms-transform:rotate(135deg); /* Internet Explorer */
+	-moz-transform:rotate(135deg); /* Firefox */
+	-webkit-transform:rotate(135deg); /* Safari 和 Chrome */
+	-o-transform:rotate(135deg); /* Opera */
+}
+.phone_zp .text6{ 
+	transform:rotate(165deg);
+	-ms-transform:rotate(165deg); /* Internet Explorer */
+	-moz-transform:rotate(165deg); /* Firefox */
+	-webkit-transform:rotate(165deg); /* Safari 和 Chrome */
+	-o-transform:rotate(165deg); /* Opera */
+}
+.phone_zp .text7{ 
+	transform:rotate(195deg);
+	-ms-transform:rotate(195deg); /* Internet Explorer */
+	-moz-transform:rotate(195deg); /* Firefox */
+	-webkit-transform:rotate(195deg); /* Safari 和 Chrome */
+	-o-transform:rotate(195deg); /* Opera */
+}
+.phone_zp .text8{ 
+	transform:rotate(225deg);
+	-ms-transform:rotate(225deg); /* Internet Explorer */
+	-moz-transform:rotate(225deg); /* Firefox */
+	-webkit-transform:rotate(225deg); /* Safari 和 Chrome */
+	-o-transform:rotate(225deg); /* Opera */
+}
+.phone_zp .text9{ 
+	transform:rotate(255deg);
+	-ms-transform:rotate(255deg); /* Internet Explorer */
+	-moz-transform:rotate(255deg); /* Firefox */
+	-webkit-transform:rotate(255deg); /* Safari 和 Chrome */
+	-o-transform:rotate(255deg); /* Opera */
+}
+.phone_zp .text10{ 
+	transform:rotate(285deg);
+	-ms-transform:rotate(285deg); /* Internet Explorer */
+	-moz-transform:rotate(285deg); /* Firefox */
+	-webkit-transform:rotate(285deg); /* Safari 和 Chrome */
+	-o-transform:rotate(285deg); /* Opera */
+}
+.phone_zp .text11{ 
+	transform:rotate(315deg);
+	-ms-transform:rotate(315deg); /* Internet Explorer */
+	-moz-transform:rotate(315deg); /* Firefox */
+	-webkit-transform:rotate(315deg); /* Safari 和 Chrome */
+	-o-transform:rotate(315deg); /* Opera */
+}
+.phone_zp .text12{ 
+	transform:rotate(345deg);
+	-ms-transform:rotate(345deg); /* Internet Explorer */
+	-moz-transform:rotate(345deg); /* Firefox */
+	-webkit-transform:rotate(345deg); /* Safari 和 Chrome */
+	-o-transform:rotate(345deg); /* Opera */
+}

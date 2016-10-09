@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<tc_include file="Public/meta"/>
+</head>
+<body>
+    <div class="mem_top">
+        <canvas id='back'></canvas>
+		<h4>累计佣金：<i>{$allyj}￥</i></h4>
+	</div>
+	<div class="view_list_box"></div>
+	<script id="showlist" type="text/html">
+		[[each list as v i]]
+		<div class="invited clr">
+			<div class="fl">
+				<img src="[[v.user_img]]">[[v.user_nicename]]（[[v.yongjin]]￥）
+			</div>
+			<div class="fr">[[v.create_time]]</div>
+		</div>
+		[[/each]]
+	</script>
+	<div class="load_more"></div>
+	<tc_include file="Public/share"/>
+	
+</body>
+</html>
