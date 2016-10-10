@@ -14,14 +14,14 @@ use Common\Controller\AdminbaseController;
 class SettlementController extends AdminbaseController
 {
     /**
-     * »ú¹¹½áËã
+     * æœºæ„ç»“ç®—
      */
     public function index(){
         $this->display();
     }
 
     /**
-     * ¾­¼ÍÈË½áËã
+     * ç»çºªäººç»“ç®—
      */
     public function calculate(){
         $this->display();
