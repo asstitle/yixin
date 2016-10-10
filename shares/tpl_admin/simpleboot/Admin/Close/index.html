@@ -23,9 +23,9 @@
 						昵称：
 						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> &nbsp; &nbsp;
                         手机号码：
-						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> &nbsp; &nbsp;
+						<input type="text" name="keyword1" style="width: 200px;" value="{$formget.keyword1}" placeholder="请输入关键字..."> &nbsp; &nbsp;
                         商品名称：
-						<input type="text" name="keyword" style="width: 200px;" value="{$formget.keyword}" placeholder="请输入关键字..."> &nbsp; &nbsp;
+						<input type="text" name="keyword2" style="width: 200px;" value="{$formget.keyword2}" placeholder="请输入关键字..."> &nbsp; &nbsp;
 						时间：
 						<input type="text" name="start_time" class="J_date" value="{$formget.start_time}" style="width: 80px;" autocomplete="off">-
 						<input type="text" name="end_time" class="J_date" value="{$formget.end_time}" style="width: 80px;" autocomplete="off"> &nbsp; &nbsp;
@@ -56,24 +56,34 @@
                 <th>平仓类型</th>
             </tr>
             </thead>
+            <foreach name="list" item="v">
                 <tr>
-                    <td>订单号</td>
-                    <td>昵称</td>
-                    <td>手机号码</td>
-                    <td>商品名称</td>
-                    <td>商品规格</td>
-                    <td>建仓方向</td>
-                    <td>手数</td>
-                    <td>定金</td>
-                    <td>交易额</td>
-                    <td>点数</td>
-                    <td>建仓价格</td>
-                    <td>平仓价格</td>
-                    <td>平仓时间</td>
-                    <td>手续费</td>
-                    <td>平仓盈亏</td>
-                    <td>平仓类型</td>
+                    <td>{$v.order_number}</td>
+                    <td>{$v.user_nicename}</td>
+                    <td>{$v.mobile}</td>
+                    <td>{$v.goods_name}</td>
+                    <td>{$v.goods_stander}</td>
+                    <if condition="$v.create_position eq 0">
+                    <td>买涨</td>
+                    <else/>
+                    <td>买跌</td>
+                    </if>
+                    <td>{$v.pointer}</td>
+                    <td>{$v.deposit}</td>
+                    <td>{$v.transaction}</td>
+                    <td>{$v.point.}</td>
+                    <td>{$v.create_price}</td>
+                    <td>{$v.flat_price}</td>
+                    <td>{$v.flat_time}</td>
+                    <td>{$v.fee}</td>
+                    <td>{$v.shares}</td>
+                    <if condition="$v.type eq 0">
+                    <td>止盈平仓</td>
+                    <else/>
+                    <td>止损平仓</td>
+                    </if>
                 </tr>
+            </foreach>
         </table>
         <div class="pagination">{$Page}</div>
     </form>
